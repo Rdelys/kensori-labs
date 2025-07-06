@@ -36,6 +36,14 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['create', 'edit', 'show']);
 });
 
+Route::resource('subscriptions', \App\Http\Controllers\Admin\SubscriptionController::class)->names([
+    'index' => 'subscriptions.index',
+    'store' => 'subscriptions.store',
+    'update' => 'subscriptions.update',
+    'destroy' => 'subscriptions.destroy',
+]);
+
+
 // Dashboard protégé
 Route::middleware('auth:admin')->group(function () {
     Route::get('/admin', function () {

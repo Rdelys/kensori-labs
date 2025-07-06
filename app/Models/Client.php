@@ -11,5 +11,11 @@ class Client extends Model
     ];
 
     protected $hidden = ['password'];
+
+    
+    public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
 }
 

@@ -167,9 +167,15 @@
 }
 
 .status-inactif {
-  background-color: #ffe5e5;
-  color: #d62c2c;
+  background-color: #ffe5e5; /* rouge clair */
+  color: #d62c2c;           /* rouge foncé */
   border: 1px solid #d62c2c33;
+}
+
+.status-actif {
+  background-color: #e6f4ea; /* vert clair */
+  color: #2c7d32;            /* vert foncé */
+  border: 1px solid #2c7d3233;
 }
 
 
@@ -277,8 +283,13 @@
   <td>{{ $client->email }}</td>
   <td>{{ $client->phone }}</td>
   <td>
+  @if ($client->status === 'Actif')
+    <span class="status-tag status-actif">{{ $client->status }}</span>
+  @else
     <span class="status-tag status-inactif">{{ $client->status }}</span>
-  </td>
+  @endif
+</td>
+
   <td>
     <!-- Bouton Modifier -->
     <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editClientModal{{ $client->id }}">
@@ -465,13 +476,119 @@
 
     <div id="billing" class="section">
       <h2>Abonnements</h2>
-      <ul>
-        <li>Plan : Pro</li>
-        <li>Renouvellement : 01/08/2025</li>
-        <li>Derniers paiements : Juin, Mai</li>
-        <li>Statut : Payé</li>
-      </ul>
-    </div>
+
+<!-- Bouton Ajouter -->
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubscriptionModal">
+  <i class="bi bi-plus-circle"></i> Ajouter un abonnement
+</button>
+
+<!-- Modal Ajout -->
+<div class="modal fade" id="addSubscriptionModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ route('subscriptions.store') }}">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un abonnement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Client</label>
+            <select name="client_id" class="form-select" required>
+              @foreach(\App\Models\Client::all() as $client)
+                <option value="{{ $client->id }}">{{ $client->company }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Plan</label>
+            <input type="text" name="plan" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Début</label>
+            <input type="date" name="start_date" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Fin</label>
+            <input type="date" name="end_date" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success">Enregistrer</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Liste abonnements -->
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>Client</th>
+        <th>Plan</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach(\App\Models\Subscription::with('client')->get() as $sub)
+        <tr>
+          <td>{{ $sub->client->company }}</td>
+          <td>{{ $sub->plan }}</td>
+          <td>{{ $sub->start_date }}</td>
+          <td>{{ $sub->end_date }}</td>
+          <td>
+            <!-- Modifier -->
+            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editSubModal{{ $sub->id }}"><i class="bi bi-pencil"></i></button>
+
+            <!-- Supprimer -->
+            <form action="{{ route('subscriptions.destroy', $sub) }}" method="POST" class="d-inline" onsubmit="return confirm('Supprimer cet abonnement ?')">
+              @csrf @method('DELETE')
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+
+        <!-- Modal Modifier -->
+        <div class="modal fade" id="editSubModal{{ $sub->id }}" tabindex="-1">
+          <div class="modal-dialog">
+            <form method="POST" action="{{ route('subscriptions.update', $sub) }}">
+              @csrf @method('PUT')
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modifier abonnement</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label>Plan</label>
+                    <input type="text" name="plan" class="form-control" value="{{ $sub->plan }}">
+                  </div>
+                  <div class="mb-3">
+                    <label>Début</label>
+                    <input type="date" name="start_date" class="form-control" value="{{ $sub->start_date }}">
+                  </div>
+                  <div class="mb-3">
+                    <label>Fin</label>
+                    <input type="date" name="end_date" class="form-control" value="{{ $sub->end_date }}">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success">Mettre à jour</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+
 
     <div id="metrics" class="section">
       <h2>Métriques</h2>
