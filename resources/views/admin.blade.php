@@ -158,6 +158,22 @@
       display: none;
     }
 
+   .status-tag {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.status-inactif {
+  background-color: #ffe5e5;
+  color: #d62c2c;
+  border: 1px solid #d62c2c33;
+}
+
+
+
     @media (max-width: 767px) {
       .mobile-nav-toggle {
         display: block;
@@ -204,33 +220,119 @@
 
     <div id="clients" class="section">
       <h2>Clients</h2>
+      <!-- Bouton Ajouter -->
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addClientModal">
+  <i class="bi bi-plus-circle"></i> Ajouter un client
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="addClientModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ route('admin.clients.store') }}">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addClientModalLabel">Ajouter un client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Nom de l'entreprise</label>
+            <input type="text" name="company" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Contact</label>
+            <input type="text" name="phone" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
       <div class="table-responsive">
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Entreprise</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Utilisateurs</th>
-              <th>Plan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Acme Corp</td>
-              <td>contact@acme.com</td>
-              <td>+261 32 12 345 67</td>
-              <td>12</td>
-              <td>Enterprise</td>
-            </tr>
-            <tr>
-              <td>StartUp X</td>
-              <td>hello@startupx.io</td>
-              <td>+261 34 56 789 01</td>
-              <td>3</td>
-              <td>Pro</td>
-            </tr>
-          </tbody>
+         <thead class="table-light">
+  <tr>
+    <th>Entreprise</th>
+    <th>Email</th>
+    <th>Contact</th>
+    <th>Statut</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+
+<tbody>
+@foreach(\App\Models\Client::all() as $client)
+<tr>
+  <td>{{ $client->company }}</td>
+  <td>{{ $client->email }}</td>
+  <td>{{ $client->phone }}</td>
+  <td>
+    <span class="status-tag status-inactif">{{ $client->status }}</span>
+  </td>
+  <td>
+    <!-- Bouton Modifier -->
+    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editClientModal{{ $client->id }}">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+
+    <!-- Bouton Supprimer -->
+    <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" class="d-inline" onsubmit="return confirm('Supprimer ce client ?');">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="btn btn-sm btn-danger">
+        <i class="bi bi-trash"></i>
+      </button>
+    </form>
+  </td>
+</tr>
+
+<!-- Modal Édition -->
+<div class="modal fade" id="editClientModal{{ $client->id }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ route('admin.clients.update', $client) }}">
+      @csrf
+      @method('PUT')
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier le client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Entreprise</label>
+            <input type="text" name="company" class="form-control" value="{{ $client->company }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" value="{{ $client->email }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Contact</label>
+            <input type="text" name="phone" class="form-control" value="{{ $client->phone }}" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Mettre à jour</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+@endforeach
+</tbody>
+
+
         </table>
       </div>
     </div>
@@ -321,6 +423,7 @@
       document.getElementById('sidebar').classList.toggle('open');
     }
   </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
