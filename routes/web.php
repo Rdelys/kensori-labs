@@ -30,6 +30,12 @@ Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin
 Route::post('/admin/clients', [ClientController::class, 'store'])->name('admin.clients.store');
 Route::put('/admin/clients/{client}', [ClientController::class, 'update'])->name('admin.clients.update');
 Route::delete('/admin/clients/{client}', [ClientController::class, 'destroy'])->name('admin.clients.destroy');
+
+// routes/web.php
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['create', 'edit', 'show']);
+});
+
 // Dashboard protégé
 Route::middleware('auth:admin')->group(function () {
     Route::get('/admin', function () {

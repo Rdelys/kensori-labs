@@ -339,23 +339,127 @@
 
     <div id="users" class="section">
       <h2>Utilisateurs</h2>
+      <!-- Bouton Ajouter -->
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+  <i class="bi bi-plus-circle"></i> Ajouter un utilisateur
+</button>
+
+<!-- Modal Ajout -->
+<div class="modal fade" id="addUserModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ route('users.store') }}">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un utilisateur</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Entreprise</label>
+            <select name="client_id" class="form-select" required>
+              <option value="">-- Choisir --</option>
+              @foreach(\App\Models\Client::all() as $client)
+                <option value="{{ $client->id }}">{{ $client->company }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Nom complet</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Fonction</label>
+            <input type="text" name="function" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Mot de passe</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Enregistrer</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
       <div class="table-responsive">
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Inscription</th>
-              <th>Connexion</th>
-              <th>Plan</th>
-              <th>Statut</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Jean Dupont</td><td>jean@example.com</td><td>01/01/2024</td><td>06/07/2025</td><td>Pro</td><td>Actif</td></tr>
-            <tr><td>Alice Martin</td><td>alice@example.com</td><td>03/03/2024</td><td>05/07/2025</td><td>Free</td><td>Essai</td></tr>
-          </tbody>
-        </table>
+  <thead class="table-light">
+    <tr>
+      <th>Nom</th>
+      <th>Fonction</th>
+      <th>Email</th>
+      <th>Entreprise</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(\App\Models\User::with('client')->get() as $user)
+    <tr>
+      <td>{{ $user->name }}</td>
+      <td>{{ $user->function }}</td>
+      <td>{{ $user->email }}</td>
+      <td>{{ $user->client->company ?? '-' }}</td>
+      <td>
+        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}"><i class="bi bi-pencil"></i></button>
+        <form method="POST" action="{{ route('users.destroy', $user) }}" class="d-inline" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+          @csrf @method('DELETE')
+          <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+        </form>
+      </td>
+    </tr>
+
+    <!-- Modal Édition -->
+    <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1">
+      <div class="modal-dialog">
+        <form method="POST" action="{{ route('users.update', $user) }}">
+          @csrf @method('PUT')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modifier utilisateur</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label>Entreprise</label>
+                <select name="client_id" class="form-select" required>
+                  @foreach(\App\Models\Client::all() as $client)
+                    <option value="{{ $client->id }}" {{ $client->id == $user->client_id ? 'selected' : '' }}>{{ $client->company }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="mb-3">
+                <label>Nom complet</label>
+                <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+              </div>
+              <div class="mb-3">
+                <label>Fonction</label>
+                <input type="text" name="function" class="form-control" value="{{ $user->function }}" required>
+              </div>
+              <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success" type="submit">Mettre à jour</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    @endforeach
+  </tbody>
+</table>
+
       </div>
     </div>
 
