@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,12 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 });
+
+
+Route::middleware(['auth:admin'])->group(function () {
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/dashboard-data', [AdminController::class, 'dashboard'])
+    ->name('admin.dashboard.data');
+});
+
 

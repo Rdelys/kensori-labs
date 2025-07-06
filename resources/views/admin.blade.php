@@ -178,6 +178,25 @@
   border: 1px solid #2c7d3233;
 }
 
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card .card-body i {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-body i {
+  transform: scale(1.2);
+}
+
 
 
     @media (max-width: 767px) {
@@ -220,9 +239,52 @@
   <!-- Contenu principal -->
   <div class="main">
     <div id="dashboard" class="section active">
-      <h2>Dashboard</h2>
-      <p>Bienvenue dans le panneau d'administration.</p>
+  <h2>Dashboard</h2>
+
+  <!-- Filtre client -->
+  <div class="mb-4">
+    <label for="clientFilter" class="form-label fw-bold">Filtrer par client :</label>
+    <select id="clientFilter" class="form-select" onchange="filterDashboard()">
+      <option value="all">Tous les clients</option>
+      @foreach(\App\Models\Client::all() as $client)
+        <option value="{{ $client->id }}">{{ $client->company }}</option>
+      @endforeach
+    </select>
+  </div>
+
+  <!-- Cards -->
+  <div class="row" id="dashboardCards">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm border-primary">
+        <div class="card-body text-center text-primary">
+          <i class="bi bi-building fs-1"></i>
+          <h5 class="card-title mt-3">Clients</h5>
+          <p class="card-text fs-2 fw-bold" id="totalClients">{{ $totalClients ?? 0 }}</p>
+        </div>
+      </div>
     </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm border-success">
+        <div class="card-body text-center text-success">
+          <i class="bi bi-people fs-1"></i>
+          <h5 class="card-title mt-3">Utilisateurs</h5>
+          <p class="card-text fs-2 fw-bold" id="totalUsers">{{ $totalUsers ?? 0 }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm border-info">
+        <div class="card-body text-center text-info">
+          <i class="bi bi-receipt fs-1"></i>
+          <h5 class="card-title mt-3">Abonnements</h5>
+          <p class="card-text fs-2 fw-bold" id="totalSubscriptions">{{ $totalSubscriptions ?? 0 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
     <div id="clients" class="section">
       <h2>Clients</h2>
@@ -643,6 +705,30 @@
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
     }
+
+    function filterDashboard() {
+  const clientId = document.getElementById('clientFilter').value;
+
+  fetch(`/admin/dashboard-data?client_id=${clientId}`, {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('totalClients').textContent = data.totalClients;
+    document.getElementById('totalUsers').textContent = data.totalUsers;
+    document.getElementById('totalSubscriptions').textContent = data.totalSubscriptions;
+  })
+  .catch(error => {
+    console.error('Erreur lors de la récupération des données:', error);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  filterDashboard();
+});
+
+
+
   </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
