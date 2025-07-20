@@ -471,6 +471,7 @@
       <th>Fonction</th>
       <th>Email</th>
       <th>Entreprise</th>
+      <th>Dernière connexion</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -482,12 +483,17 @@
       <td>{{ $user->email }}</td>
       <td>{{ $user->client->company ?? '-' }}</td>
       <td>
+{{ $user->last_login_at ? \Carbon\Carbon::parse($user->last_login_at)->format('d/m/Y H:i') : 'Jamais' }}
+</td>
+
+      <td>
         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}"><i class="bi bi-pencil"></i></button>
         <form method="POST" action="{{ route('users.destroy', $user) }}" class="d-inline" onsubmit="return confirm('Supprimer cet utilisateur ?')">
           @csrf @method('DELETE')
           <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
         </form>
       </td>
+      
     </tr>
 
     <!-- Modal Édition -->

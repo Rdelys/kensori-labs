@@ -55,10 +55,18 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 
-Route::middleware(['auth:admin'])->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/dashboard-data', [AdminController::class, 'dashboard'])
     ->name('admin.dashboard.data');
-});
 
 
+use App\Http\Controllers\LoginUserController;
+
+Route::get('/', [LoginUserController::class, 'showLoginForm'])->name('user.login');
+Route::post('/', [LoginUserController::class, 'login']);
+Route::get('/logout', [LoginUserController::class, 'logout'])->name('user.logout');
+
+Route::get('/dashboard', function () {
+    $user = auth()->user();
+    return view('clients', ['user' => $user]);
+})->middleware('auth')->name('user.dashboard');

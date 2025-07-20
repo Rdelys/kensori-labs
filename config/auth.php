@@ -22,7 +22,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+        'model' => App\Models\User::class, // ✅ ton bon modèle
         ],
 
         'admins' => [           // <-- Provider admins ajouté ici
