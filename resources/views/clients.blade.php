@@ -88,7 +88,7 @@
 
     <hr class="my-3">
     <p class="text-muted small mb-1">Modules QMS</p>
-<a href="{{ route('modules.parties') }}" class="nav-link"><i class="bi bi-people me-2"></i>Parties intéressées</a>
+<a href="#" class="nav-link"><i class="bi bi-people me-2"></i>Parties intéressées</a>
     <a href="#" class="nav-link"><i class="bi bi-bar-chart-line me-2"></i>Analyse SWOT / PESTEL</a>
     <a href="#" class="nav-link"><i class="bi bi-award me-2"></i>Politique Qualité</a>
     <a href="#" class="nav-link"><i class="bi bi-diagram-3 me-2"></i>Matrice RACI</a>
