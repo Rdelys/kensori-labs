@@ -378,9 +378,83 @@
 </div>
 
     <div id="module-raci" class="content-section d-none">
-      <h2>Matrice RACI</h2>
-      <p>Structure des rôles et responsabilités pour chaque processus.</p>
+  <h2>Matrice RACI</h2>
+  <p>Structure des rôles et responsabilités pour chaque processus.</p>
+
+  <!-- Tableau RACI -->
+  <div class="card p-4 mb-4">
+    <h6 class="mb-3">Exemple de Matrice RACI</h6>
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Processus</th>
+            <th>Responsable (R)</th>
+            <th>Approbateur (A)</th>
+            <th>Consulté (C)</th>
+            <th>Informé (I)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gestion documentaire</td>
+            <td>Responsable Qualité</td>
+            <td>Direction</td>
+            <td>Équipe Projet</td>
+            <td>Tous employés</td>
+          </tr>
+          <tr>
+            <td>Audit interne</td>
+            <td>Auditeur</td>
+            <td>Direction</td>
+            <td>Service Qualité</td>
+            <td>Collaborateurs</td>
+          </tr>
+          <tr>
+            <td>Formation</td>
+            <td>RH</td>
+            <td>Direction</td>
+            <td>Manager</td>
+            <td>Employés</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <!-- Formulaire d'ajout -->
+  <div class="card p-4 mb-4">
+    <h6 class="mb-3">Ajouter un nouveau processus</h6>
+    <form>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Nom du processus">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="R">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="A">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="C">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="I">
+        </div>
+      </div>
+      <button type="button" class="btn btn-sm btn-primary mt-3">
+        <i class="bi bi-plus-circle me-1"></i> Ajouter
+      </button>
+    </form>
+  </div>
+
+  <!-- Graphique -->
+  <div class="card p-4">
+    <h6 class="mb-3">Répartition des rôles</h6>
+    <canvas id="raciChart" height="150"></canvas>
+  </div>
+</div>
 
     <div id="module-risques" class="content-section d-none">
       <h2>Risques & Opportunités</h2>
@@ -443,91 +517,77 @@
     });
 
     //Parties interessees chart
-    const ctx = document.getElementById('partiesChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'scatter',
-    data: {
-      datasets: [
-        {
-          label: 'Clients',
-          data: [{ x: 9, y: 9 }],
-          backgroundColor: 'green',
-          pointRadius: 8
-        },
-        {
-          label: 'Fournisseurs',
-          data: [{ x: 6, y: 8 }],
-          backgroundColor: 'orange',
-          pointRadius: 8
-        },
-        {
-          label: 'Autorités',
-          data: [{ x: 10, y: 10 }],
-          backgroundColor: 'red',
-          pointRadius: 8
-        },
-        {
-          label: 'Employés',
-          data: [{ x: 7, y: 9 }],
-          backgroundColor: 'blue',
-          pointRadius: 8
-        }
-      ]
-    },
-    options: {
-      scales: {
-        x: {
-          title: { display: true, text: 'Influence' },
-          min: 0,
-          max: 10
-        },
-        y: {
-          title: { display: true, text: 'Impact' },
-          min: 0,
-          max: 10
-        }
-      }
+    // Parties intéressées chart
+const ctxParties = document.getElementById('partiesChart').getContext('2d');
+new Chart(ctxParties, {
+  type: 'scatter',
+  data: {
+    datasets: [
+      { label: 'Clients', data: [{ x: 9, y: 9 }], backgroundColor: 'green', pointRadius: 8 },
+      { label: 'Fournisseurs', data: [{ x: 6, y: 8 }], backgroundColor: 'orange', pointRadius: 8 },
+      { label: 'Autorités', data: [{ x: 10, y: 10 }], backgroundColor: 'red', pointRadius: 8 },
+      { label: 'Employés', data: [{ x: 7, y: 9 }], backgroundColor: 'blue', pointRadius: 8 }
+    ]
+  },
+  options: {
+    scales: {
+      x: { title: { display: true, text: 'Influence' }, min: 0, max: 10 },
+      y: { title: { display: true, text: 'Impact' }, min: 0, max: 10 }
     }
-  });
+  }
+});
 
-  //Analyse PESTEL chart
-   const ctxPESTEL = document.getElementById('pestelChart').getContext('2d');
-  new Chart(ctxPESTEL, {
-    type: 'radar',
-    data: {
-      labels: ['Politique', 'Économique', 'Socioculturel', 'Technologique', 'Environnemental', 'Légal'],
-      datasets: [{
-        label: 'Niveau d’impact',
-        data: [7, 8, 6, 9, 5, 8],
-        backgroundColor: 'rgba(29, 53, 87, 0.2)',
-        borderColor: 'rgba(29, 53, 87, 1)',
-        pointBackgroundColor: 'rgba(29, 53, 87, 1)'
-      }]
-    },
-    options: { scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
-  });
+// Analyse PESTEL chart
+const ctxPESTEL = document.getElementById('pestelChart').getContext('2d');
+new Chart(ctxPESTEL, {
+  type: 'radar',
+  data: {
+    labels: ['Politique', 'Économique', 'Socioculturel', 'Technologique', 'Environnemental', 'Légal'],
+    datasets: [{
+      label: 'Niveau d’impact',
+      data: [7, 8, 6, 9, 5, 8],
+      backgroundColor: 'rgba(29, 53, 87, 0.2)',
+      borderColor: 'rgba(29, 53, 87, 1)',
+      pointBackgroundColor: 'rgba(29, 53, 87, 1)'
+    }]
+  },
+  options: { scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
+});
 
+// Politique Qualité chart
+const ctxPolitique = document.getElementById('politiqueChart').getContext('2d');
+new Chart(ctxPolitique, {
+  type: 'doughnut',
+  data: {
+    labels: ['Validée', 'En attente'],
+    datasets: [{
+      data: [78, 22],
+      backgroundColor: ['#198754', '#dee2e6'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
 
-  //Politique Qualité chart
-  const ctxPolitique = document.getElementById('politiqueChart').getContext('2d');
-  new Chart(ctxPolitique, {
-    type: 'doughnut',
-    data: {
-      labels: ['Validée', 'En attente'],
-      datasets: [{
-        data: [78, 22],
-        backgroundColor: ['#198754', '#dee2e6'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }
-  });
+// Matrice RACI chart
+const ctxRaci = document.getElementById('raciChart').getContext('2d');
+new Chart(ctxRaci, {
+  type: 'doughnut',
+  data: {
+    labels: ['Responsables (R)', 'Approbateurs (A)', 'Consultés (C)', 'Informés (I)'],
+    datasets: [{
+      data: [3, 3, 3, 3],
+      backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#9c27b0']
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
   </script>
 </body>
 </html>
