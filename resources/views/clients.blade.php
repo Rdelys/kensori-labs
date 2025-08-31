@@ -322,6 +322,26 @@
     <p class="text-muted small mb-0">Validée par la Direction Générale</p>
   </div>
 
+  <!-- Indicateur de diffusion -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3"><i class="bi bi-people me-2 text-secondary"></i> Diffusion de la politique qualité</h5>
+    <p class="info-text">Pourcentage d’employés ayant lu et validé la politique.</p>
+    
+    <!-- Progress bar -->
+    <div class="mb-3">
+      <div class="d-flex justify-content-between">
+        <span>Statut de diffusion</span>
+        <span><strong>78%</strong></span>
+      </div>
+      <div class="progress" style="height: 20px;">
+        <div class="progress-bar bg-success" role="progressbar" style="width: 78%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <!-- Graphique Chart.js -->
+    <canvas id="politiqueChart" height="120"></canvas>
+  </div>
+
   <!-- Historique des versions -->
   <div class="card p-4 mb-4">
     <h5 class="mb-3"><i class="bi bi-clock-history me-2 text-secondary"></i> Historique des versions</h5>
@@ -356,7 +376,6 @@
     </form>
   </div>
 </div>
-
 
     <div id="module-raci" class="content-section d-none">
       <h2>Matrice RACI</h2>
@@ -486,6 +505,28 @@
       }]
     },
     options: { scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
+  });
+
+
+  //Politique Qualité chart
+  const ctxPolitique = document.getElementById('politiqueChart').getContext('2d');
+  new Chart(ctxPolitique, {
+    type: 'doughnut',
+    data: {
+      labels: ['Validée', 'En attente'],
+      datasets: [{
+        data: [78, 22],
+        backgroundColor: ['#198754', '#dee2e6'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
   });
   </script>
 </body>
