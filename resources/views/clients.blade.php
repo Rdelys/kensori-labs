@@ -305,9 +305,58 @@
 </div>
 
     <div id="module-politique" class="content-section d-none">
-      <h2>Politique Qualité</h2>
-      <p>Contenu de la politique qualité de l’entreprise...</p>
+  <h2 class="mb-4">Politique Qualité</h2>
+  <p class="info-text mb-4">Déclaration officielle de l’entreprise concernant son engagement envers la qualité, la satisfaction client et l’amélioration continue.</p>
+
+  <!-- Carte affichage politique actuelle -->
+  <div class="card p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5><i class="bi bi-award me-2 text-primary"></i> Politique Qualité actuelle</h5>
+      <span class="badge bg-info">Version 1.2 – 15/08/2023</span>
     </div>
+    <p class="mb-2">
+      Notre entreprise s’engage à fournir des produits et services conformes aux exigences clients et réglementaires, 
+      à améliorer continuellement l’efficacité de notre système de management de la qualité (SMQ), 
+      et à favoriser le développement des compétences de nos collaborateurs.
+    </p>
+    <p class="text-muted small mb-0">Validée par la Direction Générale</p>
+  </div>
+
+  <!-- Historique des versions -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3"><i class="bi bi-clock-history me-2 text-secondary"></i> Historique des versions</h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>v1.2</strong> – 15/08/2023 : Mise à jour des engagements environnementaux</li>
+      <li class="list-group-item"><strong>v1.1</strong> – 10/03/2022 : Ajout de l’objectif satisfaction client</li>
+      <li class="list-group-item"><strong>v1.0</strong> – 01/01/2021 : Première publication officielle</li>
+    </ul>
+  </div>
+
+  <!-- Formulaire de soumission nouvelle politique -->
+  <div class="card p-4">
+    <h5 class="mb-3"><i class="bi bi-pencil-square me-2 text-success"></i> Proposer une nouvelle version</h5>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Texte de la politique qualité</label>
+        <textarea class="form-control" rows="5" placeholder="Saisir la nouvelle politique qualité..."></textarea>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Numéro de version</label>
+          <input type="text" class="form-control" placeholder="Ex : 1.3">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Date de révision</label>
+          <input type="date" class="form-control">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-upload me-2"></i> Soumettre pour validation
+      </button>
+    </form>
+  </div>
+</div>
+
 
     <div id="module-raci" class="content-section d-none">
       <h2>Matrice RACI</h2>
