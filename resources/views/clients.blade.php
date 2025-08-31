@@ -14,27 +14,183 @@
 
   <style>
 
-    /* Conteneur calendrier */
-#maintenanceCalendar {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  font-family: 'Segoe UI', Roboto, sans-serif;
+    /* ==== Global Reset & Base ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* En-tête (mois, boutons) */
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: #f5f7fb;
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden; /* évite double scroll */
+  color: #2b2d42;
+}
+
+/* ==== Sidebar ==== */
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #e9f0f8 0%, #f0f4fa 100%);
+  border-right: 1px solid #d6e0ec;
+  padding: 30px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 4px;
+}
+
+.sidebar h5 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1d3557;
+  font-size: 1.1rem;
+}
+
+.sidebar p,
+.sidebar strong {
+  color: #3c4a60;
+  font-size: 14px;
+}
+
+.sidebar hr {
+  margin: 20px 0;
+  border-color: #cdd7e1;
+}
+
+.sidebar .nav-link {
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #1d3557;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #1d3557;
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.sidebar .nav-link.active {
+  background-color: #457b9d;
+  color: #fff;
+}
+
+/* ==== Content Area ==== */
+.content {
+  flex: 1;
+  margin-left: 280px; /* espace sidebar */
+  padding: 40px;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d9e6 transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+.content::-webkit-scrollbar-thumb {
+  background-color: #d1d9e6;
+  border-radius: 4px;
+}
+
+/* ==== Headings ==== */
+h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #2b2d42;
+  margin-bottom: 30px;
+}
+
+h5 {
+  font-weight: 600;
+  color: #1d3557;
+}
+
+/* ==== Cards ==== */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.info-text {
+  font-size: 15px;
+  color: #5e6c84;
+}
+
+/* ==== Badges ==== */
+.badge {
+  padding: 6px 10px;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+/* ==== Buttons ==== */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 8px 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary {
+  border-color: #1d3557;
+  color: #1d3557;
+}
+.btn-outline-primary:hover {
+  background-color: #1d3557;
+  color: #fff;
+}
+
+/* ==== Calendar (FullCalendar) ==== */
+#maintenanceCalendar {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
 .fc .fc-toolbar-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #0d6efd; /* bleu Bootstrap */
+  color: #0d6efd;
 }
 
 .fc .fc-button {
   background: #0d6efd;
   border: none;
-  border-radius: 6px !important;
-  padding: 0.4rem 0.8rem;
+  border-radius: 8px !important;
+  padding: 0.45rem 0.9rem;
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -45,7 +201,6 @@
   background: #adb5bd;
 }
 
-/* Grille */
 .fc .fc-daygrid-day-frame {
   padding: 6px;
 }
@@ -55,11 +210,10 @@
   color: #495057;
 }
 
-/* Evénements */
 .fc-event {
   border: none;
-  border-radius: 6px;
-  padding: 4px 6px;
+  border-radius: 8px;
+  padding: 4px 8px;
   font-size: 0.75rem;
   font-weight: 500;
   color: #fff !important;
@@ -71,80 +225,11 @@
   transition: 0.2s ease;
 }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f5f7fb;
-      display: flex;
-      min-height: 100vh;
-    }
+/* ==== Utilities ==== */
+.d-none {
+  display: none !important;
+}
 
-    .sidebar {
-      width: 280px;
-      background-color: #e9f0f8;
-      padding: 30px 20px;
-      border-right: 1px solid #d6e0ec;
-    }
-
-    .sidebar h5 {
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #1d3557;
-    }
-
-    .sidebar p, .sidebar strong {
-      color: #3c4a60;
-      font-size: 14px;
-    }
-
-    .sidebar hr {
-      margin: 20px 0;
-      border-color: #cdd7e1;
-    }
-
-    .sidebar a.btn, .sidebar .nav-link {
-      font-size: 14px;
-      border-radius: 8px;
-      padding: 10px 15px;
-      display: block;
-      margin-bottom: 8px;
-      color: #1d3557;
-      text-decoration: none;
-      transition: background 0.2s ease;
-    }
-
-    .sidebar .nav-link:hover,
-    .sidebar .nav-link.active {
-      background-color: #1d3557;
-      color: white;
-    }
-
-    .content {
-      flex: 1;
-      padding: 40px;
-    }
-
-    .card {
-      border: none;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      background: white;
-    }
-
-    h2 {
-      font-weight: 600;
-      color: #2b2d42;
-      margin-bottom: 30px;
-    }
-
-    .info-text {
-      font-size: 15px;
-      color: #5e6c84;
-    }
-
-    .d-none {
-      display: none !important;
-    }
   </style>
 </head>
 <body>
@@ -1557,6 +1642,33 @@
       });
     });
 
+    (function(){
+  const ctx = document.getElementById('politiqueChart');
+  if(!ctx) return;
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Validé', 'Non lu'],
+      datasets: [{
+        data: [78, 22], // 78% ont validé
+        backgroundColor: ['#198754','#dee2e6']
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '70%',
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.label + ": " + ctx.parsed + "%"
+          }
+        }
+      }
+    }
+  });
+})();
     //Parties interessees chart
     // ---- Parties intéressées : Matrice Influence / Impact (Bubble) ----
 (function(){
