@@ -145,14 +145,164 @@
 
     {{-- Sections par module (exemples à adapter) --}}
     <div id="module-parties" class="content-section d-none">
-      <h2>Parties intéressées</h2>
-      <p>Liste des parties prenantes, leur impact et influence sur le système QMS...</p>
-    </div>
+  <h2 class="mb-4">Parties intéressées</h2>
+  <p class="info-text mb-4">Identification des principales parties prenantes, leur rôle, leur influence et impact sur le système de management de la qualité (QMS).</p>
 
-    <div id="module-swot" class="content-section d-none">
-      <h2>Analyse SWOT / PESTEL</h2>
-      <p>Outil d’analyse stratégique pour visualiser les forces/faiblesses internes et opportunités/menaces externes.</p>
+  <!-- Tableau des parties prenantes -->
+  <div class="card p-4 mb-5">
+    <h5 class="mb-3">Tableau des parties prenantes</h5>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Partie prenante</th>
+            <th>Rôle</th>
+            <th>Influence</th>
+            <th>Impact</th>
+            <th>Attentes principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><i class="bi bi-people me-2 text-primary"></i> Clients</td>
+            <td>Destinataires des produits/services</td>
+            <td><span class="badge bg-success">Élevée</span></td>
+            <td><span class="badge bg-success">Élevé</span></td>
+            <td>Qualité, fiabilité, conformité aux besoins</td>
+          </tr>
+          <tr>
+            <td><i class="bi bi-truck me-2 text-warning"></i> Fournisseurs</td>
+            <td>Apportent les ressources et intrants</td>
+            <td><span class="badge bg-warning text-dark">Moyenne</span></td>
+            <td><span class="badge bg-success">Élevé</span></td>
+            <td>Stabilité des relations, délais respectés</td>
+          </tr>
+          <tr>
+            <td><i class="bi bi-bank me-2 text-danger"></i> Autorités</td>
+            <td>Régulateurs et organismes de contrôle</td>
+            <td><span class="badge bg-danger">Très élevée</span></td>
+            <td><span class="badge bg-danger">Très élevé</span></td>
+            <td>Respect des normes et réglementations</td>
+          </tr>
+          <tr>
+            <td><i class="bi bi-person-badge me-2 text-info"></i> Employés</td>
+            <td>Acteurs du système qualité</td>
+            <td><span class="badge bg-warning text-dark">Moyenne</span></td>
+            <td><span class="badge bg-success">Élevé</span></td>
+            <td>Clarté des rôles, formations, sécurité</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <!-- Graphique Influence vs Impact -->
+  <div class="card p-4">
+    <h5 class="mb-3">Matrice Influence / Impact</h5>
+    <canvas id="partiesChart" height="300"></canvas>
+  </div>
+</div>
+
+   <div id="module-swot" class="content-section d-none">
+  <h2 class="mb-4">Analyse SWOT / PESTEL</h2>
+  <p class="info-text mb-4">
+    Complétez votre analyse en ajoutant les forces, faiblesses, opportunités et menaces, ainsi que l’évaluation PESTEL.
+  </p>
+
+  <!-- Tableau SWOT statique -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card p-4 h-100">
+        <h5 class="text-success"><i class="bi bi-check2-circle me-2"></i>Forces</h5>
+        <ul id="swot-forces" class="mb-3">
+          <li>Réputation solide</li>
+          <li>Équipe expérimentée</li>
+        </ul>
+        <!-- Formulaire ajout Force -->
+        <form class="d-flex">
+          <input type="text" class="form-control form-control-sm me-2" placeholder="Ajouter une force...">
+          <button type="button" class="btn btn-sm btn-success"><i class="bi bi-plus-circle"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-4 h-100">
+        <h5 class="text-danger"><i class="bi bi-x-circle me-2"></i>Faiblesses</h5>
+        <ul id="swot-faiblesses" class="mb-3">
+          <li>Dépendance fournisseurs clés</li>
+        </ul>
+        <form class="d-flex">
+          <input type="text" class="form-control form-control-sm me-2" placeholder="Ajouter une faiblesse...">
+          <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-plus-circle"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-4 h-100">
+        <h5 class="text-primary"><i class="bi bi-lightbulb me-2"></i>Opportunités</h5>
+        <ul id="swot-opportunites" class="mb-3">
+          <li>Digitalisation du secteur</li>
+        </ul>
+        <form class="d-flex">
+          <input type="text" class="form-control form-control-sm me-2" placeholder="Ajouter une opportunité...">
+          <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-circle"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-4 h-100">
+        <h5 class="text-warning"><i class="bi bi-exclamation-triangle me-2"></i>Menaces</h5>
+        <ul id="swot-menaces" class="mb-3">
+          <li>Pression concurrentielle</li>
+        </ul>
+        <form class="d-flex">
+          <input type="text" class="form-control form-control-sm me-2" placeholder="Ajouter une menace...">
+          <button type="button" class="btn btn-sm btn-warning"><i class="bi bi-plus-circle"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire PESTEL -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3"><i class="bi bi-bar-chart-line me-2"></i> Analyse PESTEL</h5>
+    <p class="info-text">Évaluez l’influence de chaque facteur sur une échelle de 0 à 10.</p>
+
+    <form>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Politique</label>
+          <input type="number" class="form-control" min="0" max="10" value="7">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Économique</label>
+          <input type="number" class="form-control" min="0" max="10" value="8">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Socioculturel</label>
+          <input type="number" class="form-control" min="0" max="10" value="6">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Technologique</label>
+          <input type="number" class="form-control" min="0" max="10" value="9">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Environnemental</label>
+          <input type="number" class="form-control" min="0" max="10" value="5">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Légal</label>
+          <input type="number" class="form-control" min="0" max="10" value="8">
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary mt-3">
+        <i class="bi bi-graph-up"></i> Mettre à jour le graphique
+      </button>
+    </form>
+
+    <canvas id="pestelChart" class="mt-4" height="300"></canvas>
+  </div>
+</div>
 
     <div id="module-politique" class="content-section d-none">
       <h2>Politique Qualité</h2>
@@ -199,6 +349,7 @@
       <p>Utilisation de l’IA pour prédire les risques et optimiser la qualité.</p>
     </div>
   </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     const links = document.querySelectorAll('.nav-link[data-target]');
@@ -222,6 +373,71 @@
         this.classList.add('active');
       });
     });
+
+    //Parties interessees chart
+    const ctx = document.getElementById('partiesChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Clients',
+          data: [{ x: 9, y: 9 }],
+          backgroundColor: 'green',
+          pointRadius: 8
+        },
+        {
+          label: 'Fournisseurs',
+          data: [{ x: 6, y: 8 }],
+          backgroundColor: 'orange',
+          pointRadius: 8
+        },
+        {
+          label: 'Autorités',
+          data: [{ x: 10, y: 10 }],
+          backgroundColor: 'red',
+          pointRadius: 8
+        },
+        {
+          label: 'Employés',
+          data: [{ x: 7, y: 9 }],
+          backgroundColor: 'blue',
+          pointRadius: 8
+        }
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          title: { display: true, text: 'Influence' },
+          min: 0,
+          max: 10
+        },
+        y: {
+          title: { display: true, text: 'Impact' },
+          min: 0,
+          max: 10
+        }
+      }
+    }
+  });
+
+  //Analyse PESTEL chart
+   const ctxPESTEL = document.getElementById('pestelChart').getContext('2d');
+  new Chart(ctxPESTEL, {
+    type: 'radar',
+    data: {
+      labels: ['Politique', 'Économique', 'Socioculturel', 'Technologique', 'Environnemental', 'Légal'],
+      datasets: [{
+        label: 'Niveau d’impact',
+        data: [7, 8, 6, 9, 5, 8],
+        backgroundColor: 'rgba(29, 53, 87, 0.2)',
+        borderColor: 'rgba(29, 53, 87, 1)',
+        pointBackgroundColor: 'rgba(29, 53, 87, 1)'
+      }]
+    },
+    options: { scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
+  });
   </script>
 </body>
 </html>
