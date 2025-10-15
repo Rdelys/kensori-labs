@@ -68,5 +68,21 @@ Route::get('/logout', [LoginUserController::class, 'logout'])->name('user.logout
 
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    return view('clients', ['user' => $user]);
+    return view('client.dashboard', ['user' => $user]);
 })->middleware('auth')->name('user.dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/client', [ClientController::class, 'dashboard'])->name('client.dashboard');
+    Route::get('/client/parties', [ClientController::class, 'parties'])->name('client.parties');
+    Route::get('/client/swot', [ClientController::class, 'swot'])->name('client.swot');
+    Route::get('/client/politique', [ClientController::class, 'politique'])->name('client.politique');
+    Route::get('/client/raci', [ClientController::class, 'raci'])->name('client.raci');
+    Route::get('/client/risques', [ClientController::class, 'risques'])->name('client.risques');
+    Route::get('/client/objectifs', [ClientController::class, 'objectifs'])->name('client.objectifs');
+    Route::get('/client/docs', [ClientController::class, 'docs'])->name('client.docs');
+    Route::get('/client/equipements', [ClientController::class, 'equipements'])->name('client.equipements');
+    Route::get('/client/audits', [ClientController::class, 'audits'])->name('client.audits');
+    Route::get('/client/capa', [ClientController::class, 'capa'])->name('client.capa');
+    Route::get('/client/ia', [ClientController::class, 'ia'])->name('client.ia');
+});

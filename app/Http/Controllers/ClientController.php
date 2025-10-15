@@ -33,4 +33,19 @@ class ClientController extends Controller
         $client->delete();
         return redirect()->back()->with('success', 'Client supprimé.');
     }
+
+    public function dashboard() {
+        $user = Auth::user();
+        return view('client.dashboard', compact('user'));
+    }
+
+    public function parties() {
+        $user = Auth::user();
+        return view('client.modules.parties', compact('user'));
+    }
+
+    public function swot() {
+        $user = Auth::user();
+        return view('client.modules.swot', compact('user'));
+    }
 }
