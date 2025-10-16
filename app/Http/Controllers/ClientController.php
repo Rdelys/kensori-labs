@@ -46,6 +46,6 @@ class ClientController extends Controller
 
     public function swot() {
         $user = Auth::user();
-        return view('client.modules.swot', compact('user'));
+        return view('client.swot', compact('user'));
     }
 }
