@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Auth;
 class ClientController extends Controller
 {
     public function store(Request $request)
@@ -41,7 +41,7 @@ class ClientController extends Controller
 
     public function parties() {
         $user = Auth::user();
-        return view('client.modules.parties', compact('user'));
+        return view('client.parties', compact('user'));
     }
 
     public function swot() {
