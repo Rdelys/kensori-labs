@@ -113,7 +113,7 @@
         <ul id="contextMenu" class="mt-2 ml-3 space-y-1 hidden" role="menu" aria-hidden="true">
           <li><a href="{{ route('client.parties') }}" class="nav-link"><i class="fa-solid fa-people-group w-4"></i> Parties intéressées</a></li>
           <li><a href="{{ route('client.swot') }}" class="nav-link"><i class="fa-solid fa-chart-line w-4"></i> SWOT / PESTEL</a></li>
-          <li><a href="#" class="nav-link"><i class="fa-solid fa-diagram-project w-4"></i> Processus du SMQ</a></li>
+          <li><a href="{{ route('client.processus') }}" class="nav-link"><i class="fa-solid fa-diagram-project w-4"></i> Processus du SMQ</a></li>
         </ul>
       </div>
 

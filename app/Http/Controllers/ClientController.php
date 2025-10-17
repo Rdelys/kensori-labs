@@ -48,4 +48,9 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.swot', compact('user'));
     }
+
+    public function processus() {
+        $user = Auth::user();
+        return view('client.processus', compact('user'));
+    }
 }

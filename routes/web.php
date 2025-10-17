@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client', [ClientController::class, 'dashboard'])->name('client.dashboard');
     Route::get('/client/parties', [ClientController::class, 'parties'])->name('client.parties');
     Route::get('/client/swot', [ClientController::class, 'swot'])->name('client.swot');
+    Route::get('/client/processus', [ClientController::class, 'processus'])->name('client.processus');
     Route::get('/client/politique', [ClientController::class, 'politique'])->name('client.politique');
     Route::get('/client/raci', [ClientController::class, 'raci'])->name('client.raci');
     Route::get('/client/risques', [ClientController::class, 'risques'])->name('client.risques');
