@@ -58,4 +58,9 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.politique', compact('user'));
     }
+
+    public function raci() {
+        $user = Auth::user();
+        return view('client.raci', compact('user'));
+    }
 }
