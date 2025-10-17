@@ -149,7 +149,7 @@
         <ul id="supportMenu" class="mt-2 ml-3 space-y-1 hidden" role="menu" aria-hidden="true">
           <li><a href="{{ route('client.docs') }}" class="nav-link"><i class="fa-solid fa-file-lines w-4"></i> Documentation</a></li>
           <li><a href="{{ route('client.equipements') }}" class="nav-link"><i class="fa-solid fa-screwdriver-wrench w-4"></i> Équipements</a></li>
-          <li><a href="#" class="nav-link"><i class="fa-solid fa-id-badge w-4"></i> Compétences</a></li>
+          <li><a href="{{ route('client.competences') }}" class="nav-link"><i class="fa-solid fa-id-badge w-4"></i> Compétences</a></li>
         </ul>
       </div>
 
@@ -173,10 +173,6 @@
           <li><a href="{{ route('client.capa') }}" class="nav-link"><i class="fa-solid fa-bug w-4"></i> Non-conformités / CAPA</a></li>
           <li><a href="{{ route('client.ia') }}" class="nav-link"><i class="fa-solid fa-robot w-4"></i> IA Prédictive</a></li>
         </ul>
-      </div>
-
-      <div class="pt-4 border-t border-gray-100">
-        <a href="#" class="nav-link"><i class="fa-solid fa-gauge-high w-4"></i> Tableaux de bord</a>
       </div>
     </nav>
 
