@@ -137,7 +137,7 @@
         <ul id="planMenu" class="mt-2 ml-3 space-y-1 hidden" role="menu" aria-hidden="true">
           <li><a href="{{ route('client.risques') }}" class="nav-link"><i class="fa-solid fa-triangle-exclamation w-4"></i> Risques & Opportunités</a></li>
           <li><a href="{{ route('client.objectifs') }}" class="nav-link"><i class="fa-solid fa-bullseye w-4"></i> Objectifs Qualité</a></li>
-          <li><a href="#" class="nav-link"><i class="fa-solid fa-arrows-rotate w-4"></i> Planification des Changements</a></li>
+          <li><a href="{{ route('client.plani') }}" class="nav-link"><i class="fa-solid fa-arrows-rotate w-4"></i> Planification des Changements</a></li>
         </ul>
       </div>
 
