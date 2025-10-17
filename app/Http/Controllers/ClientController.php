@@ -53,4 +53,9 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.processus', compact('user'));
     }
+
+    public function politique() {
+        $user = Auth::user();
+        return view('client.politique', compact('user'));
+    }
 }
