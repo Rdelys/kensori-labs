@@ -12,7 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Font Awesome (v6 free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pQfWqf2mJz7+vYVx0c4+Kq3YxqQpX1s1d6W0b0c6t3x5G9G9k8o7b1h1c4G2k2o7Z1b2K9qz+4F7k7F7K2Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Optional: small custom CSS for finer control -->
   <style>
