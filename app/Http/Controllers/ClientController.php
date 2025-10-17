@@ -108,4 +108,9 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.satisfaction', compact('user'));
     }
+
+    public function capa() {
+        $user = Auth::user();
+        return view('client.capa', compact('user'));
+    }
 }
