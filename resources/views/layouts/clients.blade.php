@@ -125,7 +125,7 @@
         <ul id="leadershipMenu" class="mt-2 ml-3 space-y-1 hidden" role="menu" aria-hidden="true">
           <li><a href="{{ route('client.politique') }}" class="nav-link"><i class="fa-solid fa-certificate w-4"></i> Politique Qualité</a></li>
           <li><a href="{{ route('client.raci') }}" class="nav-link"><i class="fa-solid fa-diagram-project w-4"></i> Matrice RACI</a></li>
-          <li><a href="#" class="nav-link"><i class="fa-solid fa-calendar-check w-4"></i> Revues de Direction</a></li>
+          <li><a href="{{ route('client.revu') }}" class="nav-link"><i class="fa-solid fa-calendar-check w-4"></i> Revues de Direction</a></li>
         </ul>
       </div>
 
