@@ -160,7 +160,7 @@
         </button>
         <ul id="evalMenu" class="mt-2 ml-3 space-y-1 hidden" role="menu" aria-hidden="true">
           <li><a href="{{ route('client.audits') }}" class="nav-link"><i class="fa-solid fa-shield-check w-4"></i> Audits Internes</a></li>
-          <li><a href="#" class="nav-link"><i class="fa-regular fa-face-smile w-4"></i> Satisfaction Client</a></li>
+          <li><a href="{{ route('client.satisfaction') }}" class="nav-link"><i class="fa-regular fa-face-smile w-4"></i> Satisfaction Client</a></li>
         </ul>
       </div>
 

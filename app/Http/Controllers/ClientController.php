@@ -103,4 +103,9 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.audits', compact('user'));
     }
+
+    public function satisfaction() {
+        $user = Auth::user();
+        return view('client.satisfaction', compact('user'));
+    }
 }

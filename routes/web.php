@@ -84,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client/objectifs', [ClientController::class, 'objectifs'])->name('client.objectifs');
     Route::get('/client/plani', [ClientController::class, 'plani'])->name('client.plani');
     Route::get('/client/competences', [ClientController::class, 'competences'])->name('client.competences');
+    Route::get('/client/satisfaction', [ClientController::class, 'satisfaction'])->name('client.satisfaction');
 
     Route::get('/client/docs', [ClientController::class, 'docs'])->name('client.docs');
     Route::get('/client/equipements', [ClientController::class, 'equipements'])->name('client.equipements');
