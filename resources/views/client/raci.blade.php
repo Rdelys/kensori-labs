@@ -201,16 +201,21 @@
         </div>
 
         <!-- FORMULAIRE AJOUT VISUEL -->
-        <div class="mt-6 border-t pt-4">
-            <h4 class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                <i class="fa-solid fa-plus text-green-600"></i> Ajouter un poste (simulation)
+        <div class="mt-8 border-t pt-4">
+            <h4 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-plus text-green-600"></i> Ajouter un poste
             </h4>
-            <div class="flex gap-3">
-                <input id="newRole" type="text" placeholder="Nom du poste..." class="border rounded-lg p-2 w-full focus:ring-2 focus:ring-green-400">
-                <button id="addRole" class="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg shadow">
-                    <i class="fa-solid fa-user-plus"></i>
+            <form id="addPostForm" class="grid md:grid-cols-3 gap-4">
+                <input id="newRole" type="text" placeholder="Ex : Superviseur Maintenance" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                <select id="roleLevel" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                    <option value="haut">Niveau Haut (Direction)</option>
+                    <option value="moyen">Niveau Moyen (Encadrement)</option>
+                    <option value="bas">Niveau Bas (Opérationnel)</option>
+                </select>
+                <button type="button" id="addRole" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Ajouter
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 
