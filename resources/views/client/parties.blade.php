@@ -93,20 +93,78 @@
         </table>
     </section>
 
+    <!-- 🔗 LIEN BESOINS ↔ PROCESSUS -->
+    <section class="bg-white shadow rounded-2xl p-6 border border-gray-100">
+        <h2 class="text-xl font-semibold text-gray-700 mb-5 flex items-center gap-2">
+            <i class="fa-solid fa-link text-blue-500"></i> Lien Besoins ↔ Processus
+        </h2>
+        <p class="text-gray-500 text-sm mb-3">Association entre les attentes des parties intéressées, les processus impactés et les risques associés.</p>
+        <table class="w-full text-sm text-left text-gray-700 border rounded-lg overflow-hidden">
+            <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+                <tr>
+                    <th class="px-4 py-2">Partie</th>
+                    <th class="px-4 py-2">Attentes</th>
+                    <th class="px-4 py-2">Processus Impactés</th>
+                    <th class="px-4 py-2">Risques Associés</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t hover:bg-gray-50">
+                    <td class="px-4 py-2 font-semibold">Client A</td>
+                    <td class="px-4 py-2">Livraison rapide, conformité</td>
+                    <td class="px-4 py-2">Production, Contrôle Qualité</td>
+                    <td class="px-4 py-2 text-red-600">Retard livraison / non-conformité</td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50">
+                    <td class="px-4 py-2 font-semibold">Fournisseur B</td>
+                    <td class="px-4 py-2">Communication fluide</td>
+                    <td class="px-4 py-2">Achats, Logistique</td>
+                    <td class="px-4 py-2 text-yellow-600">Rupture d’approvisionnement</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
     <!-- GRAPHIQUES STATIQUES -->
     <section class="grid md:grid-cols-2 gap-6">
         <div class="bg-white shadow rounded-2xl p-6 border border-gray-100">
             <h2 class="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-chart-column text-blue-500"></i> Niveau d’influence des parties intéressées
             </h2>
-            <canvas id="influenceChart" class="w-full h-64"></canvas>
+            <canvas id="influenceChart" class="w-full h-72"></canvas>
         </div>
 
         <div class="bg-white shadow rounded-2xl p-6 border border-gray-100">
             <h2 class="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-chart-pie text-blue-500"></i> Analyse PESTEL (facteurs externes)
             </h2>
-            <canvas id="pestelChart" class="w-full h-64"></canvas>
+            <canvas id="pestelChart" class="w-full h-72"></canvas>
+        </div>
+    </section>
+
+    <!-- ⚙️ ANALYSE D’INFLUENCE AUTOMATISÉE -->
+    <section class="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6 shadow">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-brain text-blue-600"></i> Analyse d’Influence Automatisée
+        </h2>
+        <p class="text-gray-600 text-sm mb-4">Recommandations générées automatiquement selon les données d’influence et d’interaction.</p>
+
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white border border-green-100 shadow-sm rounded-xl p-4">
+                <h3 class="font-semibold text-green-700"><i class="fa-solid fa-thumbs-up mr-1"></i> Client A</h3>
+                <p class="text-gray-500 text-sm mt-1">Acteur clé — impliquer dans les décisions stratégiques.</p>
+                <span class="inline-block mt-3 text-xs bg-green-600 text-white px-3 py-1 rounded-full">Réunions mensuelles</span>
+            </div>
+            <div class="bg-white border border-yellow-100 shadow-sm rounded-xl p-4">
+                <h3 class="font-semibold text-yellow-700"><i class="fa-solid fa-exclamation-triangle mr-1"></i> Fournisseur B</h3>
+                <p class="text-gray-500 text-sm mt-1">Influence moyenne — surveiller la performance et la communication.</p>
+                <span class="inline-block mt-3 text-xs bg-yellow-500 text-white px-3 py-1 rounded-full">Audit Q1 prévu</span>
+            </div>
+            <div class="bg-white border border-blue-100 shadow-sm rounded-xl p-4">
+                <h3 class="font-semibold text-blue-700"><i class="fa-solid fa-user-tie mr-1"></i> Autorité Réglementaire</h3>
+                <p class="text-gray-500 text-sm mt-1">Influence forte — maintenir une veille réglementaire active.</p>
+                <span class="inline-block mt-3 text-xs bg-blue-600 text-white px-3 py-1 rounded-full">Reporting trimestriel</span>
+            </div>
         </div>
     </section>
 
@@ -133,6 +191,13 @@
                         <td class="px-4 py-2">Réunion</td>
                         <td class="px-4 py-2">Révision contrat qualité</td>
                         <td class="px-4 py-2">M. Andry</td>
+                    </tr>
+                    <tr class="border-t hover:bg-gray-50">
+                        <td class="px-4 py-2">18/10/2025</td>
+                        <td class="px-4 py-2">Client A</td>
+                        <td class="px-4 py-2">Email</td>
+                        <td class="px-4 py-2">Satisfaction trimestrielle</td>
+                        <td class="px-4 py-2">Mme Lova</td>
                     </tr>
                 </tbody>
             </table>
