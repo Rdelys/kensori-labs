@@ -23,82 +23,74 @@
     </div>
 
     <!-- KPI et Métriques Prédictives -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Carte : Risques Prédits -->
-        <div class="card bg-gradient-to-br from-red-50 to-red-100 border-red-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-red-600">Risques Prédits</p>
-                    <p class="text-2xl font-bold text-red-700 mt-1">14</p>
-                </div>
-                <div class="w-12 h-12 bg-red-200 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-triangle-exclamation text-red-600 text-xl"></i>
-                </div>
+    <div class="cards-grid">
+    <!-- Carte : Risques Prédits -->
+    <div class="card card-red">
+        <div class="card-top">
+            <div>
+                <p class="card-title">Risques Prédits</p>
+                <p class="card-value">14</p>
             </div>
-            <div class="mt-3 pt-3 border-t border-red-200">
-                <div class="flex justify-between text-sm">
-                    <span class="text-red-600">Élevé: 6</span>
-                    <span class="text-orange-500">Moyen: 5</span>
-                    <span class="text-yellow-500">Faible: 3</span>
-                </div>
+            <div class="card-icon red">
+                <i class="fa-solid fa-triangle-exclamation"></i>
             </div>
         </div>
-
-        <!-- Carte : NC Potentielles -->
-        <div class="card bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-orange-600">NC Potentielles</p>
-                    <p class="text-2xl font-bold text-orange-700 mt-1">9</p>
-                </div>
-                <div class="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-bug text-orange-600 text-xl"></i>
-                </div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-orange-200">
-                <div class="text-sm text-orange-600">
-                    <i class="fa-solid fa-arrow-up mr-1"></i>
-                    +12% vs dernier mois
-                </div>
-            </div>
-        </div>
-
-        <!-- Carte : Opportunités -->
-        <div class="card bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-green-600">Opportunités</p>
-                    <p class="text-2xl font-bold text-green-700 mt-1">7</p>
-                </div>
-                <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-chart-line text-green-600 text-xl"></i>
-                </div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-green-200">
-                <div class="text-sm text-green-600">
-                    Gain potentiel: 45k€/an
-                </div>
-            </div>
-        </div>
-
-        <!-- Carte : Alertes Actives -->
-        <div class="card bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-blue-600">Alertes Actives</p>
-                    <p class="text-2xl font-bold text-blue-700 mt-1">5</p>
-                </div>
-                <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-bell text-blue-600 text-xl"></i>
-                </div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-blue-200">
-                <div class="text-sm text-blue-600">
-                    3 nécessitent action immédiate
-                </div>
-            </div>
+        <div class="card-bottom red">
+            <span>Élevé: 6</span>
+            <span>Moyen: 5</span>
+            <span>Faible: 3</span>
         </div>
     </div>
+
+    <!-- Carte : NC Potentielles -->
+    <div class="card card-orange">
+        <div class="card-top">
+            <div>
+                <p class="card-title">NC Potentielles</p>
+                <p class="card-value">9</p>
+            </div>
+            <div class="card-icon orange">
+                <i class="fa-solid fa-bug"></i>
+            </div>
+        </div>
+        <div class="card-bottom orange">
+            <span><i class="fa-solid fa-arrow-up"></i> +12% vs dernier mois</span>
+        </div>
+    </div>
+
+    <!-- Carte : Opportunités -->
+    <div class="card card-green">
+        <div class="card-top">
+            <div>
+                <p class="card-title">Opportunités</p>
+                <p class="card-value">7</p>
+            </div>
+            <div class="card-icon green">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+        </div>
+        <div class="card-bottom green">
+            <span>Gain potentiel: 45k€/an</span>
+        </div>
+    </div>
+
+    <!-- Carte : Alertes Actives -->
+    <div class="card card-blue">
+        <div class="card-top">
+            <div>
+                <p class="card-title">Alertes Actives</p>
+                <p class="card-value">5</p>
+            </div>
+            <div class="card-icon blue">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+        </div>
+        <div class="card-bottom blue">
+            <span>3 nécessitent action immédiate</span>
+        </div>
+    </div>
+</div>
+
 
     <!-- Section : Analyse Prédictive et Détection de Tendances -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -649,54 +641,91 @@
 </div>
 
 <style>
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media(min-width: 768px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 .card {
-    background: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card-header {
-    border-bottom: 1px solid;
-    padding: 1rem 1.5rem;
-    border-radius: 0.75rem 0.75rem 0 0;
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-.btn-primary {
-    background-color: #3b82f6;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
-.btn-primary:hover {
-    background-color: #2563eb;
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background-color: #f3f4f6;
-    color: #374151;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    border: 1px solid #d1d5db;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background-color: #e5e7eb;
-}
-
-.btn-sm {
-    padding: 0.375rem 0.75rem;
+.card-title {
     font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
 }
+
+.card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+}
+
+.card-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    color: white;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Couleurs */
+.card-red { background: linear-gradient(135deg, #fee2e2, #fecaca); border: 1px solid #fca5a5; }
+.card-red .card-bottom, .card-red .card-title { color: #b91c1c; }
+.card-red .card-icon { background: #fca5a5; color: #b91c1c; }
+
+.card-orange { background: linear-gradient(135deg, #fff7ed, #ffedd5); border: 1px solid #fdba74; }
+.card-orange .card-bottom, .card-orange .card-title { color: #b45309; }
+.card-orange .card-icon { background: #fdba74; color: #b45309; }
+
+.card-green { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid #34d399; }
+.card-green .card-bottom, .card-green .card-title { color: #065f46; }
+.card-green .card-icon { background: #34d399; color: #065f46; }
+
+.card-blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #60a5fa; }
+.card-blue .card-bottom, .card-blue .card-title { color: #1e40af; }
+.card-blue .card-icon { background: #60a5fa; color: #1e40af; }
+
 </style>
 
 <script>
