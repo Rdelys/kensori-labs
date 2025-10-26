@@ -38,8 +38,8 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 
     <!-- Performances QMS -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-t-2xl">
         <i class="bi bi-bar-chart text-xl"></i>
         <h3 class="text-lg font-semibold">Performances QMS</h3>
       </div>
@@ -49,8 +49,8 @@
     </div>
 
     <!-- Équipements -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-green-700 to-green-500 text-white rounded-t-2xl">
         <i class="bi bi-gear text-xl"></i>
         <h3 class="text-lg font-semibold">Équipements</h3>
       </div>
@@ -64,8 +64,8 @@
     </div>
 
     <!-- Audits internes -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-orange-700 to-orange-500 text-white rounded-t-2xl">
         <i class="bi bi-shield-check text-xl"></i>
         <h3 class="text-lg font-semibold">Audits internes</h3>
       </div>
@@ -81,8 +81,8 @@
     </div>
 
     <!-- Satisfaction client -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-purple-700 to-purple-500 text-white rounded-t-2xl">
         <i class="bi bi-emoji-smile text-xl"></i>
         <h3 class="text-lg font-semibold">Satisfaction Client</h3>
       </div>
@@ -93,8 +93,8 @@
     </div>
 
     <!-- Non-conformités -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-red-700 to-red-500 text-white rounded-t-2xl">
         <i class="bi bi-exclamation-triangle text-xl"></i>
         <h3 class="text-lg font-semibold">Non-Conformités & CAPA</h3>
       </div>
@@ -106,8 +106,8 @@
     </div>
 
     <!-- Analyses prédictives -->
-    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
-      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-t-2xl">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-indigo-700 to-indigo-500 text-white rounded-t-2xl">
         <i class="bi bi-cpu text-xl"></i>
         <h3 class="text-lg font-semibold">Analyses Prédictives</h3>
       </div>
@@ -117,6 +117,43 @@
         <canvas id="predictChart" class="mt-3 h-36"></canvas>
       </div>
     </div>
+
+    <!-- ALERTES AUTOMATIQUES -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-xl transition col-span-1 sm:col-span-2 xl:col-span-3">
+      <div class="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-amber-600 to-red-500 text-white rounded-t-2xl">
+        <i class="bi bi-bell-fill text-xl"></i>
+        <h3 class="text-lg font-semibold">Alertes / Notifications Automatiques</h3>
+      </div>
+      <div class="p-5 text-gray-700 text-sm leading-relaxed">
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="border border-red-200 bg-red-50 rounded-xl p-4 flex items-start gap-3">
+            <i class="bi bi-exclamation-octagon text-red-600 text-xl"></i>
+            <div>
+              <p class="font-semibold text-red-700">KPI "Taux de Conformité" sous seuil</p>
+              <p class="text-xs text-red-500 mt-1">Valeur actuelle : 82% (Seuil : 90%)</p>
+              <span class="inline-block mt-2 text-xs bg-red-600 text-white px-2 py-1 rounded-full">Alerte critique</span>
+            </div>
+          </div>
+          <div class="border border-yellow-200 bg-yellow-50 rounded-xl p-4 flex items-start gap-3">
+            <i class="bi bi-exclamation-triangle text-yellow-600 text-xl"></i>
+            <div>
+              <p class="font-semibold text-yellow-700">Satisfaction client en baisse</p>
+              <p class="text-xs text-yellow-600 mt-1">Tendance : -5% sur le dernier mois</p>
+              <span class="inline-block mt-2 text-xs bg-yellow-500 text-white px-2 py-1 rounded-full">Avertissement</span>
+            </div>
+          </div>
+          <div class="border border-blue-200 bg-blue-50 rounded-xl p-4 flex items-start gap-3">
+            <i class="bi bi-info-circle text-blue-600 text-xl"></i>
+            <div>
+              <p class="font-semibold text-blue-700">Audit interne planifié</p>
+              <p class="text-xs text-blue-500 mt-1">Département : Production (03/11/2025)</p>
+              <span class="inline-block mt-2 text-xs bg-blue-600 text-white px-2 py-1 rounded-full">Notification</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- TABLEAU DE BORD PERSONNALISABLE -->
@@ -155,9 +192,9 @@
     type: 'bar',
     data: {
       labels: ['Conformité', 'Satisfaction', 'CAPA'],
-      datasets: [{ 
-        data: [96, 84, 88], 
-        backgroundColor: ['#2563eb', '#8b5cf6', '#dc2626'] 
+      datasets: [{
+        data: [96, 84, 88],
+        backgroundColor: ['#2563eb', '#8b5cf6', '#dc2626']
       }]
     },
     options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
