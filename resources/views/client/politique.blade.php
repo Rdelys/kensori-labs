@@ -5,23 +5,30 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="p-6 md:p-10 bg-gray-50 min-h-screen space-y-10">
-
-    <!-- En-tête -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-            <i class="fa-solid fa-scroll text-blue-600"></i>
-            Politique Qualité de l’Entreprise
-        </h1>
+<!-- Header Premium -->
+<div class="bg-gradient-to-r from-blue-50 via-white to-indigo-50 border-b border-gray-200 py-6 px-4 md:px-10 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <div class="bg-white shadow-md p-3 rounded-full">
+                <i class="fa-solid fa-scroll text-blue-600 text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">Politique Qualité de l’Entreprise</h1>
+                <p class="text-sm text-gray-500">Alignée sur la norme ISO 9001:2015 – Clause 5.2 (Politique Qualité)</p>
+            </div>
+        </div>
         <div class="flex gap-3">
-            <button id="openModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-md transition">
+            <button id="openModalBtn" class="bg-gradient-to-b from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-5 py-2 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
                 <i class="fa-solid fa-pen-to-square"></i> Mettre à jour
             </button>
-            <button class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow-md transition">
+            <button id="exportPdfBtn" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow-md transition">
                 <i class="fa-solid fa-file-export"></i> Exporter PDF
             </button>
         </div>
     </div>
+</div>
+
+<div class="p-6 md:p-10 bg-gray-50 min-h-screen space-y-10">
 
     <!-- Section Politique Qualité -->
     <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
@@ -50,6 +57,32 @@
                     <p class="text-sm text-gray-500">Signature électronique enregistrée</p>
                 </div>
                 <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Signature" class="w-24 opacity-70 mt-3 md:mt-0">
+            </div>
+        </div>
+    </div>
+
+    <!-- Engagement de la Direction (ajout QMS) -->
+    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-user-tie text-indigo-500"></i> Engagement de la Direction
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+            <div>
+                <p>La Direction s'engage à :</p>
+                <ul class="list-disc ml-6 mt-2 space-y-1">
+                    <li>Assurer la mise à disposition des ressources nécessaires au SMQ.</li>
+                    <li>Promouvoir une culture qualité et d'amélioration continue.</li>
+                    <li>Veiller à l’efficacité des processus et à la satisfaction des parties intéressées.</li>
+                    <li>Garantir la conformité à la norme ISO 9001:2015.</li>
+                </ul>
+            </div>
+            <div>
+                <p>Indicateurs de suivi :</p>
+                <ul class="list-disc ml-6 mt-2 space-y-1">
+                    <li>Taux de satisfaction client ≥ 90%</li>
+                    <li>Objectifs atteints ≥ 85%</li>
+                    <li>Taux de diffusion de la politique ≥ 100%</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -105,6 +138,12 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Statistiques de diffusion -->
+        <div class="mt-4 text-sm text-gray-600">
+            <p><i class="fa-solid fa-info-circle text-blue-500"></i> Taux global de lecture : <strong>75%</strong></p>
+            <p>Rappels automatiques envoyés aux destinataires “en attente”.</p>
+        </div>
     </div>
 
     <!-- Historique des Versions -->
@@ -117,6 +156,9 @@
             <li class="py-2"><strong>V1.2</strong> – 10/01/2025 : Ajout des objectifs de satisfaction client.</li>
             <li class="py-2"><strong>V1.1</strong> – 01/07/2024 : Première mise à jour validée par la direction.</li>
         </ul>
+        <div class="mt-4 text-sm text-gray-500">
+            <i class="fa-solid fa-link"></i> Traçabilité : Politique liée au module “Leadership” & “Communication” (ISO 9001 §5.1 & §7.4)
+        </div>
     </div>
 
     <!-- Graphique -->
@@ -132,7 +174,7 @@
 
 <!-- Modal d’édition -->
 <div id="policyModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-3xl relative">
+    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-3xl relative animate-fade-in">
         <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -153,6 +195,7 @@ Notre politique qualité vise à assurer la conformité, la satisfaction client 
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
 document.getElementById('openModalBtn').addEventListener('click', () => {
     document.getElementById('policyModal').classList.remove('hidden');
@@ -180,5 +223,26 @@ new Chart(document.getElementById('readChart'), {
         }
     }
 });
+
+// Export PDF
+document.getElementById('exportPdfBtn').addEventListener('click', () => {
+    const element = document.body;
+    const opt = {
+        margin: 0.5,
+        filename: 'Politique_Qualite_TechnoFab.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+});
 </script>
+
+<style>
+/* Animations et styles premium */
+@keyframes fade-in { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
+.animate-fade-in { animation: fade-in 0.25s ease-out; }
+table tbody tr { transition: background 0.2s ease, transform 0.1s ease; }
+table tbody tr:hover { transform: translateY(-1px); }
+</style>
 @endsection
