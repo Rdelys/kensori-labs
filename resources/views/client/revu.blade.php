@@ -7,7 +7,55 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="space-y-10 p-6 bg-gray-50 min-h-screen fade-in">
+<style>
+
+.shadow-premium {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+</style>
+
+<div class="space-y-10 p-8 bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen fade-in">
+
+    <!-- EN-TÊTE PREMIUM -->
+    <div class="bg-white rounded-3xl border shadow-premium p-8 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-transparent opacity-50"></div>
+        <div class="relative z-10">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-3 tracking-tight">
+                <i class="fa-solid fa-handshake text-green-600"></i>
+                Revue de Direction – Système Qualité
+            </h1>
+            <p class="text-gray-600 text-sm">Pilotage stratégique du SMQ et conformité ISO 9001:2015 – §9.3</p>
+            <div class="mt-3">
+                <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-semibold shadow-sm">Session Annuelle 2025</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RÉSUMÉ SYNTHÉTIQUE AJOUT -->
+    <div class="grid md:grid-cols-4 gap-5 text-center">
+        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+            <i class="fa-solid fa-bullseye text-2xl text-green-600 mb-2"></i>
+            <p class="font-semibold text-gray-700">Taux d'atteinte</p>
+            <p class="text-3xl font-bold text-green-700">84%</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+            <i class="fa-solid fa-face-smile text-2xl text-green-600 mb-2"></i>
+            <p class="font-semibold text-gray-700">Satisfaction client</p>
+            <p class="text-3xl font-bold text-green-700">4.3 / 5</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+            <i class="fa-solid fa-triangle-exclamation text-2xl text-yellow-500 mb-2"></i>
+            <p class="font-semibold text-gray-700">Non-conformités</p>
+            <p class="text-3xl font-bold text-yellow-600">7</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+            <i class="fa-solid fa-shield-halved text-2xl text-green-600 mb-2"></i>
+            <p class="font-semibold text-gray-700">Conformité ISO</p>
+            <p class="text-3xl font-bold text-green-700">96%</p>
+        </div>
+    </div>
+
+    <!-- ==== TON CODE ORIGINAL INTACT CI-DESSOUS ==== -->
 
     <!-- HEADER -->
     <div class="text-center">
@@ -94,7 +142,7 @@
             <i class="fa-solid fa-chart-pie text-green-600"></i> Synthèse des décisions de revue
         </h3>
         <div class="flex justify-center">
-            <canvas id="revueChart" width="140" height="140"></canvas>
+            <canvas id="revueChart" style="max-width:400px;max-height:400px;"></canvas>
         </div>
     </div>
 
@@ -169,7 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 backgroundColor: ['#16A34A', '#FACC15', '#3B82F6']
             }]
         },
-        options: { cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+        options: {
+            cutout: '70%',
+            plugins: { legend: { position: 'bottom' } },
+            responsive: true
+        }
     });
 });
 </script>
