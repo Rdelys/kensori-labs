@@ -57,6 +57,29 @@
         </div>
     </div>
 
+    {{-- SECTION 1B - Calcul brut/net et suivi --}}
+    <div class="card">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">
+            <i class="fa-solid fa-scale-balanced text-indigo-600"></i> Calcul Brut/Net et Suivi des Risques
+        </h3>
+        <ul class="list-disc pl-6 text-gray-600 text-sm mb-4 space-y-1">
+            <li><strong>Calcul brut/net :</strong> Évaluation avant et après actions correctives</li>
+            <li><strong>Suivi actions risques :</strong> Planification, mise en œuvre et évaluation d’efficacité</li>
+            <li><strong>Analyse prédictive :</strong> Évolution des risques basée sur les données historiques</li>
+        </ul>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="text-gray-700 font-semibold mb-2"><i class="fa-solid fa-gauge text-red-500"></i> Évaluation Brut vs Net</h4>
+                <canvas id="riskEvalChart"></canvas>
+            </div>
+            <div>
+                <h4 class="text-gray-700 font-semibold mb-2"><i class="fa-solid fa-chart-bar text-green-600"></i> Efficacité des Actions</h4>
+                <canvas id="efficaciteChart"></canvas>
+            </div>
+        </div>
+    </div>
+
     {{-- SECTION 2 - Matrice de criticité --}}
     <div class="card">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">
@@ -92,6 +115,48 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    {{-- SECTION 2B - Heatmap visuelle des risques --}}
+    <div class="card bg-gradient-to-b from-gray-50 to-white">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">
+            <i class="fa-solid fa-fire text-red-500"></i> Heatmap Visuelle des Risques par Domaine
+        </h3>
+        <p class="text-sm text-gray-600 mb-3">
+            Visualisation synthétique des domaines les plus exposés selon la gravité et la probabilité de survenue.
+        </p>
+        <canvas id="heatmapChart" style="height: 400px;"></canvas>
+
+        {{-- LÉGENDE STATIQUE DYNAMIQUE --}}
+        <div class="grid md:grid-cols-3 gap-4 mt-6 text-sm">
+            <div class="p-4 rounded-xl border border-red-200 bg-red-50 shadow-sm">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-server text-red-500 text-lg"></i>
+                    <span class="font-semibold text-gray-700">IT & Sécurité</span>
+                </div>
+                <p><strong>Niveau :</strong> Critique (9/10)</p>
+                <p><strong>Tendance :</strong> En hausse 🔺</p>
+                <p><strong>Action :</strong> Migration cloud sécurisée d’ici Q2 2026</p>
+            </div>
+            <div class="p-4 rounded-xl border border-yellow-200 bg-yellow-50 shadow-sm">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-users text-yellow-500 text-lg"></i>
+                    <span class="font-semibold text-gray-700">Ressources Humaines</span>
+                </div>
+                <p><strong>Niveau :</strong> Modéré (6/10)</p>
+                <p><strong>Tendance :</strong> Stable ➖</p>
+                <p><strong>Action :</strong> Programme de montée en compétences 2025</p>
+            </div>
+            <div class="p-4 rounded-xl border border-green-200 bg-green-50 shadow-sm">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-file-shield text-green-500 text-lg"></i>
+                    <span class="font-semibold text-gray-700">Conformité</span>
+                </div>
+                <p><strong>Niveau :</strong> Faible (4/10)</p>
+                <p><strong>Tendance :</strong> En amélioration ✅</p>
+                <p><strong>Action :</strong> Audit de conformité interne trimestriel</p>
+            </div>
+        </div>
     </div>
 
     {{-- SECTION 3 - Suivi des actions --}}
@@ -135,7 +200,7 @@
         </table>
     </div>
 
-    {{-- SECTION 4 - Analyse prédictive (Tendances) --}}
+    {{-- SECTION 4 - Analyse prédictive --}}
     <div class="card">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">
             <i class="fa-solid fa-chart-line text-emerald-600"></i> Analyse Prédictive des Risques
@@ -156,64 +221,127 @@
         </ul>
     </div>
 
+    {{-- SECTION 6 - OBJECTIFS QUALITÉ (Ajout CDC) --}}
+    <div class="card bg-gradient-to-b from-gray-50 to-white mt-10">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            <i class="fa-solid fa-bullseye text-emerald-600"></i> Objectifs Qualité
+        </h2>
+
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Formulation SMART</h3>
+            <p class="text-sm text-gray-600 mb-4">Chaque objectif doit être <strong>Spécifique, Mesurable, Atteignable, Réaliste et Temporellement défini</strong>.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Objectif</label>
+                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Améliorer la satisfaction client de 15% d’ici fin 2025">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Responsable</label>
+                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Responsable Qualité">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Indicateur (KPI)</label>
+                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Taux de satisfaction client (%)">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Échéance</label>
+                    <input type="date" class="w-full border border-gray-300 rounded-lg p-2">
+                </div>
+            </div>
+            <button class="mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition">
+                <i class="fa-solid fa-plus"></i> Ajouter Objectif
+            </button>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3">
+                <i class="fa-solid fa-link text-blue-500"></i> Liaison automatique Objectifs ↔ Actions ↔ KPI
+            </h3>
+            <table class="w-full text-sm border-collapse">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="p-2 text-left">Objectif</th>
+                        <th class="p-2 text-left">Action liée</th>
+                        <th class="p-2 text-left">KPI associé</th>
+                        <th class="p-2 text-center">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="p-2">Augmenter la satisfaction client</td>
+                        <td class="p-2">Mise en place d’enquêtes mensuelles</td>
+                        <td class="p-2">Taux de satisfaction (%)</td>
+                        <td class="p-2 text-center text-green-600 font-semibold">En progrès</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Réduire les non-conformités</td>
+                        <td class="p-2">Audit interne trimestriel</td>
+                        <td class="p-2">Nb de NC par mois</td>
+                        <td class="p-2 text-center text-yellow-500 font-semibold">En cours</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mt-6">
+                <canvas id="objectifsKpiChart" height="120"></canvas>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3">
+                <i class="fa-solid fa-clock-rotate-left text-indigo-500"></i> Historique & Revue Périodique
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <canvas id="historiqueChart" height="140"></canvas>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="p-3 border-l-4 border-emerald-500 bg-emerald-50 rounded">
+                        <strong>Janv 2025 :</strong> Mise en place du suivi des indicateurs.
+                    </div>
+                    <div class="p-3 border-l-4 border-yellow-500 bg-yellow-50 rounded">
+                        <strong>Avr 2025 :</strong> Ajustement de la politique qualité suite audit.
+                    </div>
+                    <div class="p-3 border-l-4 border-blue-500 bg-blue-50 rounded">
+                        <strong>Août 2025 :</strong> Revue de direction : 70% des objectifs atteints.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
+<script src="{{ asset('js/risques-opportunites.js') }}"></script>
+
 <script>
-    // Graphique des risques
-    new Chart(document.getElementById('risquesChart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Faible', 'Modéré', 'Élevé', 'Critique'],
-            datasets: [{
-                data: [8, 5, 3, 2],
-                backgroundColor: ['#10b981', '#facc15', '#f97316', '#ef4444']
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-    });
+new Chart(document.getElementById('objectifsKpiChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Satisfaction Client', 'Non-Conformités', 'Performance Fournisseurs', 'Formation Employés'],
+        datasets: [{
+            label: 'Taux d’atteinte (%)',
+            data: [85, 65, 90, 75],
+            backgroundColor: ['#10b981','#f59e0b','#3b82f6','#8b5cf6']
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100 } } }
+});
 
-    // Graphique des opportunités
-    new Chart(document.getElementById('opportunitesChart'), {
-        type: 'bar',
-        data: {
-            labels: ['Innovation', 'Formation', 'Automatisation', 'Satisfaction client'],
-            datasets: [{
-                label: 'Niveau de Potentiel',
-                data: [80, 60, 90, 70],
-                backgroundColor: '#10b981',
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: { y: { beginAtZero: true } }
-        }
-    });
-
-    // Graphique prédictif (tendance temporelle)
-    new Chart(document.getElementById('predictiveChart'), {
-        type: 'line',
-        data: {
-            labels: ['Janv', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
-            datasets: [{
-                label: 'Risque global (%)',
-                data: [40, 42, 45, 47, 49, 51, 53, 54, 55, 57, 59, 60],
-                borderColor: '#ef4444',
-                backgroundColor: 'rgba(239,68,68,0.2)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'bottom' },
-                tooltip: { mode: 'index', intersect: false }
-            },
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Niveau de risque (%)' } },
-                x: { title: { display: true, text: 'Période' } }
-            }
-        }
-    });
+new Chart(document.getElementById('historiqueChart'), {
+    type: 'line',
+    data: {
+        labels: ['Janv', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct'],
+        datasets: [{
+            label: 'Progression globale des objectifs (%)',
+            data: [20, 35, 45, 50, 58, 65, 70, 75, 78, 82],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,0.2)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, max: 100 } } }
+});
 </script>
 @endsection
