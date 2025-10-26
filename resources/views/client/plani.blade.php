@@ -203,6 +203,11 @@
                 </tr>
             </tbody>
         </table>
+
+        {{-- Graphique radar d’impact --}}
+        <div class="mt-6">
+            <canvas id="impactRadarChart"></canvas>
+        </div>
     </div>
 
     {{-- SECTION 3 : Planification de la Mise en Œuvre --}}
@@ -279,7 +284,7 @@
 </div>
 
 <script>
-    // Workflow Chart
+    // Workflow Chart existant
     new Chart(document.getElementById('workflowChart'), {
         type: 'bar',
         data: {
@@ -310,7 +315,33 @@
         }
     });
 
-    // Efficacité Chart
+    // Graphique radar d’impact
+    new Chart(document.getElementById('impactRadarChart'), {
+        type: 'radar',
+        data: {
+            labels: ['SMQ', 'Produits', 'Ressources', 'Clients', 'Processus'],
+            datasets: [{
+                label: 'Niveau d’Impact',
+                data: [90, 70, 40, 50, 80],
+                backgroundColor: 'rgba(59,130,246,0.2)',
+                borderColor: '#2563eb',
+                pointBackgroundColor: '#1d4ed8',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Analyse d’impact global sur le système qualité',
+                    font: { size: 16 }
+                }
+            }
+        }
+    });
+
+    // Graphique efficacité
     new Chart(document.getElementById('efficaciteChart'), {
         type: 'doughnut',
         data: {
