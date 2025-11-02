@@ -5,37 +5,44 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Header Premium -->
-<div class="bg-gradient-to-r from-blue-50 via-white to-indigo-50 border-b border-gray-200 py-6 px-4 md:px-10 shadow-sm">
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-blue-50 via-white to-indigo-50 border-b border-gray-200 py-6 px-4 md:px-10 shadow-inner">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="flex items-center gap-4">
             <div class="bg-white shadow-md p-3 rounded-full">
                 <i class="fa-solid fa-scroll text-blue-600 text-2xl"></i>
             </div>
             <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">Politique Qualité de l’Entreprise</h1>
-                <p class="text-sm text-gray-500">Alignée sur la norme ISO 9001:2015 – Clause 5.2 (Politique Qualité)</p>
+                <h1 class="text-3xl font-extrabold text-gray-800">Politique Qualité de l’Entreprise</h1>
+                <p class="text-sm text-gray-500">
+                    Alignée sur ISO 9001:2015 – Clauses 5.2 (Politique Qualité) & 7.4 (Communication)
+                </p>
             </div>
         </div>
         <div class="flex gap-3">
-            <button id="openModalBtn" class="bg-gradient-to-b from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-5 py-2 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
-                <i class="fa-solid fa-pen-to-square"></i> Mettre à jour
+            <button id="toggleEdit"
+                class="bg-gradient-to-b from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-5 py-2 rounded-xl shadow-md transition flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> Modifier
             </button>
-            <button id="exportPdfBtn" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow-md transition">
+            <button id="exportPdfBtn"
+                class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow-md transition flex items-center gap-2">
                 <i class="fa-solid fa-file-export"></i> Exporter PDF
             </button>
         </div>
     </div>
-</div>
+</header>
 
-<div class="p-6 md:p-10 bg-gray-50 min-h-screen space-y-10">
+<!-- CONTENU -->
+<main class="p-6 md:p-10 bg-gray-50 min-h-screen space-y-10">
 
-    <!-- Section Politique Qualité -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-flag text-blue-500"></i> Politique Qualité Actuelle
+    <!-- POLITIQUE QUALITÉ -->
+    <section class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 space-y-6">
+        <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-flag text-blue-500"></i> Politique Qualité
         </h2>
-        <div class="text-gray-700 leading-relaxed">
+
+        <!-- Zone de texte -->
+        <article id="policyView" class="text-gray-700 leading-relaxed">
             <p>
                 La politique qualité de <strong>TechnoFab Industrie</strong> vise à garantir la satisfaction totale de nos clients
                 à travers l'amélioration continue de nos processus et le respect des exigences réglementaires et normatives,
@@ -47,29 +54,55 @@
                 <li>Améliorer en continu l’efficacité du SMQ.</li>
                 <li>Renforcer la communication interne et la satisfaction client.</li>
             </ul>
-            <p class="mt-4 italic text-gray-600">Dernière mise à jour : 15 septembre 2025 — approuvée par la Direction Générale.</p>
+            <p class="mt-4 italic text-gray-600">
+                Dernière mise à jour :
+                <span id="lastUpdate">15 septembre 2025</span> — approuvée par la Direction Générale.
+            </p>
+        </article>
 
-            <!-- Signature -->
-            <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between border-t pt-4">
-                <div>
-                    <p class="font-semibold text-gray-800">Validée par :</p>
-                    <p>Marie Laurent — Directrice Générale</p>
-                    <p class="text-sm text-gray-500">Signature électronique enregistrée</p>
-                </div>
-                <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Signature" class="w-24 opacity-70 mt-3 md:mt-0">
+        <!-- Formulaire masqué -->
+        <div id="policyEdit" class="hidden">
+            <textarea id="policyTextarea" rows="10"
+                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 text-gray-700">
+La politique qualité de TechnoFab Industrie vise à garantir la satisfaction totale de nos clients à travers l'amélioration continue de nos processus et le respect des exigences réglementaires et normatives, notamment la norme ISO 9001:2015.
+
+- Assurer la conformité des produits et services livrés.
+- Développer les compétences et la sensibilisation du personnel.
+- Améliorer en continu l’efficacité du SMQ.
+- Renforcer la communication interne et la satisfaction client.
+            </textarea>
+            <div class="flex justify-end gap-3 mt-4">
+                <button id="cancelEdit"
+                    class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-700 transition">
+                    Annuler
+                </button>
+                <button id="savePolicy"
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i> Enregistrer
+                </button>
             </div>
         </div>
-    </div>
 
-    <!-- Engagement de la Direction (ajout QMS) -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+        <!-- Signature -->
+        <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between border-t pt-4">
+            <div>
+                <p class="font-semibold text-gray-800">Validée par :</p>
+                <p>Marie Laurent — Directrice Générale</p>
+                <p class="text-sm text-gray-500">Signature électronique enregistrée</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Signature"
+                class="w-24 opacity-70 mt-3 md:mt-0">
+        </div>
+    </section>
+
+    <!-- ENGAGEMENT -->
+    <section class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
             <i class="fa-solid fa-user-tie text-indigo-500"></i> Engagement de la Direction
         </h2>
-        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+        <div class="grid md:grid-cols-2 gap-6 text-gray-700">
             <div>
-                <p>La Direction s'engage à :</p>
-                <ul class="list-disc ml-6 mt-2 space-y-1">
+                <ul class="list-disc ml-6 space-y-1">
                     <li>Assurer la mise à disposition des ressources nécessaires au SMQ.</li>
                     <li>Promouvoir une culture qualité et d'amélioration continue.</li>
                     <li>Veiller à l’efficacité des processus et à la satisfaction des parties intéressées.</li>
@@ -77,33 +110,32 @@
                 </ul>
             </div>
             <div>
-                <p>Indicateurs de suivi :</p>
+                <p class="font-semibold text-gray-700">Indicateurs de suivi :</p>
                 <ul class="list-disc ml-6 mt-2 space-y-1">
-                    <li>Taux de satisfaction client ≥ 90%</li>
-                    <li>Objectifs atteints ≥ 85%</li>
-                    <li>Taux de diffusion de la politique ≥ 100%</li>
+                    <li>Taux de satisfaction client ≥ 90 %</li>
+                    <li>Objectifs atteints ≥ 85 %</li>
+                    <li>Taux de diffusion de la politique ≥ 100 %</li>
                 </ul>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Diffusion & Accusés de Lecture -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+    <!-- DIFFUSION -->
+    <section class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 space-y-4">
+        <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
             <i class="fa-solid fa-share-nodes text-green-500"></i> Diffusion et Accusés de Lecture
         </h2>
-
-        <!-- Mini Formulaire de Diffusion -->
-        <form class="mb-6 flex flex-col md:flex-row gap-3">
-            <input type="text" placeholder="Destinataire (nom ou service)" class="border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2 w-full md:w-1/2">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-sm transition">
+        <form id="addRecipientForm" class="flex flex-col md:flex-row gap-3">
+            <input type="text" id="recipientName" placeholder="Destinataire (nom ou service)"
+                class="border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2 w-full md:w-1/2">
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-2">
                 <i class="fa-solid fa-paper-plane"></i> Diffuser
             </button>
         </form>
 
-        <!-- Tableau -->
         <div class="overflow-x-auto">
-            <table class="min-w-full border border-gray-200 text-sm text-gray-700">
+            <table id="readersTable" class="min-w-full border border-gray-200 text-sm text-gray-700">
                 <thead class="bg-green-100">
                     <tr>
                         <th class="p-2 border">Nom</th>
@@ -114,117 +146,145 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="hover:bg-gray-50">
+                    <tr>
                         <td class="p-2 border">Jean Dupont</td>
                         <td class="p-2 border">Resp. Production</td>
                         <td class="p-2 border">16/09/2025</td>
                         <td class="p-2 border text-center"><i class="fa-solid fa-check text-green-600"></i></td>
                         <td class="p-2 border text-green-700 font-semibold">Lu</td>
                     </tr>
-                    <tr class="hover:bg-gray-50">
+                    <tr>
                         <td class="p-2 border">Sophie Martin</td>
                         <td class="p-2 border">Contrôle Qualité</td>
                         <td class="p-2 border">16/09/2025</td>
                         <td class="p-2 border text-center"><i class="fa-solid fa-hourglass-half text-yellow-500"></i></td>
                         <td class="p-2 border text-yellow-600 font-semibold">En attente</td>
                     </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-2 border">Ali Rabe</td>
-                        <td class="p-2 border">Service Logistique</td>
-                        <td class="p-2 border">17/09/2025</td>
-                        <td class="p-2 border text-center"><i class="fa-solid fa-check text-green-600"></i></td>
-                        <td class="p-2 border text-green-700 font-semibold">Lu</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Statistiques de diffusion -->
-        <div class="mt-4 text-sm text-gray-600">
-            <p><i class="fa-solid fa-info-circle text-blue-500"></i> Taux global de lecture : <strong>75%</strong></p>
-            <p>Rappels automatiques envoyés aux destinataires “en attente”.</p>
-        </div>
-    </div>
+        <p class="text-sm text-gray-600">
+            <i class="fa-solid fa-info-circle text-blue-500"></i>
+            Taux global de lecture :
+            <strong id="readRate">50 %</strong>
+        </p>
+    </section>
 
-    <!-- Historique des Versions -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+    <!-- HISTORIQUE -->
+    <section class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
             <i class="fa-solid fa-clock-rotate-left text-orange-500"></i> Historique des Versions
         </h2>
-        <ul class="divide-y text-gray-700">
+        <ul id="versionList" class="divide-y text-gray-700">
             <li class="py-2"><strong>V1.3</strong> – 15/09/2025 : Actualisation des engagements qualité.</li>
             <li class="py-2"><strong>V1.2</strong> – 10/01/2025 : Ajout des objectifs de satisfaction client.</li>
             <li class="py-2"><strong>V1.1</strong> – 01/07/2024 : Première mise à jour validée par la direction.</li>
         </ul>
-        <div class="mt-4 text-sm text-gray-500">
-            <i class="fa-solid fa-link"></i> Traçabilité : Politique liée au module “Leadership” & “Communication” (ISO 9001 §5.1 & §7.4)
-        </div>
-    </div>
+    </section>
 
-    <!-- Graphique -->
-    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+    <!-- KPI CHART -->
+    <section class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chart-pie text-blue-500"></i> Taux de Lecture de la Politique Qualité
+            <i class="fa-solid fa-chart-pie text-blue-500"></i> Taux de Lecture de la Politique
         </h2>
         <div class="h-64">
             <canvas id="readChart"></canvas>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 
-<!-- Modal d’édition -->
-<div id="policyModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-3xl relative animate-fade-in">
-        <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800 flex items-center gap-2">
-            <i class="fa-solid fa-pen-to-square text-blue-500"></i> Modifier la Politique Qualité
-        </h2>
-        <form class="space-y-4">
-            <textarea rows="8" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-Notre politique qualité vise à assurer la conformité, la satisfaction client et l'amélioration continue...
-            </textarea>
-            <div class="flex justify-end gap-3">
-                <button type="button" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-700 transition">Annuler</button>
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">Enregistrer</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Scripts -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
-document.getElementById('openModalBtn').addEventListener('click', () => {
-    document.getElementById('policyModal').classList.remove('hidden');
-});
-document.getElementById('closeModalBtn').addEventListener('click', () => {
-    document.getElementById('policyModal').classList.add('hidden');
-});
-
-new Chart(document.getElementById('readChart'), {
+/* === Graphique KPI === */
+const readChart = new Chart(document.getElementById('readChart'), {
     type: 'doughnut',
     data: {
         labels: ['Lu', 'En attente'],
         datasets: [{
-            data: [75, 25],
-            backgroundColor: ['#34D399', '#FBBF24'],
-            hoverOffset: 10
+            data: [50, 50],
+            backgroundColor: ['#34D399', '#FBBF24']
         }]
     },
     options: {
         maintainAspectRatio: false,
-        responsive: true,
         plugins: {
             legend: { position: 'bottom' },
-            title: { display: true, text: 'Taux de lecture global (75%)' }
+            title: { display: true, text: 'Taux global de lecture : 50 %' }
         }
     }
 });
 
-// Export PDF
+/* === Inline Edit === */
+const toggleEdit = document.getElementById('toggleEdit');
+const policyView = document.getElementById('policyView');
+const policyEdit = document.getElementById('policyEdit');
+const savePolicy = document.getElementById('savePolicy');
+const cancelEdit = document.getElementById('cancelEdit');
+const policyTextarea = document.getElementById('policyTextarea');
+const versionList = document.getElementById('versionList');
+const lastUpdate = document.getElementById('lastUpdate');
+
+toggleEdit.addEventListener('click', () => {
+    policyView.classList.toggle('hidden');
+    policyEdit.classList.toggle('hidden');
+    policyTextarea.focus();
+});
+
+cancelEdit.addEventListener('click', () => {
+    policyEdit.classList.add('hidden');
+    policyView.classList.remove('hidden');
+});
+
+savePolicy.addEventListener('click', () => {
+    const text = policyTextarea.value.trim();
+    if (text) {
+        policyView.innerHTML = '<pre class="whitespace-pre-wrap text-gray-700">' + text + '</pre>';
+        const newDate = new Date().toLocaleDateString('fr-FR');
+        lastUpdate.textContent = newDate;
+        versionList.insertAdjacentHTML('afterbegin',
+            `<li class="py-2"><strong>V${(Math.random() * 10).toFixed(1)}</strong> – ${newDate} : Mise à jour de la politique.</li>`);
+        policyEdit.classList.add('hidden');
+        policyView.classList.remove('hidden');
+    }
+});
+
+/* === Diffusion Simulation === */
+const addRecipientForm = document.getElementById('addRecipientForm');
+const readersTable = document.querySelector('#readersTable tbody');
+const readRate = document.getElementById('readRate');
+
+addRecipientForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('recipientName').value.trim();
+    if (!name) return;
+
+    readersTable.insertAdjacentHTML('beforeend', `
+        <tr>
+            <td class="p-2 border">${name}</td>
+            <td class="p-2 border">Service</td>
+            <td class="p-2 border">${new Date().toLocaleDateString('fr-FR')}</td>
+            <td class="p-2 border text-center"><i class="fa-solid fa-hourglass-half text-yellow-500"></i></td>
+            <td class="p-2 border text-yellow-600 font-semibold">En attente</td>
+        </tr>
+    `);
+
+    document.getElementById('recipientName').value = '';
+    updateReadRate();
+});
+
+function updateReadRate() {
+    const total = readersTable.querySelectorAll('tr').length;
+    const read = readersTable.querySelectorAll('.fa-check').length;
+    const rate = Math.round((read / total) * 100);
+    readRate.textContent = rate + '%';
+    readChart.data.datasets[0].data = [rate, 100 - rate];
+    readChart.update();
+}
+
+/* === Export PDF === */
 document.getElementById('exportPdfBtn').addEventListener('click', () => {
     const element = document.body;
     const opt = {
@@ -239,10 +299,14 @@ document.getElementById('exportPdfBtn').addEventListener('click', () => {
 </script>
 
 <style>
-/* Animations et styles premium */
-@keyframes fade-in { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
-.animate-fade-in { animation: fade-in 0.25s ease-out; }
-table tbody tr { transition: background 0.2s ease, transform 0.1s ease; }
-table tbody tr:hover { transform: translateY(-1px); }
+body { background: linear-gradient(to bottom right, #f8fafc, #eef2ff); font-family: 'Inter', sans-serif; }
+section { transition: all .2s ease-in-out; }
+section:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
+table tbody tr { transition: all .2s ease; }
+table tbody tr:hover { transform: scale(1.01); background: #f9fafb; }
+textarea { font-family: 'Inter', sans-serif; }
+button { transition: all .15s ease-in-out; }
+button:hover { transform: translateY(-2px); }
+pre { font-family: inherit; }
 </style>
 @endsection
