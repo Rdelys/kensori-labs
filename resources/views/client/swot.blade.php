@@ -14,29 +14,75 @@
                 <i class="fa-solid fa-chart-line text-blue-600"></i>
                 Analyse SWOT & PESTEL
             </h1>
-            <p class="text-gray-500 mt-1">Module d’analyse stratégique et contextuelle du SMQ — ISO 9001:2015 Clauses 4.1 & 6.1</p>
+            <p class="text-gray-500 mt-1">
+                Module d’analyse stratégique et contextuelle du SMQ — conforme aux clauses
+                <strong>4.1 (Contexte)</strong> et <strong>6.1 (Actions face aux risques et opportunités)</strong>
+                de la norme <strong>ISO 9001:2015</strong>.
+            </p>
         </div>
-        <button id="openModal" class="mt-3 md:mt-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-lg text-white px-4 py-2 rounded-xl shadow transition">
+        <button id="toggleForm" class="mt-3 md:mt-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-lg text-white px-4 py-2 rounded-xl shadow transition">
             <i class="fa-solid fa-plus mr-1"></i> Ajouter une analyse
         </button>
     </div>
 
-    <!-- SECTION 1 : PESTEL -->
+    <!-- 🔹 FORMULAIRE AFFICHABLE / MASQUABLE -->
+    <section id="analysisFormSection" class="hidden bg-white shadow-lg rounded-2xl p-6 border border-blue-100 animate-fadeIn">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="fa-solid fa-pen-to-square text-blue-600 mr-2"></i> Nouvelle Entrée SWOT / PESTEL
+        </h3>
+        <form id="addForm" class="grid md:grid-cols-2 gap-6">
+            <div>
+                <label class="text-sm text-gray-600">Catégorie</label>
+                <select id="category" class="w-full border-gray-300 rounded-lg mt-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option>PESTEL - Politique</option>
+                    <option>PESTEL - Économique</option>
+                    <option>PESTEL - Socioculturel</option>
+                    <option>PESTEL - Technologique</option>
+                    <option>PESTEL - Environnemental</option>
+                    <option>PESTEL - Légal</option>
+                    <option>SWOT - Force</option>
+                    <option>SWOT - Faiblesse</option>
+                    <option>SWOT - Opportunité</option>
+                    <option>SWOT - Menace</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-sm text-gray-600">Impact / Importance (1 à 5)</label>
+                <input id="impact" type="range" min="1" max="5" value="3" class="w-full accent-blue-600">
+            </div>
+            <div class="md:col-span-2">
+                <label class="text-sm text-gray-600">Description</label>
+                <textarea id="description" rows="3" class="w-full border-gray-300 rounded-lg mt-1 focus:ring-blue-500 focus:border-blue-500" placeholder="Décrivez brièvement l’élément analysé..."></textarea>
+            </div>
+            <div class="md:col-span-2 flex justify-end gap-2">
+                <button type="button" id="cancelForm" class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                    <i class="fa-solid fa-xmark mr-1"></i> Annuler
+                </button>
+                <button type="button" id="saveItem" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
+                    <i class="fa-solid fa-check mr-1"></i> Enregistrer
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- 🧭 SECTION 1 : PESTEL -->
     <section class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
         <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-earth-europe text-blue-500"></i> Analyse PESTEL
+            <i class="fa-solid fa-earth-europe text-blue-500"></i> Analyse PESTEL (Facteurs Externes)
         </h2>
-        <p class="text-gray-600 mb-6">Identifiez les facteurs externes influençant votre système de management de la qualité.</p>
+        <p class="text-gray-600 mb-6">
+            Identifiez les <strong>facteurs macro-environnementaux</strong> pouvant impacter le système de management de la qualité.
+        </p>
 
         <div class="grid md:grid-cols-3 gap-6">
             @php
                 $pestel = [
-                    ['label'=>'Politique','icon'=>'fa-gavel','color'=>'blue','desc'=>'Stabilité gouvernementale, politiques industrielles, régulations fiscales.'],
-                    ['label'=>'Économique','icon'=>'fa-sack-dollar','color'=>'green','desc'=>'Inflation, croissance, taux d’intérêt, accès au financement.'],
-                    ['label'=>'Socioculturel','icon'=>'fa-people-group','color'=>'orange','desc'=>'Valeurs sociales, culture d’entreprise, comportement des clients.'],
-                    ['label'=>'Technologique','icon'=>'fa-microchip','color'=>'indigo','desc'=>'Innovation, digitalisation, cybersécurité, obsolescence technologique.'],
-                    ['label'=>'Environnemental','icon'=>'fa-leaf','color'=>'emerald','desc'=>'Normes écologiques, durabilité, empreinte carbone.'],
-                    ['label'=>'Légal','icon'=>'fa-scale-balanced','color'=>'red','desc'=>'Conformité réglementaire, propriété intellectuelle, droit du travail.'],
+                    ['label'=>'Politique','icon'=>'fa-gavel','color'=>'blue','desc'=>'Stabilité gouvernementale, régulations, politiques publiques.'],
+                    ['label'=>'Économique','icon'=>'fa-sack-dollar','color'=>'green','desc'=>'Inflation, croissance, accès au financement, taux de change.'],
+                    ['label'=>'Socioculturel','icon'=>'fa-people-group','color'=>'orange','desc'=>'Valeurs sociales, comportements clients, évolution des besoins.'],
+                    ['label'=>'Technologique','icon'=>'fa-microchip','color'=>'indigo','desc'=>'Digitalisation, IA, innovation, cybersécurité, veille techno.'],
+                    ['label'=>'Environnemental','icon'=>'fa-leaf','color'=>'emerald','desc'=>'Durabilité, empreinte carbone, conformité environnementale.'],
+                    ['label'=>'Légal','icon'=>'fa-scale-balanced','color'=>'red','desc'=>'Lois, normes, propriété intellectuelle, droit du travail.'],
                 ];
             @endphp
 
@@ -61,19 +107,19 @@
         </div>
     </section>
 
-    <!-- SECTION 2 : SWOT -->
+    <!-- ⚙️ SECTION 2 : SWOT -->
     <section class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
         <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chess text-blue-500"></i> Analyse SWOT
+            <i class="fa-solid fa-chess text-blue-500"></i> Analyse SWOT (Facteurs Internes)
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
             @php
                 $swot = [
-                    ['label'=>'Forces','icon'=>'fa-thumbs-up','color'=>'green','items'=>['Personnel qualifié','Infrastructure moderne','Bonne réputation']],
-                    ['label'=>'Faiblesses','icon'=>'fa-triangle-exclamation','color'=>'red','items'=>['Dépendance à quelques clients','Processus internes manuels']],
-                    ['label'=>'Opportunités','icon'=>'fa-lightbulb','color'=>'blue','items'=>['Expansion marché','Digitalisation du SMQ']],
-                    ['label'=>'Menaces','icon'=>'fa-skull-crossbones','color'=>'orange','items'=>['Concurrence accrue','Évolution rapide des normes']],
+                    ['label'=>'Forces','icon'=>'fa-thumbs-up','color'=>'green','items'=>['Compétences clés','Réactivité client','Leadership qualité']],
+                    ['label'=>'Faiblesses','icon'=>'fa-triangle-exclamation','color'=>'red','items'=>['Systèmes obsolètes','Manque d’automatisation']],
+                    ['label'=>'Opportunités','icon'=>'fa-lightbulb','color'=>'blue','items'=>['Croissance du marché digital','Partenariats stratégiques']],
+                    ['label'=>'Menaces','icon'=>'fa-skull-crossbones','color'=>'orange','items'=>['Concurrence accrue','Instabilité réglementaire']],
                 ];
             @endphp
 
@@ -99,18 +145,19 @@
         </div>
     </section>
 
-    <!-- SECTION 3 : TOWS & TENDANCES -->
+    <!-- 🔍 SYNTHÈSE TOWS -->
     <section class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
         <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-brain text-blue-500"></i> Synthèse Avancée & TOWS
+            <i class="fa-solid fa-brain text-blue-500"></i> Synthèse Stratégique (TOWS)
         </h2>
+
         <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-gray-50 p-4 rounded-lg border overflow-x-auto shadow-sm">
                 <table class="w-full text-sm text-gray-600 border rounded-xl overflow-hidden">
                     <thead class="bg-gray-100">
                         <tr>
                             <th class="px-3 py-2 font-semibold text-gray-700">Stratégie</th>
-                            <th class="px-3 py-2 font-semibold text-gray-700">Description</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Orientation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -123,50 +170,21 @@
             </div>
 
             <div class="bg-gray-50 p-4 rounded-lg border shadow-sm">
-                <h3 class="font-semibold text-gray-700 mb-3 flex items-center"><i class="fa-solid fa-chart-line mr-2 text-green-500"></i> Tendances</h3>
+                <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
+                    <i class="fa-solid fa-chart-line mr-2 text-green-500"></i> Évolution Risques / Opportunités
+                </h3>
                 <div class="w-full h-60">
                     <canvas id="trendChart" class="w-full h-full"></canvas>
                 </div>
             </div>
         </div>
     </section>
-
-</div>
-
-<!-- MODAL SAISIE -->
-<div id="modal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-lg relative">
-        <button id="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
-            <i class="fa-solid fa-xmark text-xl"></i>
-        </button>
-        <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-            <i class="fa-solid fa-pen-to-square text-blue-600 mr-2"></i> Nouvelle Entrée SWOT/PESTEL
-        </h3>
-        <form id="addForm" class="space-y-4">
-            <div>
-                <label class="text-sm text-gray-600">Catégorie</label>
-                <select class="w-full border-gray-300 rounded-lg mt-1">
-                    <option>PESTEL - Politique</option>
-                    <option>PESTEL - Économique</option>
-                    <option>SWOT - Force</option>
-                    <option>SWOT - Faiblesse</option>
-                </select>
-            </div>
-            <div>
-                <label class="text-sm text-gray-600">Description</label>
-                <textarea rows="3" class="w-full border-gray-300 rounded-lg mt-1"></textarea>
-            </div>
-            <button type="button" id="saveItem" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
-                <i class="fa-solid fa-check mr-1"></i> Enregistrer
-            </button>
-        </form>
-    </div>
 </div>
 
 {{-- CHARTS --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Radar PESTEL
+    // Radar PESTEL dynamique
     const pestelCtx = document.getElementById('pestelChart');
     const pestelChart = new Chart(pestelCtx, {
         type: 'radar',
@@ -183,7 +201,7 @@
         });
     });
 
-    // SWOT Bubble Chart
+    // SWOT Chart
     new Chart(document.getElementById('swotChart'), {
         type:'bubble',
         data:{
@@ -197,7 +215,7 @@
         options:{ scales:{x:{display:false},y:{display:false}}, plugins:{legend:{position:'bottom'}} }
     });
 
-    // Tendances
+    // Trend Chart
     new Chart(document.getElementById('trendChart'), {
         type:'line',
         data:{
@@ -210,13 +228,32 @@
         options:{ scales:{y:{beginAtZero:true,max:5}}, plugins:{legend:{position:'bottom'}} }
     });
 
-    // Modal
-    const modal=document.getElementById('modal');
-    document.getElementById('openModal').onclick=()=>modal.classList.remove('hidden');
-    document.getElementById('closeModal').onclick=()=>modal.classList.add('hidden');
-    document.getElementById('saveItem').onclick=()=>{
-        alert('Élément enregistré localement (simulation)');
-        modal.classList.add('hidden');
-    };
+    // 🎛️ Formulaire Toggle
+    const toggleBtn = document.getElementById('toggleForm');
+    const formSection = document.getElementById('analysisFormSection');
+    const cancelBtn = document.getElementById('cancelForm');
+
+    toggleBtn.addEventListener('click', () => {
+        formSection.classList.toggle('hidden');
+    });
+    cancelBtn.addEventListener('click', () => {
+        formSection.classList.add('hidden');
+    });
+
+    // Simulation d’enregistrement
+    document.getElementById('saveItem').addEventListener('click', () => {
+        alert('Nouvelle entrée SWOT/PESTEL enregistrée localement (simulation).');
+        formSection.classList.add('hidden');
+    });
 </script>
+
+<style>
+    .animate-fadeIn {
+        animation: fadeIn .3s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 @endsection
