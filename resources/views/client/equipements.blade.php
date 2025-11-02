@@ -5,6 +5,11 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<style>
+#newEquipFormContainer{display:none;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+</style>
+
 <div class="space-y-10 fade-in">
 
     <!-- ======== En-tête ======== -->
@@ -13,9 +18,62 @@
             <i class="fa-solid fa-screwdriver-wrench text-blue-600"></i>
             Gestion des Équipements
         </h1>
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow flex items-center gap-2">
+        <button id="btnNewEquip" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow flex items-center gap-2">
             <i class="fa-solid fa-plus"></i> Nouvel équipement
         </button>
+    </div>
+
+    <!-- ======== 🌟 FORMULAIRE NOUVEL ÉQUIPEMENT ======== -->
+    <div id="newEquipFormContainer" class="bg-white p-6 rounded-xl shadow border border-blue-100">
+        <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-blue-700">
+            <i class="fa-solid fa-circle-plus"></i> Ajouter un nouvel équipement
+        </h2>
+        <form id="newEquipForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Nom de l’équipement</label>
+                <input type="text" id="equipName" class="w-full p-2 border rounded-lg" required>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Type</label>
+                <select id="equipType" class="w-full p-2 border rounded-lg" required>
+                    <option>Production</option>
+                    <option>Mesure / Test</option>
+                    <option>Informatique</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">État</label>
+                <select id="equipEtat" class="w-full p-2 border rounded-lg" required>
+                    <option>En service</option>
+                    <option>En maintenance</option>
+                    <option>Hors service</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Responsable</label>
+                <input type="text" id="equipResp" class="w-full p-2 border rounded-lg" placeholder="Nom du responsable">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Localisation</label>
+                <input type="text" id="equipLoc" class="w-full p-2 border rounded-lg" placeholder="Ex : Atelier / Laboratoire">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Dernière maintenance</label>
+                <input type="date" id="equipDerniere" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Prochaine échéance</label>
+                <input type="date" id="equipProchaine" class="w-full p-2 border rounded-lg">
+            </div>
+            <div class="md:col-span-2 text-right space-x-2">
+                <button type="button" id="cancelNewEquip" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded">
+                    <i class="fa-solid fa-xmark"></i> Annuler
+                </button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                    <i class="fa-solid fa-check"></i> Enregistrer
+                </button>
+            </div>
+        </form>
     </div>
 
     <!-- ======== Tableau de bord (indicateurs clés) ======== -->
@@ -234,4 +292,54 @@
     </div>
 
 </div>
+
+<script>
+// Apparition/disparition du formulaire
+const formEquip = document.getElementById('newEquipFormContainer');
+document.getElementById('btnNewEquip').addEventListener('click',()=>{
+    formEquip.style.display='block';
+    formEquip.scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('cancelNewEquip').addEventListener('click',()=>{
+    formEquip.style.display='none';
+});
+
+// Ajout dynamique d’un nouvel équipement dans la liste
+document.getElementById('newEquipForm').addEventListener('submit', e=>{
+    e.preventDefault();
+
+    const name = document.getElementById('equipName').value;
+    const type = document.getElementById('equipType').value;
+    const etat = document.getElementById('equipEtat').value;
+    const derniere = document.getElementById('equipDerniere').value || "—";
+    const prochaine = document.getElementById('equipProchaine').value || "—";
+
+    const tbody = document.querySelector("table tbody");
+    const tr = document.createElement("tr");
+    tr.classList.add("border-b","hover:bg-gray-50","transition");
+    tr.innerHTML = `
+        <td class="p-3">${name}</td>
+        <td class="p-3">${type}</td>
+        <td class="p-3">
+            <span class="text-xs px-2 py-1 rounded-full ${
+                etat === 'En service' ? 'bg-green-100 text-green-700' :
+                etat === 'En maintenance' ? 'bg-yellow-100 text-yellow-700' :
+                'bg-red-100 text-red-700'
+            }">${etat}</span>
+        </td>
+        <td class="p-3">${derniere}</td>
+        <td class="p-3">${prochaine}</td>
+        <td class="p-3 text-center space-x-2">
+            <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
+            <button class="text-yellow-500 hover:text-yellow-700"><i class="fa-solid fa-wrench"></i></button>
+            <button class="text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    `;
+    tbody.appendChild(tr);
+
+    alert("✅ Nouvel équipement ajouté (simulation conforme au QMS)");
+    e.target.reset();
+    formEquip.style.display='none';
+});
+</script>
 @endsection
