@@ -6,17 +6,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
 <style>
-
-.shadow-premium {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-}
+.shadow-premium { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.fade-in { animation: fadeIn 0.4s ease-out both; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(6px);} to {opacity:1; transform:none;} }
 </style>
 
 <div class="space-y-10 p-8 bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen fade-in">
 
-    <!-- EN-TÊTE PREMIUM -->
+    <!-- EN-TÊTE -->
     <div class="bg-white rounded-3xl border shadow-premium p-8 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-transparent opacity-50"></div>
         <div class="relative z-10">
@@ -24,46 +24,35 @@
                 <i class="fa-solid fa-handshake text-green-600"></i>
                 Revue de Direction – Système Qualité
             </h1>
-            <p class="text-gray-600 text-sm">Pilotage stratégique du SMQ et conformité ISO 9001:2015 – §9.3</p>
+            <p class="text-gray-600 text-sm">Pilotage stratégique du SMQ – conforme ISO 9001:2015 (§9.3)</p>
             <div class="mt-3">
                 <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-semibold shadow-sm">Session Annuelle 2025</span>
             </div>
         </div>
     </div>
 
-    <!-- RÉSUMÉ SYNTHÉTIQUE AJOUT -->
+    <!-- INDICATEURS SYNTHÉTIQUES -->
     <div class="grid md:grid-cols-4 gap-5 text-center">
-        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+        <div class="bg-white rounded-2xl shadow-premium p-5 border hover:shadow-lg transition">
             <i class="fa-solid fa-bullseye text-2xl text-green-600 mb-2"></i>
             <p class="font-semibold text-gray-700">Taux d'atteinte</p>
             <p class="text-3xl font-bold text-green-700">84%</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+        <div class="bg-white rounded-2xl shadow-premium p-5 border hover:shadow-lg transition">
             <i class="fa-solid fa-face-smile text-2xl text-green-600 mb-2"></i>
             <p class="font-semibold text-gray-700">Satisfaction client</p>
             <p class="text-3xl font-bold text-green-700">4.3 / 5</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+        <div class="bg-white rounded-2xl shadow-premium p-5 border hover:shadow-lg transition">
             <i class="fa-solid fa-triangle-exclamation text-2xl text-yellow-500 mb-2"></i>
             <p class="font-semibold text-gray-700">Non-conformités</p>
             <p class="text-3xl font-bold text-yellow-600">7</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-premium p-5 border border-gray-100 hover:shadow-lg transition">
+        <div class="bg-white rounded-2xl shadow-premium p-5 border hover:shadow-lg transition">
             <i class="fa-solid fa-shield-halved text-2xl text-green-600 mb-2"></i>
             <p class="font-semibold text-gray-700">Conformité ISO</p>
             <p class="text-3xl font-bold text-green-700">96%</p>
         </div>
-    </div>
-
-    <!-- ==== TON CODE ORIGINAL INTACT CI-DESSOUS ==== -->
-
-    <!-- HEADER -->
-    <div class="text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-handshake text-green-600"></i>
-            Revue de Direction – Système Qualité
-        </h1>
-        <p class="text-gray-500">Suivi stratégique du SMQ et décisions managériales selon ISO 9001 : 2015 §9.3</p>
     </div>
 
     <!-- PLANIFICATION -->
@@ -100,58 +89,34 @@
     <!-- ORDRE DU JOUR -->
     <div class="bg-white rounded-2xl shadow border p-6">
         <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-list-check text-green-600"></i> Ordre du jour type de la revue
+            <i class="fa-solid fa-list-check text-green-600"></i> Ordre du jour type
         </h3>
         <ul class="list-disc pl-6 space-y-2 text-gray-700 text-sm">
-            <li>Statut des actions issues des revues précédentes</li>
+            <li>Suivi des décisions de la revue précédente</li>
             <li>Résultats des audits internes et externes</li>
-            <li>Analyse des non-conformités et actions correctives</li>
+            <li>Analyse des non-conformités et actions</li>
             <li>Performance des processus et satisfaction client</li>
             <li>Évaluation des ressources et des prestataires</li>
-            <li>Opportunités d'amélioration et décisions stratégiques</li>
+            <li>Décisions et opportunités d'amélioration</li>
         </ul>
-    </div>
-
-    <!-- COLLECTE DE DONNÉES -->
-    <div class="bg-white rounded-2xl shadow border p-6">
-        <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-database text-green-600"></i> Données collectées pour la revue
-        </h3>
-        <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-700">
-            <div class="bg-gray-50 p-4 rounded-xl border">
-                <i class="fa-solid fa-chart-line text-green-600 mb-1"></i>
-                <p class="font-semibold">Performance des KPIs</p>
-                <p class="text-gray-500">84 % d’atteinte des objectifs trimestriels</p>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-xl border">
-                <i class="fa-solid fa-users text-green-600 mb-1"></i>
-                <p class="font-semibold">Satisfaction client</p>
-                <p class="text-gray-500">Indice moyen : 4.3/5</p>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-xl border">
-                <i class="fa-solid fa-triangle-exclamation text-green-600 mb-1"></i>
-                <p class="font-semibold">Non-conformités recensées</p>
-                <p class="text-gray-500">6 cas mineurs – 1 majeur</p>
-            </div>
-        </div>
     </div>
 
     <!-- GRAPHIQUE -->
     <div class="bg-white rounded-2xl shadow border p-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chart-pie text-green-600"></i> Synthèse des décisions de revue
+            <i class="fa-solid fa-chart-pie text-green-600"></i> Synthèse des décisions
         </h3>
         <div class="flex justify-center">
             <canvas id="revueChart" style="max-width:400px;max-height:400px;"></canvas>
         </div>
     </div>
 
-    <!-- ACTIONS ET DÉCISIONS -->
+    <!-- ACTIONS -->
     <div class="bg-white rounded-2xl shadow border p-6">
         <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-list-ol text-green-600"></i> Décisions et actions issues de la revue
+            <i class="fa-solid fa-list-ol text-green-600"></i> Décisions et actions issues
         </h3>
-        <table class="min-w-full text-sm text-gray-700 text-center">
+        <table class="min-w-full text-sm text-gray-700 text-center mb-6">
             <thead class="bg-gray-100 text-gray-600 uppercase">
                 <tr>
                     <th class="py-3 px-4 text-left">Action</th>
@@ -176,33 +141,48 @@
             </tbody>
         </table>
 
-        <!-- FORMULAIRE -->
+        <!-- FORMULAIRE AJOUT -->
         <div class="mt-6 border-t pt-4">
             <h4 class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
                 <i class="fa-solid fa-plus text-green-600"></i> Ajouter une action (simulation)
             </h4>
-            <form class="grid md:grid-cols-4 gap-3 text-sm">
-                <input type="text" placeholder="Intitulé de l’action" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400 col-span-2">
-                <input type="text" placeholder="Responsable" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
-                <input type="date" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
-                <button class="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg shadow">
+            <form id="actionForm" class="grid md:grid-cols-4 gap-3 text-sm">
+                <input id="actionName" type="text" placeholder="Intitulé de l’action" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400 col-span-2">
+                <input id="actionResp" type="text" placeholder="Responsable" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                <input id="actionDate" type="date" class="border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                <button id="addAction" type="button" class="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg shadow">
                     <i class="fa-solid fa-check"></i>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- PROCÈS-VERBAL -->
+    <!-- VALIDATION FINALE -->
     <div class="bg-white rounded-2xl shadow border p-6">
         <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-file-signature text-green-600"></i> Procès-verbal de revue (simulation)
+            <i class="fa-solid fa-file-signature text-green-600"></i> Validation et approbation QMS
         </h3>
-        <textarea rows="4" placeholder="Résumé des points clés et décisions prises..." class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-green-400"></textarea>
-        <div class="text-right mt-3">
-            <button class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 shadow">
-                <i class="fa-solid fa-file-pdf mr-1"></i> Générer le PV
-            </button>
-        </div>
+        <form id="validationForm" class="space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">Nom du valideur</label>
+                    <input id="validatorName" type="text" placeholder="Directeur Qualité" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">Date de validation</label>
+                    <input id="validationDate" type="date" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-green-400">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Commentaire / décision</label>
+                <textarea id="validationComment" rows="3" placeholder="Remarques ou décisions finales..." class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-green-400"></textarea>
+            </div>
+            <div class="text-right">
+                <button id="btnValidate" type="button" class="bg-gradient-to-br from-green-600 to-emerald-500 text-white px-6 py-2 rounded-lg hover:from-green-700 hover:to-emerald-600 shadow">
+                    <i class="fa-solid fa-save mr-1"></i> Valider la revue
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -210,18 +190,23 @@
 document.addEventListener("DOMContentLoaded", () => {
     new Chart(document.getElementById('revueChart'), {
         type: 'doughnut',
-        data: {
-            labels: ['Actions terminées', 'En cours', 'Planifiées'],
-            datasets: [{
-                data: [6, 3, 2],
-                backgroundColor: ['#16A34A', '#FACC15', '#3B82F6']
-            }]
-        },
-        options: {
-            cutout: '70%',
-            plugins: { legend: { position: 'bottom' } },
-            responsive: true
-        }
+        data: { labels: ['Actions terminées', 'En cours', 'Planifiées'], datasets: [{ data: [6, 3, 2], backgroundColor: ['#16A34A', '#FACC15', '#3B82F6'] }] },
+        options: { cutout: '70%', plugins: { legend: { position: 'bottom' } }, responsive: true }
+    });
+
+    document.getElementById('addAction').addEventListener('click', () => {
+        const action = document.getElementById('actionName').value.trim();
+        const resp = document.getElementById('actionResp').value.trim();
+        const date = document.getElementById('actionDate').value;
+        if (!action || !resp || !date) return alert('Veuillez remplir tous les champs.');
+        alert(`Action ajoutée : ${action} - ${resp} (${date})`);
+    });
+
+    document.getElementById('btnValidate').addEventListener('click', () => {
+        const name = document.getElementById('validatorName').value.trim();
+        const date = document.getElementById('validationDate').value;
+        if (!name || !date) return alert('Veuillez renseigner le nom et la date de validation.');
+        alert(`Revue validée par ${name} le ${date}`);
     });
 });
 </script>
