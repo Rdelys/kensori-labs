@@ -5,44 +5,30 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
 <style>
-    .card {
-        background: white;
-        border-radius: 1rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        padding: 1.5rem;
-        transition: 0.3s;
-    }
-    .card:hover { transform: translateY(-4px); }
-    .grid { display: grid; gap: 2rem; }
-    .matrix {
-        border-collapse: collapse; width: 100%;
-    }
-    .matrix th, .matrix td {
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 0.75rem;
-    }
-    .matrix th { background-color: #f4f4f4; font-weight: 600; }
-    .critical-high { background: #ef4444; color: white; }
-    .critical-medium { background: #f59e0b; color: white; }
-    .critical-low { background: #10b981; color: white; }
-    .badge {
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.5rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: white;
-    }
-    .badge-risk { background-color: #ef4444; }
-    .badge-opportunity { background-color: #10b981; }
+.card { background: white; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; transition: 0.3s; }
+.card:hover { transform: translateY(-4px); }
+.grid { display: grid; gap: 2rem; }
+.matrix { border-collapse: collapse; width: 100%; }
+.matrix th, .matrix td { border: 1px solid #ddd; text-align: center; padding: 0.75rem; }
+.matrix th { background-color: #f4f4f4; font-weight: 600; }
+.critical-high { background: #ef4444; color: white; }
+.critical-medium { background: #f59e0b; color: white; }
+.critical-low { background: #10b981; color: white; }
+.badge { padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 0.8rem; font-weight: 600; color: white; }
+.badge-risk { background-color: #ef4444; }
+.badge-opportunity { background-color: #10b981; }
+.fade-in { animation: fadeIn 0.4s ease-out both; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(6px);} to {opacity:1; transform:none;} }
 </style>
 
 <div class="space-y-10 fade-in">
 
-    <h2 class="text-3xl font-bold text-gray-800 mb-6">
-        <i class="fa-solid fa-triangle-exclamation text-red-500"></i> Risques & Opportunités
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+        <i class="fa-solid fa-triangle-exclamation text-red-500"></i>
+        Risques & Opportunités – Système Qualité (ISO 9001:2015 §6.1)
     </h2>
 
     {{-- SECTION 1 - Graphiques Risques et Opportunités --}}
@@ -62,12 +48,6 @@
         <h3 class="text-xl font-semibold mb-4 text-gray-700">
             <i class="fa-solid fa-scale-balanced text-indigo-600"></i> Calcul Brut/Net et Suivi des Risques
         </h3>
-        <ul class="list-disc pl-6 text-gray-600 text-sm mb-4 space-y-1">
-            <li><strong>Calcul brut/net :</strong> Évaluation avant et après actions correctives</li>
-            <li><strong>Suivi actions risques :</strong> Planification, mise en œuvre et évaluation d’efficacité</li>
-            <li><strong>Analyse prédictive :</strong> Évolution des risques basée sur les données historiques</li>
-        </ul>
-
         <div class="grid md:grid-cols-2 gap-6">
             <div>
                 <h4 class="text-gray-700 font-semibold mb-2"><i class="fa-solid fa-gauge text-red-500"></i> Évaluation Brut vs Net</h4>
@@ -82,7 +62,7 @@
 
     {{-- SECTION 2 - Matrice de criticité --}}
     <div class="card">
-        <h3 class="text-xl font-semibold mb-4 text-gray-700">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
             <i class="fa-solid fa-table-cells-large text-indigo-500"></i> Matrice de Criticité (Probabilité × Gravité)
         </h3>
         <table class="matrix text-sm">
@@ -117,231 +97,158 @@
         </table>
     </div>
 
-    {{-- SECTION 2B - Heatmap visuelle des risques --}}
-    <div class="card bg-gradient-to-b from-gray-50 to-white">
-        <h3 class="text-xl font-semibold mb-4 text-gray-700">
-            <i class="fa-solid fa-fire text-red-500"></i> Heatmap Visuelle des Risques par Domaine
-        </h3>
-        <p class="text-sm text-gray-600 mb-3">
-            Visualisation synthétique des domaines les plus exposés selon la gravité et la probabilité de survenue.
-        </p>
-        <canvas id="heatmapChart" style="height: 400px;"></canvas>
-
-        {{-- LÉGENDE STATIQUE DYNAMIQUE --}}
-        <div class="grid md:grid-cols-3 gap-4 mt-6 text-sm">
-            <div class="p-4 rounded-xl border border-red-200 bg-red-50 shadow-sm">
-                <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-server text-red-500 text-lg"></i>
-                    <span class="font-semibold text-gray-700">IT & Sécurité</span>
-                </div>
-                <p><strong>Niveau :</strong> Critique (9/10)</p>
-                <p><strong>Tendance :</strong> En hausse 🔺</p>
-                <p><strong>Action :</strong> Migration cloud sécurisée d’ici Q2 2026</p>
-            </div>
-            <div class="p-4 rounded-xl border border-yellow-200 bg-yellow-50 shadow-sm">
-                <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-users text-yellow-500 text-lg"></i>
-                    <span class="font-semibold text-gray-700">Ressources Humaines</span>
-                </div>
-                <p><strong>Niveau :</strong> Modéré (6/10)</p>
-                <p><strong>Tendance :</strong> Stable ➖</p>
-                <p><strong>Action :</strong> Programme de montée en compétences 2025</p>
-            </div>
-            <div class="p-4 rounded-xl border border-green-200 bg-green-50 shadow-sm">
-                <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-file-shield text-green-500 text-lg"></i>
-                    <span class="font-semibold text-gray-700">Conformité</span>
-                </div>
-                <p><strong>Niveau :</strong> Faible (4/10)</p>
-                <p><strong>Tendance :</strong> En amélioration ✅</p>
-                <p><strong>Action :</strong> Audit de conformité interne trimestriel</p>
-            </div>
-        </div>
-    </div>
-
-    {{-- SECTION 3 - Suivi des actions --}}
+    {{-- SECTION 3 - Formulaire Ajout Risque/Opportunité --}}
     <div class="card">
-        <h3 class="text-xl font-semibold mb-4 text-gray-700">
-            <i class="fa-solid fa-list-check text-blue-500"></i> Suivi des Actions
+        <h3 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
+            <i class="fa-solid fa-plus text-green-600"></i> Ajouter un Risque ou une Opportunité (statique)
         </h3>
-        <table class="table-auto w-full text-sm border-collapse">
-            <thead class="bg-gray-100">
-                <tr class="text-left">
-                    <th class="p-2">Type</th>
-                    <th class="p-2">Description</th>
-                    <th class="p-2">Responsable</th>
-                    <th class="p-2">Échéance</th>
-                    <th class="p-2">Statut</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="p-2"><span class="badge badge-risk">Risque</span></td>
-                    <td class="p-2">Défaillance du serveur principal</td>
-                    <td class="p-2">IT Manager</td>
-                    <td class="p-2">20/10/2025</td>
-                    <td class="p-2 text-yellow-500 font-semibold">En cours</td>
-                </tr>
-                <tr>
-                    <td class="p-2"><span class="badge badge-opportunity">Opportunité</span></td>
-                    <td class="p-2">Implémentation d’un système de sauvegarde cloud</td>
-                    <td class="p-2">Chef Qualité</td>
-                    <td class="p-2">05/11/2025</td>
-                    <td class="p-2 text-green-500 font-semibold">Planifiée</td>
-                </tr>
-                <tr>
-                    <td class="p-2"><span class="badge badge-risk">Risque</span></td>
-                    <td class="p-2">Manque de compétences sur l’audit interne</td>
-                    <td class="p-2">RH</td>
-                    <td class="p-2">15/12/2025</td>
-                    <td class="p-2 text-red-500 font-semibold">À traiter</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    {{-- SECTION 4 - Analyse prédictive --}}
-    <div class="card">
-        <h3 class="text-xl font-semibold mb-4 text-gray-700">
-            <i class="fa-solid fa-chart-line text-emerald-600"></i> Analyse Prédictive des Risques
-        </h3>
-        <canvas id="predictiveChart"></canvas>
-        <p class="text-sm text-gray-600 mt-3">
-            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Cette projection prédit une <strong>hausse de 20%</strong> des risques critiques au 1er trimestre 2026 si aucune action corrective n’est menée.
-        </p>
-    </div>
-
-    {{-- SECTION 5 - Alertes intelligentes --}}
-    <div class="card bg-red-50 border-l-4 border-red-400 text-red-800">
-        <h3 class="font-semibold mb-2"><i class="fa-solid fa-bell"></i> Alertes Intelligentes</h3>
-        <ul class="list-disc ml-5 text-sm space-y-1">
-            <li>⚠️ Risque critique "Serveur principal" approche de la date limite : 3 jours restants.</li>
-            <li>⚠️ Opportunité "Sauvegarde cloud" doit être validée avant implémentation finale.</li>
-            <li>🔔 Analyse prédictive : tendance à la hausse sur les risques informatiques.</li>
-        </ul>
-    </div>
-
-    {{-- SECTION 6 - OBJECTIFS QUALITÉ (Ajout CDC) --}}
-    <div class="card bg-gradient-to-b from-gray-50 to-white mt-10">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">
-            <i class="fa-solid fa-bullseye text-emerald-600"></i> Objectifs Qualité
-        </h2>
-
-        <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-700 mb-3"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Formulation SMART</h3>
-            <p class="text-sm text-gray-600 mb-4">Chaque objectif doit être <strong>Spécifique, Mesurable, Atteignable, Réaliste et Temporellement défini</strong>.</p>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-gray-600 text-sm mb-1">Objectif</label>
-                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Améliorer la satisfaction client de 15% d’ici fin 2025">
-                </div>
-                <div>
-                    <label class="block text-gray-600 text-sm mb-1">Responsable</label>
-                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Responsable Qualité">
-                </div>
-                <div>
-                    <label class="block text-gray-600 text-sm mb-1">Indicateur (KPI)</label>
-                    <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Ex : Taux de satisfaction client (%)">
-                </div>
-                <div>
-                    <label class="block text-gray-600 text-sm mb-1">Échéance</label>
-                    <input type="date" class="w-full border border-gray-300 rounded-lg p-2">
-                </div>
-            </div>
-            <button class="mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition">
-                <i class="fa-solid fa-plus"></i> Ajouter Objectif
+        <form id="formRisk" class="grid md:grid-cols-5 gap-4 text-sm">
+            <select id="riskType" class="border rounded-lg p-2 focus:ring-2 focus:ring-emerald-300">
+                <option value="Risque">Risque</option>
+                <option value="Opportunité">Opportunité</option>
+            </select>
+            <input id="riskDesc" type="text" placeholder="Description" class="border rounded-lg p-2 focus:ring-2 focus:ring-emerald-300 col-span-2">
+            <input id="riskResp" type="text" placeholder="Responsable" class="border rounded-lg p-2 focus:ring-2 focus:ring-emerald-300">
+            <input id="riskDate" type="date" class="border rounded-lg p-2 focus:ring-2 focus:ring-emerald-300">
+            <button id="addRisk" type="button" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg shadow flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check"></i> Ajouter
             </button>
-        </div>
+        </form>
+    </div>
 
-        <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-700 mb-3">
-                <i class="fa-solid fa-link text-blue-500"></i> Liaison automatique Objectifs ↔ Actions ↔ KPI
-            </h3>
-            <table class="w-full text-sm border-collapse">
+    {{-- SECTION 4 - Suivi des actions --}}
+    <div class="card">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-blue-500"></i> Suivi des Actions Risques / Opportunités
+        </h3>
+        <div id="riskTableWrapper">
+            <table id="riskTable" class="table-auto w-full text-sm border-collapse">
                 <thead class="bg-gray-100">
-                    <tr>
-                        <th class="p-2 text-left">Objectif</th>
-                        <th class="p-2 text-left">Action liée</th>
-                        <th class="p-2 text-left">KPI associé</th>
-                        <th class="p-2 text-center">Statut</th>
+                    <tr class="text-left">
+                        <th class="p-2">Type</th>
+                        <th class="p-2">Description</th>
+                        <th class="p-2">Responsable</th>
+                        <th class="p-2">Échéance</th>
+                        <th class="p-2">Statut</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="p-2">Augmenter la satisfaction client</td>
-                        <td class="p-2">Mise en place d’enquêtes mensuelles</td>
-                        <td class="p-2">Taux de satisfaction (%)</td>
-                        <td class="p-2 text-center text-green-600 font-semibold">En progrès</td>
+                        <td class="p-2"><span class="badge badge-risk">Risque</span></td>
+                        <td class="p-2">Défaillance du serveur principal</td>
+                        <td class="p-2">IT Manager</td>
+                        <td class="p-2">20/10/2025</td>
+                        <td class="p-2 text-yellow-500 font-semibold">En cours</td>
                     </tr>
                     <tr>
-                        <td class="p-2">Réduire les non-conformités</td>
-                        <td class="p-2">Audit interne trimestriel</td>
-                        <td class="p-2">Nb de NC par mois</td>
-                        <td class="p-2 text-center text-yellow-500 font-semibold">En cours</td>
+                        <td class="p-2"><span class="badge badge-opportunity">Opportunité</span></td>
+                        <td class="p-2">Implémentation d’un système de sauvegarde cloud</td>
+                        <td class="p-2">Chef Qualité</td>
+                        <td class="p-2">05/11/2025</td>
+                        <td class="p-2 text-green-500 font-semibold">Planifiée</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="mt-6">
-                <canvas id="objectifsKpiChart" height="120"></canvas>
-            </div>
         </div>
+        <div class="text-right mt-4">
+            <button id="exportPdf" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
+                <i class="fa-solid fa-file-pdf"></i> Exporter PDF
+            </button>
+        </div>
+    </div>
 
-        <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-700 mb-3">
-                <i class="fa-solid fa-clock-rotate-left text-indigo-500"></i> Historique & Revue Périodique
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <canvas id="historiqueChart" height="140"></canvas>
-                </div>
-                <div class="space-y-3 text-sm">
-                    <div class="p-3 border-l-4 border-emerald-500 bg-emerald-50 rounded">
-                        <strong>Janv 2025 :</strong> Mise en place du suivi des indicateurs.
-                    </div>
-                    <div class="p-3 border-l-4 border-yellow-500 bg-yellow-50 rounded">
-                        <strong>Avr 2025 :</strong> Ajustement de la politique qualité suite audit.
-                    </div>
-                    <div class="p-3 border-l-4 border-blue-500 bg-blue-50 rounded">
-                        <strong>Août 2025 :</strong> Revue de direction : 70% des objectifs atteints.
-                    </div>
-                </div>
+    {{-- SECTION 5 - Validation QMS --}}
+    <div class="card">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
+            <i class="fa-solid fa-check-double text-green-600"></i> Validation & Suivi Qualité
+        </h3>
+        <form id="validateForm" class="grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Validé par</label>
+                <input id="validName" type="text" class="border rounded-lg p-2 w-full focus:ring-2 focus:ring-emerald-300" placeholder="Directeur Qualité">
             </div>
-        </div>
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Date</label>
+                <input id="validDate" type="date" class="border rounded-lg p-2 w-full focus:ring-2 focus:ring-emerald-300">
+            </div>
+            <div class="md:col-span-2">
+                <label class="block text-sm text-gray-600 mb-1">Commentaire</label>
+                <textarea id="validComment" rows="3" class="border rounded-lg p-3 w-full focus:ring-2 focus:ring-emerald-300" placeholder="Observations et décisions qualité..."></textarea>
+            </div>
+            <div class="text-right md:col-span-2">
+                <button id="btnValidate" type="button" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg shadow">
+                    <i class="fa-solid fa-save"></i> Valider
+                </button>
+            </div>
+        </form>
     </div>
 
 </div>
 
-<script src="{{ asset('js/risques-opportunites.js') }}"></script>
-
 <script>
-new Chart(document.getElementById('objectifsKpiChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Satisfaction Client', 'Non-Conformités', 'Performance Fournisseurs', 'Formation Employés'],
-        datasets: [{
-            label: 'Taux d’atteinte (%)',
-            data: [85, 65, 90, 75],
-            backgroundColor: ['#10b981','#f59e0b','#3b82f6','#8b5cf6']
-        }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100 } } }
-});
+document.addEventListener("DOMContentLoaded", () => {
 
-new Chart(document.getElementById('historiqueChart'), {
-    type: 'line',
-    data: {
-        labels: ['Janv', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct'],
-        datasets: [{
-            label: 'Progression globale des objectifs (%)',
-            data: [20, 35, 45, 50, 58, 65, 70, 75, 78, 82],
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16,185,129,0.2)',
-            tension: 0.4,
-            fill: true
-        }]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, max: 100 } } }
+    // Graphiques
+    new Chart(document.getElementById('risquesChart'), {
+        type: 'pie',
+        data: { labels: ['Critiques', 'Modérés', 'Faibles'], datasets: [{ data: [4, 7, 3], backgroundColor: ['#ef4444','#f59e0b','#10b981'] }] },
+        options: { plugins: { legend: { position: 'bottom' } } }
+    });
+    new Chart(document.getElementById('opportunitesChart'), {
+        type: 'pie',
+        data: { labels: ['Implémentées', 'Planifiées', 'À étudier'], datasets: [{ data: [5, 3, 2], backgroundColor: ['#10b981','#3b82f6','#a855f7'] }] },
+        options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    new Chart(document.getElementById('riskEvalChart'), {
+        type: 'bar',
+        data: { labels: ['Risque 1', 'Risque 2', 'Risque 3'], datasets: [
+            { label: 'Brut', data: [9, 7, 6], backgroundColor: '#ef4444' },
+            { label: 'Net', data: [5, 4, 3], backgroundColor: '#10b981' }
+        ]},
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero:true, max:10 } } }
+    });
+
+    new Chart(document.getElementById('efficaciteChart'), {
+        type: 'line',
+        data: { labels: ['T1', 'T2', 'T3', 'T4'], datasets: [{ label: 'Efficacité (%)', data: [60,70,78,85], borderColor:'#10b981', tension:0.4, fill:true }] },
+        options: { plugins: { legend: { position:'bottom' } } }
+    });
+
+    // Ajout Risque / Opportunité
+    document.getElementById('addRisk').addEventListener('click', () => {
+        const type = document.getElementById('riskType').value;
+        const desc = document.getElementById('riskDesc').value.trim();
+        const resp = document.getElementById('riskResp').value.trim();
+        const date = document.getElementById('riskDate').value;
+        if(!desc || !resp || !date) return alert('Veuillez remplir tous les champs.');
+        const table = document.querySelector('#riskTable tbody');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="p-2"><span class="badge ${type==='Risque'?'badge-risk':'badge-opportunity'}">${type}</span></td>
+            <td class="p-2">${desc}</td>
+            <td class="p-2">${resp}</td>
+            <td class="p-2">${date}</td>
+            <td class="p-2 text-gray-600 font-semibold">Nouveau</td>`;
+        table.appendChild(tr);
+        alert(`${type} ajouté (statique uniquement).`);
+        document.getElementById('formRisk').reset();
+    });
+
+    // Validation QMS
+    document.getElementById('btnValidate').addEventListener('click', () => {
+        const name = document.getElementById('validName').value.trim();
+        const date = document.getElementById('validDate').value;
+        if(!name || !date) return alert('Nom et date requis.');
+        alert(`Validation effectuée par ${name} le ${date}.`);
+    });
+
+    // Export PDF
+    document.getElementById('exportPdf').addEventListener('click', () => {
+        const el = document.getElementById('riskTableWrapper');
+        html2pdf().set({ margin:0.5, filename:'Risques_Opportunites_QMS.pdf', jsPDF:{unit:'in', format:'a4', orientation:'landscape'} }).from(el).save();
+    });
 });
 </script>
+
 @endsection
