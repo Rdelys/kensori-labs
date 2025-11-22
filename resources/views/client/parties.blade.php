@@ -6,6 +6,77 @@
 <!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- 🌟 PREMIUM CUSTOM STYLE -->
+<style>
+    /* Cartes premium */
+    section.bg-white {
+        border-radius: 20px !important;
+        background: #ffffffcc;
+        backdrop-filter: blur(8px);
+        transition: all .25s ease;
+    }
+    section.bg-white:hover {
+        box-shadow: 0px 8px 25px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+
+    /* Inputs */
+    input, select, textarea {
+        border-radius: 12px !important;
+        transition: .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, .2);
+        transform: scale(1.01);
+    }
+
+    /* Boutons Premium */
+    button {
+        border-radius: 14px !important;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        transition: .25s ease;
+    }
+    button:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Boutons specifiques */
+    .btn-blue {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+    .btn-green {
+        background: linear-gradient(135deg, #16a34a, #15803d);
+    }
+
+    /* Table premium */
+    table {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    table thead {
+        background: #f3f4f6;
+        font-weight: 600;
+    }
+    table tbody tr {
+        transition: .2s;
+    }
+    table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    /* Drag & drop nodes */
+    #processMap div {
+        transition: .25s ease;
+    }
+    #processMap div:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, .15);
+        z-index: 10;
+    }
+</style>
+
 <div class="space-y-10 fade-in">
 
     <!-- HEADER -->
@@ -13,11 +84,10 @@
         <div>
             <h1 class="text-3xl font-semibold text-gray-800">
                 <i class="fa-solid fa-users text-blue-600 mr-2"></i>
-                Parties intéressées & Contexte de l’organisation
+                Parties intéressées
             </h1>
-            <p class="text-gray-500 mt-1">Module conforme à la clause 4 de la norme ISO 9001:2015</p>
         </div>
-        <button class="mt-3 md:mt-0 px-5 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition">
+        <button class="mt-3 md:mt-0 px-5 py-2 btn-blue text-white shadow-lg hover:opacity-90 transition">
             <i class="fa-solid fa-plus mr-2"></i> Ajouter une partie intéressée
         </button>
     </div>
@@ -38,7 +108,7 @@
                 <textarea rows="3" class="w-full border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Facteurs légaux, économiques, sociaux, technologiques..."></textarea>
             </div>
             <div class="md:col-span-2 flex justify-end">
-                <button class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                <button class="px-6 py-2 btn-green text-white hover:opacity-90 transition">
                     <i class="fa-solid fa-floppy-disk mr-2"></i> Enregistrer le contexte
                 </button>
             </div>
@@ -78,7 +148,7 @@
                 <input type="text" class="w-full border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Nom du responsable">
             </div>
             <div class="md:col-span-2 flex justify-end">
-                <button class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                <button class="px-6 py-2 btn-green text-white hover:opacity-90 transition">
                     <i class="fa-solid fa-floppy-disk mr-2"></i> Enregistrer
                 </button>
             </div>
@@ -212,7 +282,7 @@
         <div id="processMap" class="relative w-full h-[500px] border border-dashed border-gray-300 rounded-lg bg-gray-50 overflow-hidden"></div>
 
         <div class="text-right mt-4">
-            <button id="addProcess" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+            <button id="addProcess" class="px-4 py-2 btn-blue text-white shadow hover:bg-blue-700 transition">
                 <i class="fa-solid fa-plus mr-2"></i> Ajouter un Processus
             </button>
         </div>
@@ -251,7 +321,7 @@
         }
     });
 
-    // Outil d’organigramme dynamique simple
+    // 🧩 Drag & drop process nodes
     document.addEventListener('DOMContentLoaded', () => {
         const area = document.getElementById('processMap');
         const addBtn = document.getElementById('addProcess');

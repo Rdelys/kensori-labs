@@ -12,13 +12,8 @@
         <div>
             <h1 class="text-3xl font-semibold text-gray-800 flex items-center gap-2">
                 <i class="fa-solid fa-chart-line text-blue-600"></i>
-                Analyse SWOT & PESTEL
+                SWOT & PESTEL
             </h1>
-            <p class="text-gray-500 mt-1">
-                Module d’analyse stratégique et contextuelle du SMQ — conforme aux clauses
-                <strong>4.1 (Contexte)</strong> et <strong>6.1 (Actions face aux risques et opportunités)</strong>
-                de la norme <strong>ISO 9001:2015</strong>.
-            </p>
         </div>
         <button id="toggleForm" class="mt-3 md:mt-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-lg text-white px-4 py-2 rounded-xl shadow transition">
             <i class="fa-solid fa-plus mr-1"></i> Ajouter une analyse

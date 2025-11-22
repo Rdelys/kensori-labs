@@ -22,11 +22,10 @@
         <div class="relative z-10">
             <h1 class="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-3 tracking-tight">
                 <i class="fa-solid fa-handshake text-green-600"></i>
-                Revue de Direction – Système Qualité
+                Revue de Direction
             </h1>
-            <p class="text-gray-600 text-sm">Pilotage stratégique du SMQ – conforme ISO 9001:2015 (§9.3)</p>
             <div class="mt-3">
-                <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-semibold shadow-sm">Session Annuelle 2025</span>
+              <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-semibold shadow-sm">Session Annuelle {{ date('Y') }}</span>
             </div>
         </div>
     </div>

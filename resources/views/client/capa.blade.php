@@ -52,7 +52,7 @@
   </div>
 
   <!-- MAIN GRID: TABLE + ANALYSES -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-6"> -->
 
     <!-- LEFT: NC Table -->
     <div class="lg:col-span-2 bg-white shadow rounded-2xl p-6">
@@ -212,31 +212,40 @@
     </div>
 
     <!-- RIGHT: ANALYSES GRAPHIQUES & PARETO -->
-    <div class="bg-white shadow rounded-2xl p-6">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
+    
+  <!-- </div> -->
+<div class="bg-white shadow rounded-2xl p-6">
+    <h2 class="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
         <i class="fa-solid fa-chart-simple text-gray-700"></i> Analyses & Pareto
-      </h2>
+    </h2>
 
-      <div class="space-y-4">
-        <div>
-          <label class="text-sm text-gray-600">Répartition NC par processus</label>
-          <canvas id="ncDistributionChart" width="300" height="220"></canvas>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- CAMEMBERT GAUCHE -->
+        <div class="flex flex-col items-center">
+            <label class="text-sm text-gray-600 mb-2">Répartition NC par processus</label>
+            <div class="w-72 h-72">
+                <canvas id="ncDistributionChart"></canvas>
+            </div>
         </div>
 
-        <div>
-          <label class="text-sm text-gray-600">Diagramme Pareto — Causes (exemple)</label>
-          <canvas id="paretoChart" width="300" height="220"></canvas>
-          <p class="text-xs text-gray-500 mt-2">Pareto généré sur les causes enregistrées — montre 80/20 des causes principales.</p>
+        <!-- PARETO DROITE -->
+        <div class="flex flex-col items-center">
+            <label class="text-sm text-gray-600 mb-2">Diagramme Pareto — Causes (exemple)</label>
+            <div class="w-full h-72">
+                <canvas id="paretoChart"></canvas>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Pareto généré sur les causes enregistrées — montre 80/20 des causes principales.</p>
         </div>
 
-        <div class="mt-3">
-          <button onclick="exportSummary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg">
-            <i class="fa-solid fa-file-export mr-2"></i>Exporter synthèse CAPA (PDF fictif)
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <div class="mt-3">
+        <button onclick="exportSummary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg">
+            <i class="fa-solid fa-file-export mr-2"></i>Exporter synthèse CAPA (PDF fictif)
+        </button>
+    </div>
+</div>
 
   <!-- 5 WHY & ISHIKAWA DETAILED AREA -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -9,14 +9,7 @@
 <div class="bg-gradient-to-r from-sky-50 via-white to-indigo-50 p-4 md:p-6 rounded-b-3xl shadow-inner sticky top-0 z-40">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="flex items-start gap-4">
-            <div class="rounded-full bg-white p-3 shadow-md">
-                <i class="fa-solid fa-shield-check text-blue-600 text-2xl"></i>
-            </div>
-            <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight">Processus du Système de Management de la Qualité (SMQ)</h1>
-                <p class="text-sm text-gray-500 mt-1">Vue consolidée des processus, cartographie, KPI et traçabilité — alignée ISO 9001:2015.</p>
-                <p class="text-xs text-gray-400 mt-1">Intégrations & exigences du Cahier des Charges QMS incluses.</p>
-            </div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight">Processus du SMQ</h1>
         </div>
 
         <div class="flex items-center gap-3">
@@ -148,16 +141,6 @@
             </div>
         </form>
     </section>
-
-    <!-- Description -->
-    <div class="bg-white p-6 rounded-2xl shadow-sm border">
-        <p class="text-gray-700 leading-relaxed">
-            Cette section permet de créer, visualiser et gérer la <strong>cartographie des processus</strong> du SMQ,
-            conformément à la norme <strong>ISO 9001:2015 (Clause 4.4)</strong>. Chaque processus comprend ses
-            intrants, extrants, indicateurs de performance, ressources associées et interactions avec d’autres processus.
-        </p>
-    </div>
-
     <!-- TABLE DES PROCESSUS -->
     <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 overflow-x-auto" id="printArea">
         <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-800">

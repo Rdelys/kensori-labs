@@ -28,7 +28,7 @@
 
     <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
         <i class="fa-solid fa-triangle-exclamation text-red-500"></i>
-        Risques & Opportunités – Système Qualité (ISO 9001:2015 §6.1)
+        Risques & Opportunités
     </h2>
 
     {{-- SECTION 1 - Graphiques Risques et Opportunités --}}

@@ -13,10 +13,7 @@
                 <i class="fa-solid fa-scroll text-blue-600 text-2xl"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-extrabold text-gray-800">Politique Qualité de l’Entreprise</h1>
-                <p class="text-sm text-gray-500">
-                    Alignée sur ISO 9001:2015 – Clauses 5.2 (Politique Qualité) & 7.4 (Communication)
-                </p>
+                <h1 class="text-3xl font-extrabold text-gray-800">Politique Qualité</h1>
             </div>
         </div>
         <div class="flex gap-3">

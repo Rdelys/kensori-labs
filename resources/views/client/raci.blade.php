@@ -24,9 +24,8 @@
             <span class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-emerald-400 text-white shadow-lg">
                 <i class="fa-solid fa-sitemap text-xl"></i>
             </span>
-            <span>Matrice RACI – Système Qualité</span>
+            <span>Matrice RACI</span>
         </h1>
-        <p class="text-gray-500 max-w-2xl mx-auto">Responsabilités, autorités et diffusion automatique selon le QMS — conforme ISO 9001:2015 (Clause 5.3).</p>
     </div>
 
     <!-- MATRICE RACI -->
@@ -114,9 +113,6 @@
                     <li><span class="font-bold text-orange-500">C</span> : Consulté – Donne un avis</li>
                     <li><span class="font-bold text-gray-500">I</span> : Informé – Tient informé</li>
                 </ul>
-            </div>
-            <div class="text-right text-xs text-gray-500">
-                <div>Conforme CdC QMS — Rôles & responsabilités (ISO 9001:2015 §5.3).</div>
             </div>
         </div>
     </div>
