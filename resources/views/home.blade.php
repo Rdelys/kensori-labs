@@ -1,121 +1,215 @@
+<!-- Version améliorée avec navbar animée + features premium + effet étoiles -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kensori Labs — Connexion</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kensori Labs - Optimisez Votre Qualité</title>
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0f4c5c',
-            accent: '#1e6f86',
-            soft: '#f8fafc',
-            dark: '#1b1b1b',
-          },
-          boxShadow: {
-            glow: '0 0 25px rgba(30, 111, 134, 0.2)',
-          }
-        },
-      },
-    };
-  </script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Effet étoiles animées */
+    .star-field { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+    .star { position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%; animation: moveStar linear infinite; opacity: 0.8; }
+    @keyframes moveStar {
+      0% { transform: translateY(0); opacity: .3; }
+      100% { transform: translateY(800px); opacity: 1; }
+    }
+
+    /* Animation glow douce sur la navbar */
+    @keyframes navGlow {
+      0% { box-shadow: 0 0 15px rgba(0, 255, 255, .2); }
+      50% { box-shadow: 0 0 25px rgba(0, 255, 255, .4); }
+      100% { box-shadow: 0 0 15px rgba(0, 255, 255, .2); }
+    }
+
+    /* Effet underline-slide pour les liens */
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #2dd4bf;
+      transition: 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Glow pulse sur les boutons */
+    .glow-btn {
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(45, 212, 191, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(45, 212, 191, 0.6); }
+      100% { box-shadow: 0 0 10px rgba(45, 212, 191, 0.3); }
+    }
+
+    /* Styles des Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      padding: 60px 20px;
+      margin-top: 60px;
+    }
+    .feature {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .feature:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+    .feature img {
+      width: 80px;
+      margin: auto;
+    }
+  </style>
+
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-soft via-white to-soft font-sans text-gray-800">
+<body class="bg-gray-50 text-gray-900">
 
-  <div class="flex flex-col md:flex-row bg-white/90 backdrop-blur-2xl rounded-3xl shadow-glow overflow-hidden w-full max-w-5xl animate-fadeIn border border-gray-100">
 
-    <!-- Section gauche (logo + présentation) -->
-    <div class="flex flex-col justify-center items-center bg-white text-gray-800 w-full md:w-1/2 relative p-10">
-      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-5"></div>
-      <div class="relative z-10 text-center space-y-6">
-        <img src="/logo.png" alt="Kensori Labs" class="w-28 h-28 mx-auto drop-shadow-md mb-4">
-        <h1 class="text-4xl font-extrabold tracking-tight text-primary">Kensori Labs</h1>
-        <p class="text-gray-600 text-lg leading-relaxed max-w-md mx-auto">
-          Plateforme QMS intelligente et intuitive pour optimiser vos processus qualité et piloter votre performance.
-        </p>
-        <div class="mt-8">
-          <div class="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
-        </div>
-      </div>
+<!-- NAVBAR PREMIUM + ANIMATIONS -->
+<nav class="w-full backdrop-blur-xl bg-[#0a2a43]/90 border-b border-white/10
+     px-10 py-5 flex justify-between items-center sticky top-0 z-50 shadow-xl
+     animate-[navGlow_6s_infinite]">
+
+  <div class="text-white text-2xl font-bold tracking-wide flex items-center gap-2">
+    <i class="fa-solid fa-flask text-teal-300"></i> Kensori Labs
+  </div>
+
+  <div class="flex gap-8 text-lg font-medium">
+    <a href="#" class="text-white nav-link hover:text-teal-300 transition">Accueil</a>
+    <a href="#" class="text-white nav-link hover:text-teal-300 transition">Fonctionnalités</a>
+    <a href="#" class="text-white nav-link hover:text-teal-300 transition">Tarifs</a>
+  </div>
+
+  <div class="flex gap-4 items-center">
+  <a href="#" 
+     class="px-5 py-2 bg-[#0d2338] text-white rounded-lg shadow-lg flex items-center gap-2 
+            hover:bg-[#12314d] transition font-medium
+            hover:shadow-teal-500/40">
+      <i class="fa-solid fa-key text-teal-300"></i>
+      Login
+  </a>
+
+  <a href="#" 
+     class="px-6 py-2 rounded-lg shadow-lg flex items-center gap-2 bg-teal-500 text-white 
+            hover:bg-teal-400 transition font-semibold
+            hover:shadow-teal-500/40">
+      <i class="fa-solid fa-user-plus"></i>
+      Inscription
+  </a>
+</div>
+
+</nav>
+
+
+<!-- HERO SECTION AVEC EFFET ÉTOILES -->
+<section class="relative mx-6 mt-6 rounded-2xl overflow-hidden text-white px-10 py-24 
+                bg-gradient-to-r from-cyan-800/90 to-teal-500/80 shadow-2xl">
+
+  <div class="star-field" id="stars"></div>
+
+  <div class="relative z-10">
+    <h1 class="text-4xl md:text-5xl font-extrabold max-w-2xl leading-tight">
+      Optimisez Votre Qualité avec l’Intelligence ISO 9001
+    </h1>
+
+    <p class="mt-4 text-lg opacity-90 max-w-xl">
+      Une plateforme intelligente pour une gestion agile, performante et conforme.
+    </p>
+
+    <a href="#" class="inline-block mt-6 px-6 py-3 bg-teal-400 hover:bg-teal-300 
+                       text-gray-900 font-semibold text-lg rounded-xl shadow-lg transition glow-btn">
+      Commencer l'Essai Gratuit
+    </a>
+
+    <!-- Stars -->
+    <div class="flex gap-1 mt-6 text-yellow-300 text-xl">
+      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
     </div>
 
-    <!-- Section droite (formulaire sur fond coloré) -->
-    <div class="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-gradient-to-br from-primary to-accent text-white relative overflow-hidden">
-      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-      <div class="relative z-10">
-
-        <div class="flex flex-col items-center mb-8">
-          <img src="/logo.png" alt="Kensori Labs" class="w-14 h-14 mb-3 md:hidden">
-          <h2 class="text-2xl font-bold text-white">Connexion à votre compte</h2>
-          <p class="text-white/70 text-sm mt-1">Veuillez entrer vos identifiants</p>
-        </div>
-
-        @if(session('error'))
-          <div class="bg-white/20 border border-red-200 text-red-100 text-sm p-3 rounded-xl mb-4 text-center backdrop-blur-md">
-            {{ session('error') }}
-          </div>
-        @endif
-
-        <form method="POST" action="{{ route('user.login') }}" class="space-y-5">
-          @csrf
-          <div>
-            <label for="email" class="block text-sm font-medium text-white/80 mb-1">Adresse e-mail</label>
-            <input type="email" id="email" name="email" required
-              class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-white/70 focus:ring-4 focus:ring-white/20 focus:border-white/40 transition duration-200 outline-none" 
-              placeholder="exemple@domaine.com">
-          </div>
-
-          <div>
-            <label for="password" class="block text-sm font-medium text-white/80 mb-1">Mot de passe</label>
-            <div class="relative">
-              <input type="password" id="password" name="password" required
-                class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-white/70 focus:ring-4 focus:ring-white/20 focus:border-white/40 transition duration-200 outline-none pr-10" 
-                placeholder="Votre mot de passe">
-              <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center text-white/60 hover:text-white transition">
-                <svg xmlns="http://www.w3.org/2000/svg" id="eyeIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <button type="submit" 
-            class="w-full bg-white text-primary font-semibold py-3 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-xl hover:-translate-y-0.5 transform transition-all duration-200">
-            Se connecter
-          </button>
-        </form>
-
-        <footer class="text-center text-white/70 text-sm mt-8">
-          © <span id="year"></span> Kensori Labs — Tous droits réservés.
-        </footer>
+    <!-- Icons -->
+    <div class="mt-6 flex flex-col md:flex-row gap-6 text-white/90 text-base">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-shield-halved text-teal-300"></i> Conforme ISO 9001
+      </div>
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-bolt text-teal-300"></i> Gain de temps significatif
       </div>
     </div>
   </div>
+</section>
 
-  <script>
-    // Affichage de l'année
-    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Toggle mot de passe
-    const togglePassword = document.getElementById("togglePassword");
-    const password = document.getElementById("password");
-    togglePassword.addEventListener("click", () => {
-      password.type = password.type === "password" ? "text" : "password";
-    });
-  </script>
+<!-- ⭐ SMART FEATURES BLOCK -->
+<section class="features">
+  <div class="feature">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png">
+    <h3 class="text-xl font-semibold mt-4">Intelligence Artificielle & Automatisation</h3>
+    <p class="text-gray-600 mt-2">Automatisez vos tâches et décuplez votre efficacité.</p>
+  </div>
 
-  <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fadeIn {
-      animation: fadeIn 0.8s ease-out;
-    }
-  </style>
+  <div class="feature">
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png">
+    <h3 class="text-xl font-semibold mt-4">Conformité Simplifiée</h3>
+    <p class="text-gray-600 mt-2">Restez totalement conforme aux normes ISO sans effort.</p>
+  </div>
+
+  <div class="feature">
+    <img src="https://cdn-icons-png.flaticon.com/512/3590/3590417.png">
+    <h3 class="text-xl font-semibold mt-4">Prise de Décision Éclairée</h3>
+    <p class="text-gray-600 mt-2">Appuyez-vous sur des analyses intelligentes pour décider mieux.</p>
+  </div>
+
+  <div class="feature">
+    <img src="https://cdn-icons-png.flaticon.com/512/993/993707.png">
+    <h3 class="text-xl font-semibold mt-4">Collaboration Optimisée</h3>
+    <p class="text-gray-600 mt-2">Travaillez efficacement avec toutes vos équipes.</p>
+  </div>
+</section>
+
+
+
+<script>
+  // Génération dynamique d'étoiles animées
+  const starContainer = document.getElementById("stars");
+  const starCount = 60;
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+
+    const size = Math.random() * 4 + 2;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * -200 + "px";
+    star.style.animationDuration = Math.random() * 6 + 4 + "s";
+
+    starContainer.appendChild(star);
+  }
+</script>
+
 </body>
 </html>
