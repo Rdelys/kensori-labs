@@ -92,3 +92,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client/capa', [ClientController::class, 'capa'])->name('client.capa');
     Route::get('/client/ia', [ClientController::class, 'ia'])->name('client.ia');
 });
+
+// Solution rapide : ajoutez cette route
+Route::get('/login', function () {
+    return view('login'); // Assurez-vous que login.blade.php existe
+})->name('login');

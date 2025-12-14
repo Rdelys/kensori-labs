@@ -120,9 +120,10 @@
      animate-[navGlow_6s_infinite]">
 
   <div class="flex items-center gap-2">
-    <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-md">
-      <i class="fa-solid fa-chart-line text-white text-lg"></i>
-    </div>
+    <div class="w-10 h-10 to-accent rounded-xl flex items-center justify-center shadow-md">
+<img src="{{ asset('logo.png') }}" alt="Logo QualiSmart" class="w-full h-full object-contain">
+</div>
+
     <div class="text-dark text-2xl font-bold tracking-tight logo">
       <span class="gradient-text">KENSORI LABS</span>
     </div>
@@ -137,7 +138,7 @@
   </div>
 
   <div class="flex gap-3 items-center">
-    <a href="#" 
+    <a href="{{ route('login') }}" 
        class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg shadow-sm flex items-center gap-2 
               hover:bg-gray-200 transition font-medium
               hover:shadow-gray-300/40 border border-gray-200">
