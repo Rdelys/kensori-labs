@@ -91,6 +91,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client/audits', [ClientController::class, 'audits'])->name('client.audits');
     Route::get('/client/capa', [ClientController::class, 'capa'])->name('client.capa');
     Route::get('/client/ia', [ClientController::class, 'ia'])->name('client.ia');
+        Route::get('/client/reclamation', [ClientController::class, 'reclamation'])->name('client.reclamation');
+
 });
 
 // Solution rapide : ajoutez cette route

@@ -118,5 +118,10 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.ia', compact('user'));
     }
+
+    public function reclamation() {
+        $user = Auth::user();
+        return view('client.reclamation', compact('user'));
+    }
 }
 

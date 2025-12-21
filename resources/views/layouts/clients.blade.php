@@ -298,7 +298,8 @@
         ]],
         ['id'=>'evalMenu','icon'=>'chart-simple','label'=>'Évaluation','items'=>[
           ['client.audits','shield-check','Audits Internes'],
-          ['client.satisfaction','face-smile','Satisfaction Client']
+          ['client.satisfaction','face-smile','Satisfaction Client'],
+          ['client.reclamation','face-smile','Réclamation Client']
         ]],
         ['id'=>'improveMenu','icon'=>'lightbulb','label'=>'Amélioration','items'=>[
           ['client.capa','bug','Non-conformités / CAPA'],
