@@ -547,8 +547,8 @@
           <!-- Main card -->
           <div class="card max-w-md mx-auto">
             <div class="flex justify-center mb-6">
-              <div class="w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-xl">
-                <i class="fa-solid fa-brain text-white text-4xl"></i>
+              <div class="w-24 h-24  from-primary to-accent rounded-2xl flex items-center justify-center shadow-xl">
+    <img src="/logo.png" alt="Kensori Labs Logo" class="w-30 h-30">
               </div>
             </div>
             
@@ -990,7 +990,7 @@
       <div class="lg:col-span-2">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-md">
-            <i class="fa-solid fa-chart-line text-white text-lg"></i>
+    <img src="/logo.png" alt="Kensori Labs Logo" class="w-8 h-8">
           </div>
           <div class="text-2xl font-bold">
             <span class="gradient-text">Kensori</span>
