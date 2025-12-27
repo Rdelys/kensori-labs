@@ -296,11 +296,18 @@
           ['client.equipements','screwdriver-wrench','Équipements'],
           ['client.competences','id-badge','Compétences']
         ]],
-        ['id'=>'evalMenu','icon'=>'chart-simple','label'=>'Évaluation','items'=>[
-          ['client.audits','shield-check','Audits Internes'],
-          ['client.satisfaction','face-smile','Satisfaction Client'],
-          ['client.reclamation','face-smile','Réclamation Client']
-        ]],
+        [
+  'id'    => 'evalMenu',
+  'icon'  => 'chart-simple',
+  'label' => 'Évaluation',
+  'items' => [
+    ['client.audits',        'shield-check',        'Audits Internes'],
+    ['client.satisfaction',  'face-smile',          'Satisfaction Client'],
+    ['client.reclamation',   'triangle-exclamation','Réclamation Client'],
+    ['client.evaluation','handshake',          'Évaluation Fournisseur']
+  ]
+]
+,
         ['id'=>'improveMenu','icon'=>'lightbulb','label'=>'Amélioration','items'=>[
           ['client.capa','bug','Non-conformités / CAPA'],
           ['client.ia','robot','IA Prédictive']
