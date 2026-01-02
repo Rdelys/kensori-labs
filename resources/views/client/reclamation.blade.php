@@ -206,7 +206,7 @@
         </select>
         <div class="relative flex-1 md:w-48">
           <input type="text" id="searchReclam" placeholder="Rechercher..." class="compact-btn border rounded text-sm bg-white w-full pl-9">
-          <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+          <i class="fa-solid fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
         </div>
       </div>
     </div>
