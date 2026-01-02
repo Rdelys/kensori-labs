@@ -93,16 +93,16 @@
             },
             neonGlow: {
               '0%, 100%': { 
-                boxShadow: '0 0 8px rgba(14, 165, 233, 0.3), 0 0 15px rgba(59, 130, 246, 0.2), 0 0 22px rgba(139, 92, 246, 0.1)'
+                boxShadow: '0 0 8px rgba(14, 165, 233, 0.25), 0 0 15px rgba(59, 130, 246, 0.15), 0 0 22px rgba(139, 92, 246, 0.08)'
               },
               '50%': { 
-                boxShadow: '0 0 12px rgba(14, 165, 233, 0.5), 0 0 22px rgba(59, 130, 246, 0.3), 0 0 32px rgba(139, 92, 246, 0.15)'
+                boxShadow: '0 0 12px rgba(14, 165, 233, 0.35), 0 0 22px rgba(59, 130, 246, 0.2), 0 0 32px rgba(139, 92, 246, 0.1)'
               }
             }
           },
           backgroundImage: {
             'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            'gradient-shine': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)',
+            'gradient-shine': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)',
             'gradient-subtle': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #f8fafc 100%)'
           }
         }
@@ -150,9 +150,9 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 40% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 40% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
       pointer-events: none;
       z-index: -2;
       animation: gradientFlow 15s ease infinite;
@@ -170,7 +170,7 @@
 
     .particle {
       position: absolute;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
       border-radius: 50%;
       animation: particleFloat linear infinite;
     }
@@ -193,8 +193,8 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 50%);
       animation: wave 15s ease-in-out infinite;
       z-index: 0;
     }
@@ -217,18 +217,18 @@
       position: absolute;
       width: 2px;
       height: 2px;
-      background: radial-gradient(circle, white 30%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 30%, transparent 70%);
       border-radius: 50%;
       animation: moveStar linear infinite;
       opacity: 0;
     }
     
     .star:nth-child(3n) {
-      background: radial-gradient(circle, #0ea5e9 30%, transparent 70%);
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.6) 30%, transparent 70%);
     }
     
     .star:nth-child(3n+1) {
-      background: radial-gradient(circle, #8b5cf6 30%, transparent 70%);
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 30%, transparent 70%);
     }
     
     @keyframes moveStar {
@@ -237,10 +237,10 @@
         opacity: 0;
       }
       10% {
-        opacity: 0.6;
+        opacity: 0.5;
       }
       90% {
-        opacity: 0.6;
+        opacity: 0.5;
       }
       100% {
         transform: translateY(-100vh) translateX(200px) rotate(720deg);
@@ -251,14 +251,14 @@
     .navbar {
       backdrop-filter: blur(15px);
       background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(14, 165, 233, 0.2);
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
     }
 
     .navbar.scrolled {
       background: rgba(15, 23, 42, 0.95);
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
     }
 
     .nav-link {
@@ -308,39 +308,39 @@
       overflow: hidden;
       transition: all 0.3s ease;
       border: none;
-      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.25);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4);
+      box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(8px);
       color: white;
       padding: 12px 28px;
       border-radius: 10px;
       font-weight: 600;
-      border: 1.5px solid rgba(14, 165, 233, 0.25);
+      border: 1.5px solid rgba(14, 165, 233, 0.2);
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
     }
 
     .btn-secondary:hover {
       transform: translateY(-2px);
       border-color: var(--primary);
-      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.25);
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(8px);
       border-radius: 20px;
       padding: 32px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -362,8 +362,8 @@
 
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-      border-color: rgba(14, 165, 233, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      border-color: rgba(14, 165, 233, 0.15);
     }
 
     .card:hover::before {
@@ -380,7 +380,7 @@
       margin-bottom: 24px;
       font-size: 24px;
       color: white;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
     }
 
@@ -398,8 +398,8 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
       pointer-events: none;
       animation: wave 20s ease-in-out infinite;
     }
@@ -419,13 +419,13 @@
       background-clip: text;
       color: transparent;
       line-height: 1;
-      text-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+      text-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
     }
 
     .testimonial-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 24px;
       padding: 40px;
       position: relative;
@@ -438,7 +438,7 @@
       top: -30px;
       left: 25px;
       font-size: 140px;
-      color: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.03);
       font-family: serif;
       line-height: 1;
       z-index: 0;
@@ -493,7 +493,7 @@
     .floating-shape {
       position: absolute;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.08));
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.06), rgba(139, 92, 246, 0.06));
       filter: blur(30px);
       animation: float 15s ease-in-out infinite;
       z-index: 0;
@@ -505,7 +505,7 @@
 
     .hover-lift:hover {
       transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     }
 
     @media (max-width: 1024px) {
@@ -708,19 +708,19 @@
   <div class="star-field" id="stars"></div>
   
   <!-- Floating shapes -->
-  <div class="floating-shape w-96 h-96 -top-48 -right-48 opacity-25"></div>
-  <div class="floating-shape w-80 h-80 -bottom-40 -left-40 opacity-35" style="animation-delay: 2s;"></div>
+  <div class="floating-shape w-96 h-96 -top-48 -right-48 opacity-20"></div>
+  <div class="floating-shape w-80 h-80 -bottom-40 -left-40 opacity-25" style="animation-delay: 2s;"></div>
   
   <!-- Animated gradient orbs -->
-  <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-3xl animate-glow-pulse"></div>
-  <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-secondary/15 to-accent/15 rounded-full blur-3xl animate-glow-pulse" style="animation-delay: 1s;"></div>
+  <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary/12 to-accent/12 rounded-full blur-3xl animate-glow-pulse"></div>
+  <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-secondary/12 to-accent/12 rounded-full blur-3xl animate-glow-pulse" style="animation-delay: 1s;"></div>
   
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <!-- Left content -->
       <div class="lg:w-1/2 animate-on-scroll">
         <!-- Badge -->
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/20 shadow-lg hover-lift">
+        <div class="inline-flex items-center gap-2 bg-white/08 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/15 shadow-lg hover-lift">
           <i class="fa-solid fa-medal text-primary animate-bounce-subtle"></i>
           <span class="text-white">Conforme ISO 9001:2015</span>
         </div>
@@ -780,7 +780,7 @@
             
             <div class="space-y-4">
               <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all duration-300 hover-lift">
-                <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow">
+                <div class="w-12 h-12 bg-green-500/15 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow">
                   <i class="fa-solid fa-check text-green-400"></i>
                 </div>
                 <div>
@@ -790,7 +790,7 @@
               </div>
               
               <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all duration-300 hover-lift">
-                <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow" style="animation-delay: 0.5s;">
+                <div class="w-12 h-12 bg-blue-500/15 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow" style="animation-delay: 0.5s;">
                   <i class="fa-solid fa-robot text-blue-400"></i>
                 </div>
                 <div>
@@ -800,7 +800,7 @@
               </div>
               
               <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all duration-300 hover-lift">
-                <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow" style="animation-delay: 1s;">
+                <div class="w-12 h-12 bg-purple-500/15 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow" style="animation-delay: 1s;">
                   <i class="fa-solid fa-chart-bar text-purple-400"></i>
                 </div>
                 <div>
@@ -819,8 +819,8 @@
           </div>
           
           <!-- Floating elements -->
-          <div class="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-primary/25 to-accent/25 rounded-2xl blur-xl animate-float"></div>
-          <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-secondary/25 to-accent/25 rounded-2xl blur-xl animate-float" style="animation-delay: 2s;"></div>
+          <div class="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl animate-float"></div>
+          <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-2xl blur-xl animate-float" style="animation-delay: 2s;"></div>
         </div>
       </div>
     </div>
@@ -831,8 +831,8 @@
 <section id="fonctionnalites" class="py-20 px-4 md:px-8 section-light">
   <div class="max-w-7xl mx-auto relative">
     <!-- Floating shapes -->
-    <div class="floating-shape w-64 h-64 top-20 -left-32 opacity-20"></div>
-    <div class="floating-shape w-48 h-48 bottom-20 -right-32 opacity-15" style="animation-delay: 3s;"></div>
+    <div class="floating-shape w-64 h-64 top-20 -left-32 opacity-15"></div>
+    <div class="floating-shape w-48 h-48 bottom-20 -right-32 opacity-10" style="animation-delay: 3s;"></div>
     
     <!-- Section header -->
     <div class="text-center mb-16 animate-on-scroll">
@@ -848,7 +848,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Feature 1 -->
       <div class="card animate-on-scroll hover-lift">
-        <div class="card-icon bg-gradient-to-br from-blue-500 to-cyan-400">
+        <div class="card-icon bg-gradient-to-br from-blue-500/90 to-cyan-400/90">
           <i class="fa-solid fa-robot"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">IA & Automatisation</h3>
@@ -877,7 +877,7 @@
       
       <!-- Feature 2 -->
       <div class="card animate-on-scroll delay-1 hover-lift">
-        <div class="card-icon bg-gradient-to-br from-green-500 to-emerald-400">
+        <div class="card-icon bg-gradient-to-br from-green-500/90 to-emerald-400/90">
           <i class="fa-solid fa-file-shield"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">Conformité Simplifiée</h3>
@@ -906,7 +906,7 @@
       
       <!-- Feature 3 -->
       <div class="card animate-on-scroll delay-2 hover-lift">
-        <div class="card-icon bg-gradient-to-br from-purple-500 to-pink-400">
+        <div class="card-icon bg-gradient-to-br from-purple-500/90 to-pink-400/90">
           <i class="fa-solid fa-chart-line"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">Analyses Avancées</h3>
@@ -948,7 +948,7 @@
 <section id="modules" class="py-20 px-4 md:px-8">
   <div class="max-w-7xl mx-auto relative">
     <!-- Floating shapes -->
-    <div class="floating-shape w-96 h-96 -top-48 right-1/4 opacity-10"></div>
+    <div class="floating-shape w-96 h-96 -top-48 right-1/4 opacity-08"></div>
     
     <!-- Section header -->
     <div class="text-center mb-16 animate-on-scroll">
@@ -965,10 +965,10 @@
       <!-- Module 1 -->
       <div class="card animate-on-scroll hover-lift">
         <div class="flex items-start justify-between mb-6">
-          <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-500/90 to-cyan-400/90 rounded-xl flex items-center justify-center shadow-lg">
             <i class="fa-solid fa-diagram-project text-white text-2xl"></i>
           </div>
-          <span class="bg-blue-500/20 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow">POPULAIRE</span>
+          <span class="bg-blue-500/15 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow">POPULAIRE</span>
         </div>
         <h3 class="text-2xl font-bold mb-4">Gestion Documentaire IA</h3>
         <p class="text-gray-300 mb-6">
@@ -997,10 +997,10 @@
       <!-- Module 2 -->
       <div class="card animate-on-scroll delay-1 hover-lift">
         <div class="flex items-start justify-between mb-6">
-          <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl flex items-center justify-center shadow-lg">
+          <div class="w-16 h-16 bg-gradient-to-br from-purple-500/90 to-pink-400/90 rounded-xl flex items-center justify-center shadow-lg">
             <i class="fa-solid fa-clipboard-check text-white text-2xl"></i>
           </div>
-          <span class="bg-purple-500/20 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow" style="animation-delay: 0.5s;">ESSENTIEL</span>
+          <span class="bg-purple-500/15 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow" style="animation-delay: 0.5s;">ESSENTIEL</span>
         </div>
         <h3 class="text-2xl font-bold mb-4">Audits & Actions Correctives</h3>
         <p class="text-gray-300 mb-6">
@@ -1029,10 +1029,10 @@
       <!-- Module 3 -->
       <div class="card animate-on-scroll delay-2 hover-lift">
         <div class="flex items-start justify-between mb-6">
-          <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-500/90 to-emerald-400/90 rounded-xl flex items-center justify-center shadow-lg">
             <i class="fa-solid fa-chart-pie text-white text-2xl"></i>
           </div>
-          <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow" style="animation-delay: 1s;">NOUVEAU</span>
+          <span class="bg-green-500/15 text-green-300 text-xs font-semibold px-3 py-1 rounded-full animate-pulse-slow" style="animation-delay: 1s;">NOUVEAU</span>
         </div>
         <h3 class="text-2xl font-bold mb-4">Dashboard Personnalisable</h3>
         <p class="text-gray-300 mb-6">
@@ -1065,7 +1065,7 @@
 <section id="temoignages" class="py-20 px-4 md:px-8 section-dark">
   <div class="max-w-7xl mx-auto relative">
     <!-- Floating shapes -->
-    <div class="floating-shape w-64 h-64 -bottom-32 left-1/4 opacity-15"></div>
+    <div class="floating-shape w-64 h-64 -bottom-32 left-1/4 opacity-10"></div>
     
     <!-- Section header -->
     <div class="text-center mb-16 animate-on-scroll">
@@ -1115,11 +1115,11 @@
         <div class="mt-8 card animate-on-scroll delay-1">
           <h4 class="text-xl font-bold mb-4">Secteurs d'activité</h4>
           <div class="flex flex-wrap gap-3">
-            <span class="bg-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition-colors">Industrie</span>
-            <span class="bg-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition-colors">Santé</span>
-            <span class="bg-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition-colors">Technologie</span>
-            <span class="bg-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition-colors">Services</span>
-            <span class="bg-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition-colors">Construction</span>
+            <span class="bg-white/08 rounded-lg px-4 py-2 text-sm hover:bg-white/15 transition-colors">Industrie</span>
+            <span class="bg-white/08 rounded-lg px-4 py-2 text-sm hover:bg-white/15 transition-colors">Santé</span>
+            <span class="bg-white/08 rounded-lg px-4 py-2 text-sm hover:bg-white/15 transition-colors">Technologie</span>
+            <span class="bg-white/08 rounded-lg px-4 py-2 text-sm hover:bg-white/15 transition-colors">Services</span>
+            <span class="bg-white/08 rounded-lg px-4 py-2 text-sm hover:bg-white/15 transition-colors">Construction</span>
           </div>
         </div>
       </div>
@@ -1176,11 +1176,11 @@
 <!-- CTA Section -->
 <section id="essai" class="py-20 px-4 md:px-8 relative">
   <!-- Floating shapes -->
-  <div class="floating-shape w-80 h-80 top-1/2 -left-40 opacity-10"></div>
-  <div class="floating-shape w-64 h-64 bottom-20 -right-32 opacity-15" style="animation-delay: 2s;"></div>
+  <div class="floating-shape w-80 h-80 top-1/2 -left-40 opacity-08"></div>
+  <div class="floating-shape w-64 h-64 bottom-20 -right-32 opacity-12" style="animation-delay: 2s;"></div>
   
   <div class="max-w-4xl mx-auto relative z-10">
-    <div class="bg-gradient-to-br from-primary/15 via-white/8 to-secondary/15 rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 animate-on-scroll hover-lift">
+    <div class="bg-gradient-to-br from-primary/12 via-white/6 to-secondary/12 rounded-3xl p-8 md:p-12 shadow-2xl border border-white/15 animate-on-scroll hover-lift">
       <div class="text-center">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
           Prêt à <span class="gradient-text" data-text="Transformer">Transformer</span> Votre Qualité ?
@@ -1223,7 +1223,7 @@
 <!-- Footer -->
 <footer class="bg-dark text-white py-16 px-4 md:px-8 relative">
   <!-- Floating shapes -->
-  <div class="floating-shape w-96 h-96 -top-48 left-1/4 opacity-5"></div>
+  <div class="floating-shape w-96 h-96 -top-48 left-1/4 opacity-04"></div>
   
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
@@ -1242,16 +1242,16 @@
           La plateforme intelligente qui révolutionne la gestion de la qualité grâce à l'IA et l'automatisation. Conforme ISO 9001 et bien plus encore.
         </p>
         <div class="flex gap-4">
-          <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
+          <a href="#" class="w-10 h-10 bg-white/08 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
-          <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
+          <a href="#" class="w-10 h-10 bg-white/08 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
             <i class="fa-brands fa-twitter"></i>
           </a>
-          <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
+          <a href="#" class="w-10 h-10 bg-white/08 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
             <i class="fa-brands fa-youtube"></i>
           </a>
-          <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
+          <a href="#" class="w-10 h-10 bg-white/08 rounded-full flex items-center justify-center hover:bg-primary transition-all hover:scale-110">
             <i class="fa-brands fa-facebook-f"></i>
           </a>
         </div>
