@@ -128,5 +128,40 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.evaluation', compact('user'));
     }
+
+        public function dashboardOper() {
+        $user = Auth::user();
+        return view('client.dashboardOper', compact('user'));
+    }
+
+    public function contractreview() {
+        $user = Auth::user();
+        return view('client.contract-review', compact('user'));
+    }
+
+    public function design() {
+        $user = Auth::user();
+        return view('client.design', compact('user'));
+    }
+
+    public function suppliers() {
+        $user = Auth::user();
+        return view('client.suppliers', compact('user'));
+    }
+
+    public function production() {
+        $user = Auth::user();
+        return view('client.production', compact('user'));
+    }
+
+    public function release() {
+        $user = Auth::user();
+        return view('client.release', compact('user'));
+    }
+
+    public function nonconformities() {
+        $user = Auth::user();
+        return view('client.nonconformities', compact('user'));
+    }
 }
 

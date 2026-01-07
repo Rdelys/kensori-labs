@@ -301,7 +301,7 @@
   'icon'  => 'chart-simple',
   'label' => 'Évaluation',
   'items' => [
-    ['client.audits',        'shield-check',        'Audits Internes'],
+    ['client.audits',        'clipboard-check',        'Audits Internes'],
     ['client.satisfaction',  'face-smile',          'Satisfaction Client'],
     ['client.reclamation',   'triangle-exclamation','Réclamation Client'],
     ['client.evaluation','handshake',          'Évaluation Fournisseur']
@@ -311,7 +311,22 @@
         ['id'=>'improveMenu','icon'=>'lightbulb','label'=>'Amélioration','items'=>[
           ['client.capa','bug','Non-conformités / CAPA'],
           ['client.ia','robot','IA Prédictive']
-        ]]
+        ]],
+
+        [
+  'id'    => 'operationsMenu',
+  'icon'  => 'gears',
+  'label' => 'Opérations',
+  'items' => [
+    ['client.dashboardOper',       'chart-line',           'Tableau de Bord'],
+    ['client.contract-review', 'file-contract',        'Revue de Contrat'],
+    ['client.design',          'lightbulb',            'Conception & Développement'],
+    ['client.suppliers',       'truck',                'Gestion des Fournisseurs'],
+    ['client.production',      'industry',             'Suivi de Production'],
+    ['client.release',         'clipboard-list',       'Libération Produits'],
+    ['client.nonconformities', 'circle-exclamation',   'Non-Conformités Production']
+  ]
+],
       ] as $section)
       <div class="pt-3 border-t border-gray-100">
         <button class="w-full nav-link justify-between font-semibold" data-collapse-target="{{ $section['id'] }}" aria-expanded="false" aria-controls="{{ $section['id'] }}">

@@ -91,8 +91,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client/audits', [ClientController::class, 'audits'])->name('client.audits');
     Route::get('/client/capa', [ClientController::class, 'capa'])->name('client.capa');
     Route::get('/client/ia', [ClientController::class, 'ia'])->name('client.ia');
-        Route::get('/client/reclamation', [ClientController::class, 'reclamation'])->name('client.reclamation');
-        Route::get('/client/evaluation', [ClientController::class, 'evaluation'])->name('client.evaluation');
+    Route::get('/client/reclamation', [ClientController::class, 'reclamation'])->name('client.reclamation');
+    Route::get('/client/evaluation', [ClientController::class, 'evaluation'])->name('client.evaluation');
+   
+    Route::get('/client/dashboardOper', [ClientController::class, 'dashboardOper'])->name('client.dashboardOper');
+    Route::get('/client/contract-review', [ClientController::class, 'contractreview'])->name('client.contract-review');
+    Route::get('/client/design', [ClientController::class, 'design'])->name('client.design');
+    Route::get('/client/suppliers', [ClientController::class, 'suppliers'])->name('client.suppliers');
+    Route::get('/client/production', [ClientController::class, 'production'])->name('client.production');
+    Route::get('/client/release', [ClientController::class, 'release'])->name('client.release');
+    Route::get('/client/nonconformities', [ClientController::class, 'nonconformities'])->name('client.nonconformities');
 
 });
 
