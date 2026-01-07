@@ -8,7 +8,7 @@
     <div class="header-section">
         <div class="header-content">
             <div class="header-text">
-                <h1 class="page-title">Revue des Contrats (8.2)</h1>
+                <h1 class="page-title">Revue des Contrats</h1>
                 <p class="page-subtitle">Validation des exigences client avant l'acceptation de la commande</p>
             </div>
             <div class="header-actions">

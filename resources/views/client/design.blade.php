@@ -7,7 +7,7 @@
     <!-- En-tête -->
     <div class="page-header">
         <div class="header-main">
-            <h1 class="page-title">Conception & Développement (8.3)</h1>
+            <h1 class="page-title">Conception & Développement</h1>
             <p class="page-subtitle">Suivi des projets et revues de conception</p>
         </div>
         <div class="header-actions">
