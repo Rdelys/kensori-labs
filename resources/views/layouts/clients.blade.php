@@ -321,7 +321,6 @@
     ['client.dashboardOper',       'chart-line',           'Tableau de Bord'],
     ['client.contract-review', 'file-contract',        'Revue de Contrat'],
     ['client.design',          'lightbulb',            'Conception & Développement'],
-    ['client.suppliers',       'truck',                'Gestion des Fournisseurs'],
     ['client.production',      'industry',             'Suivi de Production'],
     ['client.release',         'clipboard-list',       'Libération Produits'],
     ['client.nonconformities', 'circle-exclamation',   'Non-Conformités Production']
@@ -378,7 +377,7 @@
     </section>
 
     <footer class="mt-16 pt-6 pb-6 text-center text-sm text-gray-500">
-      &copy; {{ date('Y') }} <span class="font-semibold text-blue-700">MonApp</span>. Tous droits réservés.
+      &copy; {{ date('Y') }} <span class="font-semibold text-blue-700">Kensori Labs</span>. Tous droits réservés.
       <a href="/mentions-legales" class="ml-2 text-blue-600 hover:underline">Mentions légales</a>
     </footer>
   </main>

@@ -144,11 +144,6 @@ class ClientController extends Controller
         return view('client.design', compact('user'));
     }
 
-    public function suppliers() {
-        $user = Auth::user();
-        return view('client.suppliers', compact('user'));
-    }
-
     public function production() {
         $user = Auth::user();
         return view('client.production', compact('user'));
