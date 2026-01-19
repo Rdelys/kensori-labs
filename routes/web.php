@@ -101,6 +101,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client/release', [ClientController::class, 'release'])->name('client.release');
     Route::get('/client/nonconformities', [ClientController::class, 'nonconformities'])->name('client.nonconformities');
 
+    Route::get('/client/stock-entrant', [ClientController::class, 'entrant'])->name('client.stock-entrant');
+    Route::get('/client/stock-sortant', [ClientController::class, 'sortant'])->name('client.stock-sortant');
+
 });
 
 // Solution rapide : ajoutez cette route

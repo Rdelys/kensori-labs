@@ -158,5 +158,15 @@ class ClientController extends Controller
         $user = Auth::user();
         return view('client.nonconformities', compact('user'));
     }
+
+    public function entrant() {
+        $user = Auth::user();
+        return view('client.entrant', compact('user'));
+    }
+
+    public function sortant() {
+        $user = Auth::user();
+        return view('client.sortant', compact('user'));
+    }
 }
 

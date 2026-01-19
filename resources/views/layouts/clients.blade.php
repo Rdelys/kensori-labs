@@ -306,8 +306,7 @@
     ['client.reclamation',   'triangle-exclamation','Réclamation Client'],
     ['client.evaluation','handshake',          'Évaluation Fournisseur']
   ]
-]
-,
+],
         ['id'=>'improveMenu','icon'=>'lightbulb','label'=>'Amélioration','items'=>[
           ['client.capa','bug','Non-conformités / CAPA'],
           ['client.ia','robot','IA Prédictive']
@@ -323,7 +322,16 @@
     ['client.design',          'lightbulb',            'Conception & Développement'],
     ['client.production',      'industry',             'Suivi de Production'],
     ['client.release',         'clipboard-list',       'Libération Produits'],
-    ['client.nonconformities', 'circle-exclamation',   'Non-Conformités Production']
+    ['client.nonconformities', 'circle-exclamation',   'Non-Conformités Production'],
+    [
+      'client.stock-management',
+      'boxes-stacked',
+      'Stocks',
+      [
+        ['client.stock-entrant', 'arrow-down', 'Entrant'],
+        ['client.stock-sortant', 'arrow-up', 'Sortant']
+      ]
+    ]
   ]
 ],
       ] as $section)
@@ -333,8 +341,32 @@
           <i class="fa-solid fa-chevron-down chev transition-transform"></i>
         </button>
         <ul id="{{ $section['id'] }}" class="mt-2 ml-3 space-y-1 hidden">
-          @foreach($section['items'] as [$route, $icon, $label])
-          <li><a href="{{ route($route) }}" class="nav-link"><i class="fa-solid fa-{{ $icon }} w-4"></i> {{ $label }}</a></li>
+          @foreach($section['items'] as $item)
+            @if(isset($item[3]) && is_array($item[3]))
+              <!-- Sous-menu avec sous-sous-menus -->
+              <li>
+                <div class="nav-link cursor-pointer justify-between" data-submenu-target="{{ $item[0] }}">
+                  <span class="flex items-center gap-3"><i class="fa-solid fa-{{ $item[1] }} w-4"></i> {{ $item[2] }}</span>
+                  <i class="fa-solid fa-chevron-right chev text-xs transition-transform"></i>
+                </div>
+                <ul id="{{ $item[0] }}" class="mt-1 ml-4 space-y-1 hidden">
+                  @foreach($item[3] as $subItem)
+                    <li>
+                      <a href="{{ route($subItem[0]) }}" class="nav-link pl-8">
+                        <i class="fa-solid fa-{{ $subItem[1] }} w-4"></i> {{ $subItem[2] }}
+                      </a>
+                    </li>
+                  @endforeach
+                </ul>
+              </li>
+            @else
+              <!-- Item normal -->
+              <li>
+                <a href="{{ route($item[0]) }}" class="nav-link">
+                  <i class="fa-solid fa-{{ $item[1] }} w-4"></i> {{ $item[2] }}
+                </a>
+              </li>
+            @endif
           @endforeach
         </ul>
       </div>
@@ -440,8 +472,26 @@
       });
     });
 
+    // Sous-menu avec sous-sous-menus
+    document.querySelectorAll('[data-submenu-target]').forEach(btn => {
+      const targetId = btn.getAttribute('data-submenu-target');
+      const list = document.getElementById(targetId);
+      if (!list) return;
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        list.classList.toggle('hidden');
+        const chev = btn.querySelector('.fa-chevron-right');
+        if (chev) chev.classList.toggle('rotate-90');
+      });
+    });
+
     // Small enhancement: link keyboard accessibility for collapse
     document.querySelectorAll('[data-collapse-target]').forEach(btn => {
+      btn.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === ' ') btn.click(); });
+    });
+
+    // Sous-menu keyboard accessibility
+    document.querySelectorAll('[data-submenu-target]').forEach(btn => {
       btn.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === ' ') btn.click(); });
     });
 
