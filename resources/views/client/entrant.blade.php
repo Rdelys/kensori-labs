@@ -4,4 +4,4 @@
 
 @section('content')
 Test entrant
-@endsection
+@endsectiona
