@@ -3,13 +3,6 @@
 @section('title', 'Stock sortant')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Sortant - Gestion des Expéditions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -217,6 +210,63 @@
             width: 100%;
         }
 
+        /* Form Section (Inline, not modal) */
+        .form-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            display: none; /* Hidden by default */
+        }
+
+        .form-section.active {
+            display: block;
+            animation: formSlideIn 0.5s ease-out;
+        }
+
+        @keyframes formSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .close-form:hover {
+            color: var(--accent-color);
+        }
+
         /* Data Table */
         .data-section {
             background: white;
@@ -336,73 +386,7 @@
             color: var(--primary-color);
         }
 
-        /* Form Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-color);
-            transition: var(--transition);
-        }
-
-        .close-modal:hover {
-            color: var(--accent-color);
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
+        /* Form Styles */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -517,16 +501,12 @@
                 height: 250px;
             }
             
-            .data-section {
+            .form-section, .data-section {
                 padding: 15px;
             }
             
             .search-box {
                 width: 100%;
-            }
-            
-            .modal-content {
-                width: 95%;
             }
             
             .form-grid {
@@ -557,16 +537,6 @@
             }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--gray-color);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 30px;
-        }
-
         /* Animation for status */
         @keyframes pulse {
             0% { opacity: 1; }
@@ -577,9 +547,42 @@
         .pulse {
             animation: pulse 1.5s infinite;
         }
+
+        /* Form toggle button */
+        .form-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .form-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .form-toggle-btn:hover {
+            background-color: #e2e8f0;
+            border-color: var(--secondary-color);
+        }
+
+        .form-toggle-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .form-toggle-btn.collapsed i {
+            transform: rotate(180deg);
+        }
     </style>
-</head>
-<body>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -651,6 +654,104 @@
                         <i class="fas fa-arrow-down"></i> 0.3h vs hier
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Form Toggle Button -->
+        <div class="form-toggle-container">
+            <button class="form-toggle-btn collapsed" id="formToggleBtn">
+                <i class="fas fa-chevron-down"></i>
+                <span>Afficher le formulaire de nouvelle expédition</span>
+            </button>
+        </div>
+
+        <!-- Form Section (Inline, not modal) -->
+        <div class="form-section" id="expeditionFormSection">
+            <div class="form-header">
+                <h3 class="form-title">
+                    <i class="fas fa-shipping-fast"></i> Nouvelle Expédition
+                </h3>
+                <button class="close-form" id="closeFormBtn">&times;</button>
+            </div>
+            <div class="form-body">
+                <form id="expeditionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="orderNumber">N° Commande Client</label>
+                            <input type="text" class="form-input" id="orderNumber" placeholder="Ex: CMD-2023-0456" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="clientName">Client</label>
+                            <select class="form-input" id="clientName" required>
+                                <option value="">Sélectionner un client</option>
+                                <option value="1">TechnoParts SA</option>
+                                <option value="2">ElectroPlus Distribution</option>
+                                <option value="3">MecaPro Industries</option>
+                                <option value="4">AutoSolution France</option>
+                                <option value="5">LogiTech Europe</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="orderDate">Date Commande</label>
+                            <input type="date" class="form-input" id="orderDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="deliveryDate">Date Livraison Souhaitée</label>
+                            <input type="date" class="form-input" id="deliveryDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="contactPerson">Contact Client</label>
+                            <input type="text" class="form-input" id="contactPerson" placeholder="Nom et coordonnées">
+                        </div>
+                        
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="specificRequirements">Exigences Spécifiques</label>
+                            <input type="text" class="form-input" id="specificRequirements" placeholder="Emballage, livraison, etc.">
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 25px 0 15px 0; color: var(--primary-color);">Produits à Expédier</h4>
+                    
+                    <button type="button" class="add-product-btn" id="addProductBtn">
+                        <i class="fas fa-plus"></i> Ajouter un Produit
+                    </button>
+                    
+                    <table class="products-table" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Désignation</th>
+                                <th>Quantité</th>
+                                <th>N° Lot/Série</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <tr>
+                                <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
+                                <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
+                                <td><input type="number" class="form-input" value="1" min="1" style="width: 100%;"></td>
+                                <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="action-btn remove-product">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelFormBtn">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer l'Expédition</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -740,102 +841,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Form Modal -->
-        <div class="modal-overlay" id="expeditionModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Nouvelle Expédition</h3>
-                    <button class="close-modal" id="closeModalBtn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="expeditionForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label class="form-label" for="orderNumber">N° Commande Client</label>
-                                <input type="text" class="form-input" id="orderNumber" placeholder="Ex: CMD-2023-0456" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="clientName">Client</label>
-                                <select class="form-input" id="clientName" required>
-                                    <option value="">Sélectionner un client</option>
-                                    <option value="1">TechnoParts SA</option>
-                                    <option value="2">ElectroPlus Distribution</option>
-                                    <option value="3">MecaPro Industries</option>
-                                    <option value="4">AutoSolution France</option>
-                                    <option value="5">LogiTech Europe</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="orderDate">Date Commande</label>
-                                <input type="date" class="form-input" id="orderDate" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="deliveryDate">Date Livraison Souhaitée</label>
-                                <input type="date" class="form-input" id="deliveryDate" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group" style="flex: 1;">
-                                <label class="form-label" for="contactPerson">Contact Client</label>
-                                <input type="text" class="form-input" id="contactPerson" placeholder="Nom et coordonnées">
-                            </div>
-                            
-                            <div class="form-group" style="flex: 1;">
-                                <label class="form-label" for="specificRequirements">Exigences Spécifiques</label>
-                                <input type="text" class="form-input" id="specificRequirements" placeholder="Emballage, livraison, etc.">
-                            </div>
-                        </div>
-                        
-                        <h4 style="margin: 25px 0 15px 0; color: var(--primary-color);">Produits à Expédier</h4>
-                        
-                        <button type="button" class="add-product-btn" id="addProductBtn">
-                            <i class="fas fa-plus"></i> Ajouter un Produit
-                        </button>
-                        
-                        <table class="products-table" id="productsTable">
-                            <thead>
-                                <tr>
-                                    <th>Référence</th>
-                                    <th>Désignation</th>
-                                    <th>Quantité</th>
-                                    <th>N° Lot/Série</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productsTableBody">
-                                <tr>
-                                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
-                                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
-                                    <td><input type="number" class="form-input" value="1" min="1" style="width: 100%;"></td>
-                                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
-                                    <td style="text-align: center;">
-                                        <button type="button" class="action-btn remove-product">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-outline" id="cancelFormBtn">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer l'Expédition</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Système de Gestion de Stock Sortant - Conforme ISO 9001:2015 (Clauses 8.2, 8.5.1, 8.5.2, 8.6)</p>
-            <p>© 2023 SMQ Smart - Tous droits réservés</p>
-        </div>
     </div>
 
     <!-- Chart.js Library -->
@@ -868,9 +873,12 @@
 
         // DOM Elements
         const newExpeditionBtn = document.getElementById('newExpeditionBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const cancelFormBtn = document.getElementById('cancelFormBtn');
-        const expeditionModal = document.getElementById('expeditionModal');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        
+        const expeditionFormSection = document.getElementById('expeditionFormSection');
+        const formToggleBtn = document.getElementById('formToggleBtn');
+        const closeFormBtn = document.getElementById('closeFormBtn');
         const expeditionForm = document.getElementById('expeditionForm');
         const addProductBtn = document.getElementById('addProductBtn');
         const productsTableBody = document.getElementById('productsTableBody');
@@ -878,8 +886,6 @@
         const searchBox = document.querySelector('.search-box');
         const statusFilter = document.querySelectorAll('.filter-select')[0];
         const dateFilter = document.querySelectorAll('.filter-select')[1];
-        const refreshBtn = document.getElementById('refreshBtn');
-        const generateReportBtn = document.getElementById('generateReportBtn');
         const prevPageBtn = document.getElementById('prevPageBtn');
         const nextPageBtn = document.getElementById('nextPageBtn');
         const startRowEl = document.getElementById('startRow');
@@ -1104,6 +1110,26 @@
             renderExpeditionsTable();
         }
 
+        // Function to toggle form visibility
+        function toggleForm() {
+            const isVisible = expeditionFormSection.classList.contains('active');
+            
+            if (isVisible) {
+                // Hide form
+                expeditionFormSection.classList.remove('active');
+                formToggleBtn.classList.add('collapsed');
+                formToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>Afficher le formulaire de nouvelle expédition</span>';
+            } else {
+                // Show form
+                expeditionFormSection.classList.add('active');
+                formToggleBtn.classList.remove('collapsed');
+                formToggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i><span>Masquer le formulaire de nouvelle expédition</span>';
+                
+                // Scroll to form smoothly
+                expeditionFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
         // Function to add product row to form
         function addProductRow() {
             const row = document.createElement('tr');
@@ -1126,20 +1152,8 @@
             });
         }
 
-        // Event Listeners
-        newExpeditionBtn.addEventListener('click', function() {
-            expeditionModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeModalBtn.addEventListener('click', function() {
-            expeditionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        cancelFormBtn.addEventListener('click', function() {
-            expeditionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+        // Function to reset form
+        function resetForm() {
             expeditionForm.reset();
             
             // Reset products table to one row
@@ -1162,6 +1176,27 @@
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             document.getElementById('deliveryDate').valueAsDate = tomorrow;
+        }
+
+        // Event Listeners
+        newExpeditionBtn.addEventListener('click', function() {
+            // Show form when clicking "Nouvelle Expédition" button
+            if (!expeditionFormSection.classList.contains('active')) {
+                toggleForm();
+            }
+        });
+
+        // Form toggle button
+        formToggleBtn.addEventListener('click', toggleForm);
+
+        // Close form button
+        closeFormBtn.addEventListener('click', function() {
+            toggleForm();
+        });
+
+        cancelFormBtn.addEventListener('click', function() {
+            resetForm();
+            toggleForm();
         });
 
         expeditionForm.addEventListener('submit', function(e) {
@@ -1174,39 +1209,13 @@
             const deliveryDate = document.getElementById('deliveryDate').value;
             
             // In a real application, you would send this data to a server
-            // For this demo, we'll just show an alert and close the modal
+            // For this demo, we'll just show an alert and reset the form
             alert(`Expédition ${orderNumber} enregistrée avec succès!`);
             
-            // Close modal
-            expeditionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
             // Reset form
-            expeditionForm.reset();
-            
-            // Reset products table to one row
-            productsTableBody.innerHTML = `
-                <tr>
-                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
-                    <td><input type="number" class="form-input" value="1" min="1" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
-                    <td style="text-align: center;">
-                        <button type="button" class="action-btn remove-product">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            
-            // Reset dates
-            document.getElementById('orderDate').valueAsDate = new Date();
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('deliveryDate').valueAsDate = tomorrow;
+            resetForm();
             
             // Refresh the table to show the new expedition
-            // In a real app, you would fetch updated data from the server
             setTimeout(() => {
                 alert("Tableau actualisé avec la nouvelle expédition");
             }, 500);
@@ -1226,8 +1235,7 @@
             setTimeout(() => {
                 refreshBtn.querySelector('i').classList.remove('fa-spin');
                 
-                // In a real application, you would fetch new data from the server
-                // For this demo, we'll just show a notification
+                // Show notification
                 const notification = document.createElement('div');
                 notification.textContent = "Données actualisées avec succès!";
                 notification.style.cssText = `
@@ -1245,11 +1253,6 @@
                 
                 document.body.appendChild(notification);
                 
-                // Remove notification after 3 seconds
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-                
                 // Add CSS for animation
                 const style = document.createElement('style');
                 style.textContent = `
@@ -1261,6 +1264,11 @@
                     }
                 `;
                 document.head.appendChild(style);
+                
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
                 
             }, 1000);
         });
@@ -1303,14 +1311,6 @@
                     }
                 });
             });
-            
-            // Close modal when clicking outside
-            expeditionModal.addEventListener('click', function(e) {
-                if (e.target === expeditionModal) {
-                    expeditionModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
         });
 
         // Simulate real-time updates
@@ -1336,7 +1336,4 @@
             }
         }, 5000);
     </script>
-</body>
-</html>
-
 @endsection

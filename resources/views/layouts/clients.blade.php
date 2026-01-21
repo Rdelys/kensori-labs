@@ -329,8 +329,8 @@
       'boxes-stacked',
       'Stocks',
       [
-        ['client.stock-entrant', 'arrow-down', 'Entrant'],
-        ['client.stock-sortant', 'arrow-up', 'Sortant']
+        ['client.stock-entrant', 'fa-circle-arrow-down', 'Entrant'],
+        ['client.stock-sortant', 'fa-circle-arrow-up', 'Sortant']
       ]
     ]
   ]
