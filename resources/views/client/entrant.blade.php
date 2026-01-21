@@ -3,13 +3,6 @@
 @section('title', 'Stock entrant')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Entrant - Gestion des Réceptions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -30,12 +23,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
         }
 
         .container {
@@ -268,6 +255,63 @@
             color: var(--primary-color);
         }
 
+        /* Form Section (Inline, not modal) */
+        .form-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            display: none; /* Hidden by default */
+        }
+
+        .form-section.active {
+            display: block;
+            animation: formSlideIn 0.5s ease-out;
+        }
+
+        @keyframes formSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .close-form:hover {
+            color: var(--accent-color);
+        }
+
         /* Data Table */
         .data-section {
             background: white;
@@ -392,73 +436,7 @@
             color: var(--primary-color);
         }
 
-        /* Form Modals */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-color);
-            transition: var(--transition);
-        }
-
-        .close-modal:hover {
-            color: var(--accent-color);
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
+        /* Form Styles */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -640,16 +618,12 @@
                 height: 250px;
             }
             
-            .data-section, .alerts-section {
+            .form-section, .data-section, .alerts-section {
                 padding: 15px;
             }
             
             .search-box {
                 width: 100%;
-            }
-            
-            .modal-content {
-                width: 95%;
             }
             
             .form-grid {
@@ -682,16 +656,6 @@
             .charts-container {
                 gap: 15px;
             }
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--gray-color);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 30px;
         }
 
         /* Animation for alerts */
@@ -737,9 +701,42 @@
             font-size: 0.9rem;
             color: var(--gray-color);
         }
+
+        /* Form toggle button */
+        .form-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .form-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .form-toggle-btn:hover {
+            background-color: #e2e8f0;
+            border-color: var(--secondary-color);
+        }
+
+        .form-toggle-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .form-toggle-btn.collapsed i {
+            transform: rotate(180deg);
+        }
     </style>
-</head>
-<body>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -859,6 +856,121 @@
             </div>
         </div>
 
+        <!-- Form Toggle Button -->
+        <div class="form-toggle-container">
+            <button class="form-toggle-btn collapsed" id="formToggleBtn">
+                <i class="fas fa-chevron-down"></i>
+                <span>Afficher le formulaire de nouvelle réception</span>
+            </button>
+        </div>
+
+        <!-- Form Section (Inline, not modal) -->
+        <div class="form-section" id="receptionFormSection">
+            <div class="form-header">
+                <h3 class="form-title">
+                    <i class="fas fa-truck-loading"></i> Nouvelle Réception
+                </h3>
+                <button class="close-form" id="closeFormBtn">&times;</button>
+            </div>
+            <div class="form-body">
+                <form id="receptionForm">
+                    <div class="scan-area" id="scanArea">
+                        <div class="scan-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div class="scan-text">Scanner le Bon de Livraison</div>
+                        <div class="scan-hint">Cliquez ici pour scanner ou importer le BL</div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="blNumber">N° Bon de Livraison</label>
+                            <input type="text" class="form-input" id="blNumber" placeholder="Ex: BL-2023-0456" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="supplierName">Fournisseur</label>
+                            <select class="form-input" id="supplierName" required>
+                                <option value="">Sélectionner un fournisseur</option>
+                                <option value="1">TechnoParts SA</option>
+                                <option value="2">ElectroPlus Distribution</option>
+                                <option value="3">MecaPro Industries</option>
+                                <option value="4">AutoSolution France</option>
+                                <option value="5">LogiTech Europe</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="receptionDate">Date de Réception</label>
+                            <input type="datetime-local" class="form-input" id="receptionDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="expectedDate">Date Attendue</label>
+                            <input type="date" class="form-input" id="expectedDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="contactPerson">Contact Fournisseur</label>
+                            <input type="text" class="form-input" id="contactPerson" placeholder="Nom et coordonnées">
+                        </div>
+                        
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="orderReference">Référence Commande</label>
+                            <input type="text" class="form-input" id="orderReference" placeholder="N° commande fournisseur">
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 25px 0 15px 0; color: var(--primary-color);">Produits Reçus</h4>
+                    
+                    <button type="button" class="add-product-btn" id="addReceivedProductBtn">
+                        <i class="fas fa-plus"></i> Ajouter un Produit Reçu
+                    </button>
+                    
+                    <table class="products-table" id="receivedProductsTable">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Désignation</th>
+                                <th>Quantité Attendue</th>
+                                <th>Quantité Reçue</th>
+                                <th>N° Lot/Série</th>
+                                <th>Emplacement</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receivedProductsTableBody">
+                            <tr>
+                                <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
+                                <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
+                                <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
+                                <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
+                                <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
+                                <td><input type="text" class="form-input" placeholder="A-12-34" style="width: 100%;"></td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="action-btn remove-received-product">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label class="form-label" for="qualityNotes">Notes de Qualité / Observations</label>
+                        <textarea class="form-input" id="qualityNotes" rows="3" placeholder="Observations sur la qualité, emballage, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelReceptionBtn">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer la Réception</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Charts Section -->
         <div class="charts-container">
             <div class="chart-card">
@@ -963,185 +1075,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal for New Reception -->
-        <div class="modal-overlay" id="receptionModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Nouvelle Réception</h3>
-                    <button class="close-modal" id="closeReceptionModalBtn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="receptionForm">
-                        <div class="scan-area" id="scanArea">
-                            <div class="scan-icon">
-                                <i class="fas fa-barcode"></i>
-                            </div>
-                            <div class="scan-text">Scanner le Bon de Livraison</div>
-                            <div class="scan-hint">Cliquez ici pour scanner ou importer le BL</div>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label class="form-label" for="blNumber">N° Bon de Livraison</label>
-                                <input type="text" class="form-input" id="blNumber" placeholder="Ex: BL-2023-0456" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="supplierName">Fournisseur</label>
-                                <select class="form-input" id="supplierName" required>
-                                    <option value="">Sélectionner un fournisseur</option>
-                                    <option value="1">TechnoParts SA</option>
-                                    <option value="2">ElectroPlus Distribution</option>
-                                    <option value="3">MecaPro Industries</option>
-                                    <option value="4">AutoSolution France</option>
-                                    <option value="5">LogiTech Europe</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="receptionDate">Date de Réception</label>
-                                <input type="datetime-local" class="form-input" id="receptionDate" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="expectedDate">Date Attendue</label>
-                                <input type="date" class="form-input" id="expectedDate" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group" style="flex: 1;">
-                                <label class="form-label" for="contactPerson">Contact Fournisseur</label>
-                                <input type="text" class="form-input" id="contactPerson" placeholder="Nom et coordonnées">
-                            </div>
-                            
-                            <div class="form-group" style="flex: 1;">
-                                <label class="form-label" for="orderReference">Référence Commande</label>
-                                <input type="text" class="form-input" id="orderReference" placeholder="N° commande fournisseur">
-                            </div>
-                        </div>
-                        
-                        <h4 style="margin: 25px 0 15px 0; color: var(--primary-color);">Produits Reçus</h4>
-                        
-                        <button type="button" class="add-product-btn" id="addReceivedProductBtn">
-                            <i class="fas fa-plus"></i> Ajouter un Produit Reçu
-                        </button>
-                        
-                        <table class="products-table" id="receivedProductsTable">
-                            <thead>
-                                <tr>
-                                    <th>Référence</th>
-                                    <th>Désignation</th>
-                                    <th>Quantité Attendue</th>
-                                    <th>Quantité Reçue</th>
-                                    <th>N° Lot/Série</th>
-                                    <th>Emplacement</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="receivedProductsTableBody">
-                                <tr>
-                                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
-                                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
-                                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
-                                    <td><input type="text" class="form-input" placeholder="A-12-34" style="width: 100%;"></td>
-                                    <td style="text-align: center;">
-                                        <button type="button" class="action-btn remove-received-product">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="form-group" style="margin-top: 20px;">
-                            <label class="form-label" for="qualityNotes">Notes de Qualité / Observations</label>
-                            <textarea class="form-input" id="qualityNotes" rows="3" placeholder="Observations sur la qualité, emballage, etc."></textarea>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-outline" id="cancelReceptionBtn">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer la Réception</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Quick Inventory -->
-        <div class="modal-overlay" id="inventoryModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Inventaire Rapide</h3>
-                    <button class="close-modal" id="closeInventoryModalBtn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="inventoryForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label class="form-label" for="inventoryType">Type d'Inventaire</label>
-                                <select class="form-input" id="inventoryType" required>
-                                    <option value="">Sélectionner</option>
-                                    <option value="complete">Inventaire Complet</option>
-                                    <option value="cyclic">Inventaire Tournant</option>
-                                    <option value="spot">Inventaire Ponctuel</option>
-                                    <option value="random">Contrôle Aléatoire</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="inventoryDate">Date de l'Inventaire</label>
-                                <input type="datetime-local" class="form-input" id="inventoryDate" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="inventoryZone">Zone / Emplacement</label>
-                                <select class="form-input" id="inventoryZone" required>
-                                    <option value="">Sélectionner une zone</option>
-                                    <option value="A">Zone A - Produits électroniques</option>
-                                    <option value="B">Zone B - Pièces mécaniques</option>
-                                    <option value="C">Zone C - Consommables</option>
-                                    <option value="D">Zone D - Produits finis</option>
-                                    <option value="all">Toutes les zones</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="inventoryResponsible">Responsable</label>
-                                <input type="text" class="form-input" id="inventoryResponsible" placeholder="Nom du responsable" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="inventoryReason">Raison / Motif</label>
-                            <textarea class="form-input" id="inventoryReason" rows="3" placeholder="Raison de l'inventaire..." required></textarea>
-                        </div>
-                        
-                        <div class="scan-area" id="inventoryScanArea" style="margin: 20px 0;">
-                            <div class="scan-icon">
-                                <i class="fas fa-qrcode"></i>
-                            </div>
-                            <div class="scan-text">Scanner les Produits pour l'Inventaire</div>
-                            <div class="scan-hint">Scanner les codes-barres pour compter rapidement</div>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-outline" id="cancelInventoryBtn">Annuler</button>
-                            <button type="submit" class="btn btn-success">Démarrer l'Inventaire</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Système de Gestion de Stock Entrant - Conforme ISO 9001:2015 (Clauses 8.4, 8.5.1, 8.5.2, 8.6)</p>
-            <p>© 2023 SMQ Smart - Tous droits réservés</p>
-        </div>
     </div>
 
     <!-- Chart.js Library -->
@@ -1193,19 +1126,13 @@
         const supplierRatingBtn = document.getElementById('supplierRatingBtn');
         const markAllReadBtn = document.getElementById('markAllReadBtn');
         
-        const receptionModal = document.getElementById('receptionModal');
-        const closeReceptionModalBtn = document.getElementById('closeReceptionModalBtn');
-        const cancelReceptionBtn = document.getElementById('cancelReceptionBtn');
+        const receptionFormSection = document.getElementById('receptionFormSection');
+        const formToggleBtn = document.getElementById('formToggleBtn');
+        const closeFormBtn = document.getElementById('closeFormBtn');
         const receptionForm = document.getElementById('receptionForm');
         const scanArea = document.getElementById('scanArea');
         const addReceivedProductBtn = document.getElementById('addReceivedProductBtn');
         const receivedProductsTableBody = document.getElementById('receivedProductsTableBody');
-        
-        const inventoryModal = document.getElementById('inventoryModal');
-        const closeInventoryModalBtn = document.getElementById('closeInventoryModalBtn');
-        const cancelInventoryBtn = document.getElementById('cancelInventoryBtn');
-        const inventoryForm = document.getElementById('inventoryForm');
-        const inventoryScanArea = document.getElementById('inventoryScanArea');
         
         const searchBox = document.querySelector('.search-box');
         const statusFilter = document.getElementById('statusFilter');
@@ -1221,12 +1148,10 @@
         // Initialize date fields with current date/time
         const now = new Date();
         const nowFormatted = now.toISOString().slice(0, 16);
-        document.getElementById('receptionDate').value = nowFormatted;
-        document.getElementById('expectedDate').valueAsDate = now;
-        
-        const inventoryNow = new Date();
-        inventoryNow.setHours(9, 0, 0);
-        document.getElementById('inventoryDate').value = inventoryNow.toISOString().slice(0, 16);
+        if (document.getElementById('receptionDate')) {
+            document.getElementById('receptionDate').value = nowFormatted;
+            document.getElementById('expectedDate').valueAsDate = now;
+        }
 
         // Initialize charts
         let suppliersChart, statusChart;
@@ -1473,6 +1398,26 @@
             renderReceptionsTable();
         }
 
+        // Function to toggle form visibility
+        function toggleForm() {
+            const isVisible = receptionFormSection.classList.contains('active');
+            
+            if (isVisible) {
+                // Hide form
+                receptionFormSection.classList.remove('active');
+                formToggleBtn.classList.add('collapsed');
+                formToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>Afficher le formulaire de nouvelle réception</span>';
+            } else {
+                // Show form
+                receptionFormSection.classList.add('active');
+                formToggleBtn.classList.remove('collapsed');
+                formToggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i><span>Masquer le formulaire de nouvelle réception</span>';
+                
+                // Scroll to form smoothly
+                receptionFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
         // Function to add received product row to form
         function addReceivedProductRow() {
             const row = document.createElement('tr');
@@ -1502,15 +1447,44 @@
             });
         }
 
+        // Function to reset form
+        function resetForm() {
+            receptionForm.reset();
+            
+            // Reset products table to one row
+            receivedProductsTableBody.innerHTML = `
+                <tr>
+                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
+                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
+                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
+                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
+                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
+                    <td><input type="text" class="form-input" placeholder="A-12-34" style="width: 100%;"></td>
+                    <td style="text-align: center;">
+                        <button type="button" class="action-btn remove-received-product">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            
+            // Reset dates
+            const now = new Date();
+            const nowFormatted = now.toISOString().slice(0, 16);
+            document.getElementById('receptionDate').value = nowFormatted;
+            document.getElementById('expectedDate').valueAsDate = now;
+        }
+
         // Event Listeners for main actions
         newReceptionBtn.addEventListener('click', function() {
-            receptionModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            // Show form when clicking "Nouvelle Réception" button
+            if (!receptionFormSection.classList.contains('active')) {
+                toggleForm();
+            }
         });
 
         quickInventoryBtn.addEventListener('click', function() {
-            inventoryModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            alert("Fonctionnalité d'inventaire rapide à venir prochainement!");
         });
 
         refreshBtn.addEventListener('click', function() {
@@ -1539,6 +1513,18 @@
                 
                 document.body.appendChild(notification);
                 
+                // Add CSS for animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translateY(-20px); }
+                        15% { opacity: 1; transform: translateY(0); }
+                        85% { opacity: 1; transform: translateY(0); }
+                        100% { opacity: 0; transform: translateY(-20px); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
                 // Remove notification after 3 seconds
                 setTimeout(() => {
                     notification.remove();
@@ -1547,10 +1533,21 @@
             }, 1000);
         });
 
+        // Form toggle button
+        formToggleBtn.addEventListener('click', toggleForm);
+
+        // Close form button
+        closeFormBtn.addEventListener('click', function() {
+            toggleForm();
+        });
+
         // Quick action buttons
         scanBarcodeBtn.addEventListener('click', function() {
-            receptionModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            // Show form if hidden
+            if (!receptionFormSection.classList.contains('active')) {
+                toggleForm();
+            }
+            
             // Simulate scanning after a delay
             setTimeout(() => {
                 document.getElementById('blNumber').value = "BL-2023-0471";
@@ -1586,41 +1583,6 @@
 
         markAllReadBtn.addEventListener('click', function() {
             alertsContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray-color);">Toutes les alertes ont été marquées comme lues.</div>';
-        });
-
-        // Event Listeners for reception modal
-        closeReceptionModalBtn.addEventListener('click', function() {
-            receptionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        cancelReceptionBtn.addEventListener('click', function() {
-            receptionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            receptionForm.reset();
-            
-            // Reset products table to one row
-            receivedProductsTableBody.innerHTML = `
-                <tr>
-                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
-                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="A-12-34" style="width: 100%;"></td>
-                    <td style="text-align: center;">
-                        <button type="button" class="action-btn remove-received-product">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            
-            // Reset dates
-            const now = new Date();
-            const nowFormatted = now.toISOString().slice(0, 16);
-            document.getElementById('receptionDate').value = nowFormatted;
-            document.getElementById('expectedDate').valueAsDate = now;
         });
 
         scanArea.addEventListener('click', function() {
@@ -1677,38 +1639,11 @@
             const expectedDate = document.getElementById('expectedDate').value;
             
             // In a real application, you would send this data to a server
-            // For this demo, we'll just show an alert and close the modal
+            // For this demo, we'll just show an alert and reset the form
             alert(`Réception ${blNumber} enregistrée avec succès!`);
             
-            // Close modal
-            receptionModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
             // Reset form
-            receptionForm.reset();
-            
-            // Reset products table to one row
-            receivedProductsTableBody.innerHTML = `
-                <tr>
-                    <td><input type="text" class="form-input" placeholder="REF-001" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="Moteur électrique 5kW" style="width: 100%;"></td>
-                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                    <td><input type="number" class="form-input" value="10" min="0" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="LOT-2023-09" style="width: 100%;"></td>
-                    <td><input type="text" class="form-input" placeholder="A-12-34" style="width: 100%;"></td>
-                    <td style="text-align: center;">
-                        <button type="button" class="action-btn remove-received-product">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            
-            // Reset dates
-            const now = new Date();
-            const nowFormatted = now.toISOString().slice(0, 16);
-            document.getElementById('receptionDate').value = nowFormatted;
-            document.getElementById('expectedDate').valueAsDate = now;
+            resetForm();
             
             // Refresh the table to show the new reception
             setTimeout(() => {
@@ -1717,60 +1652,6 @@
         });
 
         addReceivedProductBtn.addEventListener('click', addReceivedProductRow);
-
-        // Event Listeners for inventory modal
-        closeInventoryModalBtn.addEventListener('click', function() {
-            inventoryModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        cancelInventoryBtn.addEventListener('click', function() {
-            inventoryModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            inventoryForm.reset();
-            
-            // Reset date
-            const inventoryNow = new Date();
-            inventoryNow.setHours(9, 0, 0);
-            document.getElementById('inventoryDate').value = inventoryNow.toISOString().slice(0, 16);
-        });
-
-        inventoryScanArea.addEventListener('click', function() {
-            // Simulate scanning for inventory
-            inventoryScanArea.innerHTML = `
-                <div class="scan-icon">
-                    <i class="fas fa-spinner fa-spin"></i>
-                </div>
-                <div class="scan-text">Mode scan inventaire activé</div>
-                <div class="scan-hint">Scannez chaque produit pour le compter</div>
-            `;
-            
-            // In a real app, this would activate continuous scanning mode
-        });
-
-        inventoryForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const inventoryType = document.getElementById('inventoryType').value;
-            const inventoryDate = document.getElementById('inventoryDate').value;
-            const inventoryZone = document.getElementById('inventoryZone').value;
-            
-            // In a real application, you would start the inventory process
-            alert(`Inventaire ${inventoryType} démarré pour la zone ${inventoryZone}!`);
-            
-            // Close modal
-            inventoryModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Reset form
-            inventoryForm.reset();
-            
-            // Reset date
-            const inventoryNow = new Date();
-            inventoryNow.setHours(9, 0, 0);
-            document.getElementById('inventoryDate').value = inventoryNow.toISOString().slice(0, 16);
-        });
 
         // Search and filter event listeners
         searchBox.addEventListener('input', filterReceptions);
@@ -1809,21 +1690,6 @@
                     }
                 });
             });
-            
-            // Close modals when clicking outside
-            receptionModal.addEventListener('click', function(e) {
-                if (e.target === receptionModal) {
-                    receptionModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            inventoryModal.addEventListener('click', function(e) {
-                if (e.target === inventoryModal) {
-                    inventoryModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
         });
 
         // Simulate real-time updates
@@ -1849,6 +1715,4 @@
             }
         }, 7000);
     </script>
-</body>
-</html>
-@endsectiona
+@endsection
